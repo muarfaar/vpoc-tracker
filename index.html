@@ -1062,8 +1062,7 @@ function processM8(input){
       const deliveryDate = parseDeliveryDate(r['Delivery date']||r['delivery date']||'');
       const delivered    = (r['Delivered (YES/NO)']||r['delivered (yes/no)']||'').trim().toUpperCase()==='YES';
 
-      const days = daysBetween(quipDate, deliveryDate);
-      const slaMet = days!==null && days<=5 && delivered;
+      const slaMet = delivered; // SLA = Delivered YES/NO only
 
       agStats[ag].total++;
       if(slaMet) agStats[ag].slaMet++;
