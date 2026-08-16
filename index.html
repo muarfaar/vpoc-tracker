@@ -407,7 +407,8 @@ function showPage(name,btn){
 // ═══════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════
-function init(){
+
+ function init(){
   const uae=getUAEDateStr();
   document.getElementById('dateDisplay').textContent='📅 '+formatDisplayDate(uae);
   document.getElementById('dbg-date').textContent=uae;
@@ -416,6 +417,11 @@ function init(){
   renderMetrics();
   renderTeam();
   initScoringPage();
+  // ensure dashboard is active on load
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-dashboard').classList.add('active');
+  document.querySelector('.nav-btn').classList.add('active');
 }
 
 function updateDebugCount(){
