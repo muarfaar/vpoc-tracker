@@ -25,13 +25,14 @@
   .section-header { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   .section-header h2 { font-size: 15px; font-weight: 600; }
   .badge { background: #e94560; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
+  .badge-green { background: #2ecc71; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
   table { width: 100%; border-collapse: collapse; }
   th { background: #f8f9fa; padding: 10px 12px; text-align: left; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
   td { padding: 11px 12px; border-bottom: 1px solid #f5f5f5; font-size: 13px; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbff; }
   .score-badge { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-weight: 700; font-size: 12px; }
-  .score-5{background:#d4edda;color:#155724} .score-4{background:#cce5ff;color:#004085} .score-3{background:#fff3cd;color:#856404} .score-2{background:#ffe;color:#856404} .score-1{background:#fde;color:#721c24} .score-0{background:#f8d7da;color:#721c24}
+  .score-5{background:#d4edda;color:#155724} .score-4{background:#cce5ff;color:#004085} .score-3{background:#fff3cd;color:#856404} .score-2{background:#ffe0b2;color:#e65100} .score-1{background:#fde;color:#721c24} .score-0{background:#f8d7da;color:#721c24}
   .progress-wrap { background: #f0f0f0; border-radius: 10px; height: 7px; overflow: hidden; min-width: 80px; }
   .progress-bar { height: 100%; border-radius: 10px; }
   .bar-green{background:linear-gradient(90deg,#2ecc71,#27ae60)} .bar-orange{background:linear-gradient(90deg,#f39c12,#e67e22)} .bar-red{background:linear-gradient(90deg,#e74c3c,#c0392b)}
@@ -50,35 +51,34 @@
   .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 20px; }
   .metric-card { border: 1px solid #e8e8e8; border-radius: 10px; padding: 16px; }
   .metric-card .m-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-  .metric-card .m-criteria { font-size: 11px; color: #888; margin-bottom: 8px; line-height: 1.5; }
+  .metric-card .m-desc { font-size: 11px; color: #888; margin-bottom: 8px; line-height: 1.5; }
   .metric-card .m-target { font-size: 11px; color: #e94560; font-weight: 600; }
   .m-type { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin-bottom: 8px; }
   .type-daily{background:#e3f2fd;color:#1565c0} .type-weekly{background:#f3e5f5;color:#6a1b9a}
   .alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; }
   .alert-info{background:#e3f2fd;color:#1565c0;border-left:4px solid #2196f3}
   .alert-warn{background:#fff3cd;color:#856404;border-left:4px solid #f39c12}
+  .alert-success{background:#d4edda;color:#155724;border-left:4px solid #2ecc71}
   .upload-zone { border: 2px dashed #ddd; border-radius: 10px; padding: 28px; text-align: center; color: #aaa; cursor: pointer; transition: all 0.2s; margin: 10px 0; }
-  .upload-zone:hover{border-color:#3498db;color:#3498db}
-  .upload-zone.loaded{border-color:#2ecc71;background:#f0fff4;color:#155724}
+  .upload-zone:hover { border-color:#3498db; color:#3498db; }
+  .upload-zone.loaded { border-color:#2ecc71; background:#f0fff4; color:#155724; }
   .upload-icon { font-size: 28px; margin-bottom: 8px; }
   .wbc-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 16px 0; }
-  .wbc-agency-card { border-radius: 10px; padding: 14px; border: 1px solid #e8e8e8; }
-  .wbc-agency-card .ag-name { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-  .wbc-agency-card .ag-stats { font-size: 11px; color: #666; line-height: 1.8; }
-  .wbc-agency-card .ag-score { font-size: 24px; font-weight: 700; margin-top: 8px; }
-  .m3-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 16px 0; }
-  .m3-vpoc-card { border-radius: 8px; padding: 10px 12px; border: 1px solid #e8e8e8; display:flex; align-items:center; justify-content:space-between; }
+  .agency-card { border-radius: 10px; padding: 14px; border: 1px solid #e8e8e8; }
+  .agency-card .ag-name { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .agency-card .ag-stats { font-size: 11px; color: #666; line-height: 1.8; }
+  .agency-card .ag-score { font-size: 24px; font-weight: 700; margin-top: 8px; }
   .footer { text-align: center; padding: 20px; color: #aaa; font-size: 11px; }
   #debug-bar { background:#1a1a2e; color:#7fff7f; font-family:monospace; font-size:11px; padding:6px 16px; display:flex; gap:20px; flex-wrap:wrap; }
-  @media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}.metric-grid{grid-template-columns:1fr}.main{padding:15px}.wbc-summary{grid-template-columns:repeat(2,1fr)}.m3-summary{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}.metric-grid{grid-template-columns:1fr}.main{padding:15px}.wbc-summary{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 
 <div id="debug-bar">
   <span>🕐 UAE Date: <strong id="dbg-date">—</strong></span>
-  <span>💾 Scores stored: <strong id="dbg-count">—</strong></span>
-  <span>📅 Viewing: <strong id="dbg-viewing">today</strong></span>
+  <span>💾 Entries stored: <strong id="dbg-count">—</strong></span>
+  <span>📅 Storage key: <strong>vpoc_scores_v2</strong></span>
 </div>
 
 <div class="header">
@@ -92,17 +92,22 @@
 <div class="nav">
   <button class="nav-btn active" onclick="showPage('dashboard',this)">📊 Dashboard</button>
   <button class="nav-btn" onclick="showPage('scoring',this)">✏️ Score Entry</button>
-  <button class="nav-btn" onclick="showPage('wbc',this)">📋 WBC Scoring</button>
-  <button class="nav-btn" onclick="showPage('m3',this)">🕐 M3 Attendance</button>
+  <button class="nav-btn" onclick="showPage('wbc',this)">📋 WBC — M1</button>
+  <button class="nav-btn" onclick="showPage('m3',this)">🕐 Attendance — M3</button>
   <button class="nav-btn" onclick="showPage('metrics',this)">📐 Metrics</button>
   <button class="nav-btn" onclick="showPage('team',this)">👥 Team</button>
 </div>
 
 <div class="main">
 
-<!-- DASHBOARD -->
+<!-- ═══════════════════════════════════════════════════════════ DASHBOARD -->
 <div id="page-dashboard" class="page active">
-  <div class="alert alert-info">📌 <strong>How to use:</strong> Upload WBC CSV → <strong>WBC Scoring</strong>. Upload punch CSV → <strong>M3 Attendance</strong>. Manual scores → <strong>Score Entry</strong>. All flow to Dashboard automatically.</div>
+  <div class="alert alert-info">
+    📌 <strong>Workflow:</strong>
+    Upload WBC CSV → <strong>WBC tab</strong> (scores M1, date auto-detected from filename) &nbsp;|&nbsp;
+    Upload punch CSV → <strong>Attendance tab</strong> (scores M3, date auto-detected from punch time) &nbsp;|&nbsp;
+    Other metrics → <strong>Score Entry</strong>
+  </div>
   <div class="stats-row">
     <div class="stat-card blue"><div class="label">Total VPOCs</div><div class="value">16</div><div class="sub">DXB5 Based</div></div>
     <div class="stat-card green"><div class="label">Avg Team Score</div><div class="value" id="stat-avg">—</div><div class="sub">Out of 40</div></div>
@@ -141,53 +146,68 @@
   </div>
 </div>
 
-<!-- SCORE ENTRY -->
+<!-- ═══════════════════════════════════════════════════════ SCORE ENTRY -->
 <div id="page-scoring" class="page">
   <div class="section">
     <div class="section-header">
-      <h2>✏️ Score Entry</h2>
+      <h2>✏️ Manual Score Entry</h2>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-        <select id="score-vpoc" style="padding:6px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;"><option value="">— Select VPOC —</option></select>
+        <select id="score-vpoc" style="padding:6px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;">
+          <option value="">— Select VPOC —</option>
+        </select>
         <input type="date" id="score-date" style="padding:6px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;">
         <button class="btn btn-primary" onclick="loadScores()">Load</button>
       </div>
     </div>
-    <div style="padding:20px;"><div id="score-entry-form"><div style="text-align:center;color:#aaa;padding:40px;">Select a VPOC and date, then click Load</div></div></div>
+    <div style="padding:20px;">
+      <div id="score-entry-form">
+        <div style="text-align:center;color:#aaa;padding:40px;">Select a VPOC and date, then click Load</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- WBC SCORING -->
+<!-- ═══════════════════════════════════════════════════════════ WBC — M1 -->
 <div id="page-wbc" class="page">
   <div class="section">
     <div class="section-header">
-      <h2>📋 WBC Closure — Auto Scoring</h2>
-      <div style="font-size:12px;color:#888;">SLA: 5 days | Sites: DXB5·DXB8·DWC3·DDB1</div>
+      <h2>📋 WBC Closure — M1 Auto Scoring</h2>
+      <div style="font-size:12px;color:#888;">SLA: 5 days · Sites: DXB5·DXB8·DWC3·DDB1 · Date auto-detected from filename</div>
     </div>
     <div style="padding:20px;">
+      <div class="alert alert-info">
+        📌 Filename format: <code>wbc_cases_YYYY-MM-DD.csv</code> — date is read automatically. Score is saved to that date, not today.
+      </div>
       <div id="wbc-upload-zone" class="upload-zone" onclick="document.getElementById('wbc-file-input').click()">
         <div class="upload-icon">📁</div>
         <div style="font-weight:600;font-size:14px;">Click to upload WBC CSV</div>
-        <div style="font-size:11px;margin-top:6px;">Required columns: Site, Agency, Absent, Status, Closed</div>
+        <div style="font-size:11px;margin-top:6px;">Columns: ID, Login, Name, EmpID, Site, Agency, Absent, Status, Closed</div>
       </div>
       <input type="file" id="wbc-file-input" accept=".csv" style="display:none" onchange="processWBCFile(this)">
+
+      <div id="wbc-date-detected" style="display:none;margin:10px 0;"></div>
+
       <div id="wbc-results" style="display:none;">
-        <div style="margin-bottom:16px;">
-          <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📊 Agency Breakdown</h3>
-          <div class="wbc-summary" id="wbc-agency-cards"></div>
-        </div>
-        <table><thead><tr><th>Agency</th><th>Total</th><th>In SLA</th><th>Rate</th><th>Score /5</th><th>VPOCs</th></tr></thead>
-        <tbody id="wbc-score-table"></tbody></table>
+        <h3 style="font-size:14px;font-weight:600;margin:16px 0 10px;">📊 Agency Breakdown</h3>
+        <div class="wbc-summary" id="wbc-agency-cards"></div>
+        <table style="margin-top:8px;">
+          <thead><tr><th>Agency</th><th>Total</th><th>Closed in SLA</th><th>Rate</th><th>Score /5</th><th>VPOCs</th></tr></thead>
+          <tbody id="wbc-score-table"></tbody>
+        </table>
         <div style="text-align:right;margin-top:16px;">
-          <button class="btn btn-green" onclick="applyWBCScores()">✅ Apply to Dashboard</button>
+          <button class="btn btn-green" onclick="applyWBCScores()">✅ Apply M1 Scores to Dashboard</button>
         </div>
         <div style="margin-top:20px;">
-          <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📝 Case Details (first 100)</h3>
+          <h3 style="font-size:14px;font-weight:600;margin-bottom:10px;">📝 Case Details (first 100)</h3>
           <div style="overflow-x:auto;">
-            <table><thead><tr><th>Case ID</th><th>Name</th><th>Site</th><th>Agency</th><th>Absent</th><th>Status</th><th>Closed</th><th>Days</th><th>SLA</th></tr></thead>
-            <tbody id="wbc-case-table"></tbody></table>
+            <table>
+              <thead><tr><th>Case ID</th><th>Name</th><th>Site</th><th>Agency</th><th>Absent</th><th>Status</th><th>Closed</th><th>Days</th><th>SLA</th></tr></thead>
+              <tbody id="wbc-case-table"></tbody>
+            </table>
           </div>
         </div>
       </div>
+
       <div style="margin-top:20px;background:#f8f9fa;border-radius:10px;padding:16px;">
         <h3 style="font-size:13px;font-weight:600;margin-bottom:10px;color:#666;">📐 WBC Scoring Criteria</h3>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center;">
@@ -202,52 +222,73 @@
   </div>
 </div>
 
-<!-- M3 ATTENDANCE -->
+<!-- ══════════════════════════════════════════════════ ATTENDANCE — M3 -->
 <div id="page-m3" class="page">
   <div class="section">
     <div class="section-header">
-      <h2>🕐 M3 Attendance — Auto Scoring</h2>
-      <div style="font-size:12px;color:#888;">Rule: 4 punches = 5 pts | Less than 4 = 0 pts | Per VPOC individually</div>
+      <h2>🕐 Attendance — M3 Auto Scoring</h2>
+      <div style="font-size:12px;color:#888;">Rule: 4+ punches = 5pts · Less than 4 = 0pts · Per VPOC · Date from Punch Time column</div>
     </div>
     <div style="padding:20px;">
-      <div class="alert alert-info">📌 Upload the punch clock CSV for a shift. The app filters your 16 VPOCs by <strong>Psoft ID</strong> and counts punches per person.</div>
+      <div class="alert alert-info">
+        📌 Upload the completed shift CSV (after shift ends — must contain In <strong>and</strong> Out punches). Date is read automatically from the <code>Punch Time</code> column — no manual input needed.
+      </div>
       <div id="m3-upload-zone" class="upload-zone" onclick="document.getElementById('m3-file-input').click()">
         <div class="upload-icon">📁</div>
         <div style="font-weight:600;font-size:14px;">Click to upload Punch Clock CSV</div>
-        <div style="font-size:11px;margin-top:6px;">Required columns: Employee ID, Punch Type (or similar) · Any filename</div>
+        <div style="font-size:11px;margin-top:6px;">Columns: Employee ID, Employee Name, Shift, Punch Type, Punch Time</div>
       </div>
       <input type="file" id="m3-file-input" accept=".csv" style="display:none" onchange="processM3File(this)">
+
+      <div id="m3-date-detected" style="display:none;margin:10px 0;"></div>
+
       <div id="m3-results" style="display:none;">
-        <div style="margin-bottom:8px;padding:10px 14px;background:#f0fff4;border-radius:8px;font-size:13px;" id="m3-summary-bar"></div>
-        <h3 style="font-size:14px;font-weight:600;margin:16px 0 10px;">👤 VPOC Punch Results</h3>
+        <div id="m3-summary-bar" style="margin-bottom:12px;padding:12px 14px;background:#f0fff4;border-radius:8px;font-size:13px;"></div>
         <div style="overflow-x:auto;">
           <table>
-            <thead><tr><th>Psoft ID</th><th>Name</th><th>Agency</th><th>Punches Found</th><th>Score /5</th><th>Status</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Psoft ID</th><th>Name</th><th>Agency</th>
+                <th style="text-align:center;">Punches</th>
+                <th style="text-align:center;">Score /5</th>
+                <th>Result</th>
+              </tr>
+            </thead>
             <tbody id="m3-vpoc-table"></tbody>
           </table>
         </div>
-        <div style="margin-top:12px;padding:12px;background:#fff3cd;border-radius:8px;font-size:12px;color:#856404;" id="m3-missing-alert" style="display:none;"></div>
+        <div id="m3-missing-alert" style="display:none;margin-top:10px;" class="alert alert-warn"></div>
         <div style="text-align:right;margin-top:16px;">
           <button class="btn btn-green" onclick="applyM3Scores()">✅ Apply M3 Scores to Dashboard</button>
         </div>
       </div>
+
       <div style="margin-top:20px;background:#f8f9fa;border-radius:10px;padding:16px;">
         <h3 style="font-size:13px;font-weight:600;margin-bottom:10px;color:#666;">📐 M3 Scoring Rule</h3>
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;text-align:center;max-width:300px;">
-          <div style="padding:12px;background:#d4edda;border-radius:8px;"><div style="font-size:22px;font-weight:700;color:#155724;">5</div><div style="font-size:12px;color:#155724;">4 punches ✅</div></div>
-          <div style="padding:12px;background:#f8d7da;border-radius:8px;"><div style="font-size:22px;font-weight:700;color:#721c24;">0</div><div style="font-size:12px;color:#721c24;">Less than 4 ❌</div></div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;text-align:center;max-width:280px;">
+          <div style="padding:14px;background:#d4edda;border-radius:8px;">
+            <div style="font-size:22px;font-weight:700;color:#155724;">5</div>
+            <div style="font-size:12px;color:#155724;margin-top:4px;">4+ punches ✅</div>
+          </div>
+          <div style="padding:14px;background:#f8d7da;border-radius:8px;">
+            <div style="font-size:22px;font-weight:700;color:#721c24;">0</div>
+            <div style="font-size:12px;color:#721c24;margin-top:4px;">Less than 4 ❌</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- METRICS -->
+<!-- ══════════════════════════════════════════════════════════ METRICS -->
 <div id="page-metrics" class="page">
-  <div class="section"><div class="section-header"><h2>📐 Metrics & Scoring Criteria</h2></div><div class="metric-grid" id="metrics-grid"></div></div>
+  <div class="section">
+    <div class="section-header"><h2>📐 Metrics & Scoring Criteria</h2></div>
+    <div class="metric-grid" id="metrics-grid"></div>
+  </div>
 </div>
 
-<!-- TEAM -->
+<!-- ════════════════════════════════════════════════════════════ TEAM -->
 <div id="page-team" class="page">
   <div class="section">
     <div class="section-header">
@@ -258,445 +299,534 @@
       </select>
     </div>
     <div style="overflow-x:auto;">
-      <table><thead><tr><th>Psoft ID</th><th>Amazon ID</th><th>Name</th><th>Agency</th><th>DOJ</th><th>Total /40</th><th>WBC /5</th><th>M3 /5</th><th>Status</th></tr></thead>
-      <tbody id="team-body"></tbody></table>
+      <table>
+        <thead>
+          <tr><th>Psoft ID</th><th>Amazon ID</th><th>Name</th><th>Agency</th><th>DOJ</th><th>Total /40</th><th>M1 WBC</th><th>M3 Attend</th><th>Status</th></tr>
+        </thead>
+        <tbody id="team-body"></tbody>
+      </table>
     </div>
   </div>
 </div>
 
 </div><!-- end .main -->
-<div class="footer">VPOC Activity Tracker v1.4 — DXB5·DXB8·DWC3·DDB1 | Phase 1 | WBC + M3 Auto-Scoring</div>
+<div class="footer">VPOC Activity Tracker v1.5 — DXB5·DXB8·DWC3·DDB1 | M1 + M3 Auto-Scoring | Date auto-detected from CSV</div>
 <script>
-// ── DATA ──────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════
 const VPOCS = [
-  {psoft:'205671526', id:'miadnana', name:'Adnan Amir Afridi',  agency:'Dulsco',   agKey:'dulsco',   doj:'17-Jul-25'},
-  {psoft:'207302255', id:'muarfaar', name:'Arfa Arif',          agency:'Fastlink', agKey:'fastlink', doj:'15-Apr-26'},
-  {psoft:'207799093', id:'javeiqrn', name:'Javed Iqra',         agency:'Dulsco',   agKey:'dulsco',   doj:'23-Jun-26'},
-  {psoft:'205688378', id:'osmakhai', name:'Khairi Mohamed',     agency:'Fastlink', agKey:'fastlink', doj:'22-Jul-25'},
-  {psoft:'205730381', id:'lalucema', name:'Marc Angel Luce',    agency:'Dulsco',   agKey:'dulsco',   doj:'30-Jul-25'},
-  {psoft:'207283256', id:'mbikkiri', name:'Hubaib Bikkiri',     agency:'Dulsco',   agKey:'dulsco',   doj:'14-Apr-26'},
-  {psoft:'204604983', id:'mohaanwn', name:'Anwar Mohammed',     agency:'Adecco',   agKey:'adecco',   doj:'20-Nov-24'},
-  {psoft:'204604982', id:'niapeedi', name:'Nihala Yas Peedi',   agency:'Adecco',   agKey:'adecco',   doj:'20-Nov-24'},
-  {psoft:'205776070', id:'okupragt', name:'Pragti Kumar',       agency:'Fastlink', agKey:'fastlink', doj:'08-Aug-25'},
-  {psoft:'203305831', id:'predesnb', name:'Tinated Elsheba',    agency:'Adecco',   agKey:'adecco',   doj:'09-May-24'},
-  {psoft:'203331748', id:'renmanya', name:'Ny Ochieng Manya',   agency:'Adecco',   agKey:'adecco',   doj:'16-May-24'},
-  {psoft:'205441633', id:'jamoafos', name:'Sandra Amoafo',      agency:'Dulsco',   agKey:'dulsco',   doj:'16-Jun-25'},
-  {psoft:'207275154', id:'sivakmit', name:'Mitravakumar',       agency:'EFS',      agKey:'efs',      doj:'12-Apr-26'},
-  {psoft:'205389687', id:'gusweene', name:'Sweeney Gunaseke',   agency:'Fastlink', agKey:'fastlink', doj:'09-Jun-25'},
-  {psoft:'205699662', id:'tambohes', name:'Stephan Awinda',     agency:'Fastlink', agKey:'fastlink', doj:'28-Jul-25'},
-  {psoft:'200641956', id:'sazehra',  name:'Zehra Sana',         agency:'Fastlink', agKey:'fastlink', doj:'30-Oct-22'},
+  {id:'205671526',amazon:'miadnana',name:'Adnan Amir Afridi',agency:'Dulsco'},
+  {id:'207302255',amazon:'muarfaar',name:'Arfa Arif',agency:'Fastlink'},
+  {id:'207799093',amazon:'javeiqrn',name:'Javed Iqra',agency:'Dulsco'},
+  {id:'205688378',amazon:'osmakhai',name:'Khairi Mohamed',agency:'Fastlink'},
+  {id:'205730381',amazon:'lalucema',name:'Marc Angel Luce',agency:'Dulsco'},
+  {id:'207283256',amazon:'mbikkiri',name:'Hubaib Bikkiri',agency:'Dulsco'},
+  {id:'204604983',amazon:'mohaanwn',name:'Anwar Mohammed',agency:'Adecco'},
+  {id:'204604982',amazon:'niapeedi',name:'Nihala Yas Peedi',agency:'Adecco'},
+  {id:'205776070',amazon:'okupragt',name:'Pragti Kumar',agency:'Fastlink'},
+  {id:'203305831',amazon:'predesnb',name:'Tinated Elsheba',agency:'Adecco'},
+  {id:'203331748',amazon:'renmanya',name:'Ny Ochieng Manya',agency:'Adecco'},
+  {id:'205441633',amazon:'jamoafos',name:'Sandra Amoafo',agency:'Dulsco'},
+  {id:'207275154',amazon:'sivakmit',name:'Mitravakumar',agency:'EFS'},
+  {id:'205389687',amazon:'gusweene',name:'Sweeney Gunaseke',agency:'Fastlink'},
+  {id:'205699662',amazon:'tambohes',name:'Stephan Awinda',agency:'Fastlink'},
+  {id:'200641956',amazon:'sazehra',name:'Zehra Sana',agency:'Fastlink'}
 ];
-
-const AGENCY_MAP = {
-  'dulsco l.l.c.':'dulsco','dulsco':'dulsco',
-  'fastlink outsourcing':'fastlink','fastlink':'fastlink',
-  'adecco':'adecco',
-  'efs facilities services':'efs','efs':'efs'
-};
-
-const SITES = ['DXB5','DXB8','DWC3','DDB1'];
 
 const METRICS = [
-  {id:'m1', name:'WBC Closure',                    type:'daily',  max:5, criteria:'WBC completed within 5-day SLA',             target:'100% closure',           source:'CSV Auto (WBC)'},
-  {id:'m2', name:'HR Gemba',                       type:'daily',  max:5, criteria:'Gemba walks completed; findings actioned',    target:'100% compliance',        source:'Manual'},
-  {id:'m3', name:'VPOC Attendance & Compliance',   type:'daily',  max:5, criteria:'4 punches in shift = 5pts, less than 4 = 0', target:'4 punches per shift',    source:'CSV Auto (Punch Clock)'},
-  {id:'m4', name:'Daily Attendance & Bridging',    type:'daily',  max:5, criteria:'Bridging submitted within 2hrs from SOS',     target:'Daily within 2hrs',      source:'Email (Pending)'},
-  {id:'m5', name:'SOS Meeting Attendance',         type:'daily',  max:5, criteria:'SOS attendance with PXT updates',             target:'100% attendance',        source:'SharePoint (Pending)'},
-  {id:'m6', name:'Engagement Activity Management', type:'weekly', max:5, criteria:'Engagement per quarterly calendar',           target:'100% execution',         source:'SharePoint (Pending)'},
-  {id:'m7', name:'Punch Analysis & Pay Defect',    type:'weekly', max:5, criteria:'Mispunch tracked; pay defect corrected',      target:'Mispunch 0%; Defect 0%', source:'CSV Upload'},
-  {id:'m8', name:'Adapt Feedback Closure',         type:'weekly', max:5, criteria:'WL issued within SLA; Bravo pin given',       target:'WL ≤48h',                source:'SharePoint (Pending)'},
+  {id:'M1',name:'WBC Closure',type:'Daily',desc:'Welcome Back Conversation case closure within SLA.',target:'5-day SLA closure rate per agency',auto:true},
+  {id:'M2',name:'HR Gemba',type:'Daily',desc:'Daily HR Gemba attendance and engagement.',target:'Full attendance = 5pts',auto:false},
+  {id:'M3',name:'VPOC Attendance',type:'Daily',desc:'Punch clock compliance — 4 punches per shift required.',target:'4+ punches = 5pts | <4 = 0pts',auto:true},
+  {id:'M4',name:'Daily Bridging',type:'Daily',desc:'Daily bridging submissions completed on time.',target:'TBD',auto:false},
+  {id:'M5',name:'SOS Meeting',type:'Daily',desc:'SOS meeting participation and action tracking.',target:'TBD',auto:false},
+  {id:'M6',name:'Engagement Activity',type:'Weekly',desc:'Weekly engagement activities completed.',target:'TBD',auto:false},
+  {id:'M7',name:'Punch Analysis & Pay Defect',type:'Weekly',desc:'Weekly punch analysis and pay defect resolution.',target:'TBD',auto:false},
+  {id:'M8',name:'Adapt Feedback Closure',type:'Weekly',desc:'Adapt feedback items closed within the week.',target:'TBD',auto:false}
 ];
 
-const COLORS = ['#e94560','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#4caf50','#ff5722','#607d8b','#795548','#8bc34a','#ff9800','#673ab7'];
+const AGENCY_COLORS = {Dulsco:'#1565c0',Fastlink:'#6a1b9a',Adecco:'#2e7d32',EFS:'#f57f17'};
+const AGENCY_BG = {Dulsco:'#e3f2fd',Fastlink:'#f3e5f5',Adecco:'#e8f5e9',EFS:'#fff8e1'};
+const AVATAR_COLORS = ['#e94560','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e74c3c'];
+const STORAGE_KEY = 'vpoc_scores_v2';
 
-// ── DATE (UAE = UTC+4) ─────────────────────────────────────────────
-function todayStr() {
-  const uae = new Date(Date.now() + 4*60*60*1000);
-  return uae.toISOString().split('T')[0];
-}
-function fmtDate(d) {
-  const [y,m,day] = d.split('-').map(Number);
-  return new Date(y,m-1,day).toLocaleDateString('en-GB',{weekday:'short',day:'2-digit',month:'short',year:'numeric'});
-}
+// temp holders for pending CSV scores
+let pendingWBCScores = null;
+let pendingM3Scores = null;
 
-// ── STORAGE ────────────────────────────────────────────────────────
-const STORE_KEY = 'vpoc_scores_v2';
-function saveScores(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); updateDebug(); }
-function loadAllScores() { return JSON.parse(localStorage.getItem(STORE_KEY)||'{}'); }
-function getScore(vpocId, date) { const a=loadAllScores(); return (a[vpocId]&&a[vpocId][date]) ? a[vpocId][date] : {}; }
-function setScore(vpocId, date, metricId, val) {
-  const a = loadAllScores();
-  if(!a[vpocId]) a[vpocId]={};
-  if(!a[vpocId][date]) a[vpocId][date]={};
-  a[vpocId][date][metricId] = (val===''||val===null||val===undefined) ? null : Number(val);
-  saveScores(a);
-}
-function getTotalForDate(vpocId, date) {
-  const s = getScore(vpocId, date);
-  return METRICS.reduce((sum,m) => sum + (s[m.id]!=null ? Number(s[m.id]) : 0), 0);
-}
+// ═══════════════════════════════════════════════════
+// STORAGE
+// ═══════════════════════════════════════════════════
+function loadData(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch(e){return {};}}
+function saveData(d){localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}
 
-// ── DEBUG BAR ──────────────────────────────────────────────────────
-function updateDebug() {
-  const today = todayStr();
-  document.getElementById('dbg-date').textContent = today;
-  const all = loadAllScores();
-  let count = 0;
-  Object.values(all).forEach(dates => Object.values(dates).forEach(() => count++));
-  document.getElementById('dbg-count').textContent = count + ' entries';
-  document.getElementById('dbg-viewing').textContent = today;
+function getScore(psoftId, dateStr, metric){
+  const d=loadData();
+  return d[psoftId]?.[dateStr]?.[metric]??null;
+}
+function setScore(psoftId, dateStr, metric, val){
+  const d=loadData();
+  if(!d[psoftId])d[psoftId]={};
+  if(!d[psoftId][dateStr])d[psoftId][dateStr]={};
+  d[psoftId][dateStr][metric]=val;
+  saveData(d);
+}
+function getTotalScore(psoftId, dateStr){
+  const d=loadData();
+  if(!d[psoftId]||!d[psoftId][dateStr])return 0;
+  return METRICS.reduce((s,m)=>s+(d[psoftId][dateStr][m.id]||0),0);
 }
 
-// ── HELPERS ────────────────────────────────────────────────────────
-function daysBetween(d1,d2) { return Math.round((new Date(d2)-new Date(d1))/864e5); }
-function wbcScore(pct) { return pct>=100?5:pct>=80?4:pct>=60?3:pct>=40?2:pct>0?1:0; }
-function m3Score(punches) { return punches>=4 ? 5 : 0; }
-function getAvatar(name,i) { const ini=name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase(); return `<div class="vpoc-avatar" style="background:${COLORS[i%COLORS.length]}">${ini}</div>`; }
-function agTag(ag) { const cls={Dulsco:'ag-dulsco',Fastlink:'ag-fastlink',Adecco:'ag-adecco',EFS:'ag-efs'}; return `<span class="agency-tag ${cls[ag]||''}">${ag||''}</span>`; }
-function sb(s) {
-  if(s===null||s===undefined||s==='') return `<span class="score-badge" style="background:#eee;color:#bbb;">—</span>`;
-  const n=Number(s);
-  const c=n>=5?'score-5':n>=4?'score-4':n>=3?'score-3':n>=2?'score-2':n>=1?'score-1':'score-0';
-  return `<span class="score-badge ${c}">${n}</span>`;
+// ═══════════════════════════════════════════════════
+// DATE HELPERS (UAE)
+// ═══════════════════════════════════════════════════
+function getUAEDateStr(){
+  return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Dubai'});
 }
-function pBar(pct) {
-  const c=pct>=80?'bar-green':pct>=60?'bar-orange':'bar-red';
-  return `<div style="min-width:90px"><div class="progress-wrap"><div class="progress-bar ${c}" style="width:${Math.min(pct,100)}%"></div></div><div style="font-size:11px;color:#888;margin-top:2px;">${pct}%</div></div>`;
+function formatDisplayDate(dateStr){
+  if(!dateStr)return '—';
+  const [y,m,d]=dateStr.split('-');
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
 }
 
-// ── CSV PARSER ─────────────────────────────────────────────────────
-function parseCSV(text) {
-  const lines = text.split('\n').filter(l=>l.trim());
-  const headers = lines[0].split(',').map(h=>h.trim().toLowerCase().replace(/"/g,'').replace(/\s+/g,' '));
-  const rows = [];
-  for(let i=1;i<lines.length;i++) {
-    const vals = parseCSVLine(lines[i]);
-    if(vals.length<2) continue;
-    const row = {};
-    headers.forEach((h,j) => row[h] = (vals[j]||'').trim().replace(/"/g,''));
-    rows.push(row);
-  }
-  return {headers, rows};
-}
-function parseCSVLine(line) {
-  const r=[]; let c='',q=false;
-  for(let ch of line){if(ch==='"')q=!q;else if(ch===','&&!q){r.push(c);c='';}else c+=ch;}
-  r.push(c); return r;
-}
-
-// ── TEST DATA ──────────────────────────────────────────────────────
-function loadTestScores() {
-  if(!confirm('Load sample scores for today?\n(Clear anytime with "Clear All")')) return;
-  const today = todayStr();
-  const sample = [5,4,5,3,4,3,5,4];
-  VPOCS.forEach((v,i) => {
-    METRICS.forEach((m,j) => {
-      setScore(v.id, today, m.id, Math.max(1, Math.min(5, sample[j]-Math.floor(i/5))));
-    });
-  });
-  renderLeaderboard();
-  alert('✅ Test scores loaded for '+today);
-}
-function clearAllData() {
-  if(!confirm('Clear ALL saved scores? Cannot be undone.')) return;
-  localStorage.removeItem(STORE_KEY);
-  updateDebug();
-  renderLeaderboard();
-}
-
-// ── NAV ────────────────────────────────────────────────────────────
-function showPage(name, btn) {
+// ═══════════════════════════════════════════════════
+// NAV
+// ═══════════════════════════════════════════════════
+function showPage(name,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
-  if(btn) btn.classList.add('active');
-  if(name==='dashboard') renderLeaderboard();
-  if(name==='metrics') renderMetrics();
-  if(name==='team') renderTeam();
-  if(name==='scoring') initScoring();
+  if(btn)btn.classList.add('active');
+  if(name==='dashboard')renderLeaderboard();
+  if(name==='metrics')renderMetrics();
+  if(name==='team')renderTeam();
+  if(name==='scoring')initScoringPage();
 }
 
-// ── LEADERBOARD ────────────────────────────────────────────────────
-function renderLeaderboard() {
-  const today = todayStr();
-  document.getElementById('lb-date').textContent = fmtDate(today);
-  updateDebug();
-  const rows = VPOCS.map((v,i) => {
-    const s = getScore(v.id, today);
-    const ms = {};
-    METRICS.forEach(m => { ms[m.id] = s[m.id]!=null ? Number(s[m.id]) : null; });
-    const total = METRICS.reduce((sum,m) => sum+(ms[m.id]||0), 0);
-    const pct = Math.round(total/40*100);
-    return {v, i, ms, total, pct};
-  }).sort((a,b) => b.total-a.total);
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+function init(){
+  const uae=getUAEDateStr();
+  document.getElementById('dateDisplay').textContent='📅 '+formatDisplayDate(uae);
+  document.getElementById('dbg-date').textContent=uae;
+  updateDebugCount();
+  renderLeaderboard();
+  renderMetrics();
+  renderTeam();
+  initScoringPage();
+}
 
-  let html = '';
-  rows.forEach((r,rank) => {
-    const medal = rank===0?'🥇':rank===1?'🥈':rank===2?'🥉':`${rank+1}`;
-    const tc = r.pct>=80?'#2ecc71':r.pct>=60?'#f39c12':'#e74c3c';
-    const hasAny = METRICS.some(m=>r.ms[m.id]!==null);
-    html += `<tr style="${!hasAny?'opacity:0.45':''}">
-      <td style="font-weight:700;font-size:14px;">${medal}</td>
-      <td><div class="vpoc-name">${getAvatar(r.v.name,r.i)}<div>
-        <div style="font-weight:600;font-size:13px;">${r.v.name}</div>
-        <div style="font-size:10px;color:#aaa;">${r.v.id}</div>
-      </div></div></td>
-      <td>${agTag(r.v.agency)}</td>
-      ${METRICS.map(m=>`<td style="text-align:center;">${sb(r.ms[m.id])}</td>`).join('')}
-      <td><span style="font-size:20px;font-weight:800;color:${tc}">${r.total}</span><span style="font-size:11px;color:#aaa;">/40</span></td>
-      <td>${pBar(r.pct)}</td>
+function updateDebugCount(){
+  const d=loadData();
+  let count=0;
+  Object.values(d).forEach(vpoc=>Object.values(vpoc).forEach(day=>count+=Object.keys(day).length));
+  document.getElementById('dbg-count').textContent=count;
+}
+
+// ═══════════════════════════════════════════════════
+// LEADERBOARD
+// ═══════════════════════════════════════════════════
+function renderLeaderboard(){
+  const today=getUAEDateStr();
+  document.getElementById('lb-date').textContent=formatDisplayDate(today);
+  const tbody=document.getElementById('leaderboard-body');
+  const rows=VPOCS.map(v=>{
+    const total=getTotalScore(v.id,today);
+    return {...v,total,scores:METRICS.map(m=>getScore(v.id,today,m.id))};
+  }).sort((a,b)=>b.total-a.total);
+
+  tbody.innerHTML=rows.map((v,i)=>{
+    const pct=Math.round((v.total/40)*100);
+    const barClass=pct>=80?'bar-green':pct>=50?'bar-orange':'bar-red';
+    const avatarColor=AVATAR_COLORS[i%AVATAR_COLORS.length];
+    const initials=v.name.split(' ').map(x=>x[0]).join('').substring(0,2).toUpperCase();
+    const agClass='ag-'+v.agency.toLowerCase();
+    const scoreCells=v.scores.map(s=>{
+      if(s===null)return `<td style="text-align:center;"><span style="color:#ccc;font-size:11px;">—</span></td>`;
+      const cls='score-'+(s>=5?5:s>=4?4:s>=3?3:s>=2?2:s>=1?1:0);
+      return `<td style="text-align:center;"><span class="score-badge ${cls}">${s}</span></td>`;
+    }).join('');
+    return `<tr>
+      <td style="font-weight:700;color:#aaa;font-size:13px;">${i+1}</td>
+      <td><div class="vpoc-name"><span class="vpoc-avatar" style="background:${avatarColor}">${initials}</span><div><div style="font-weight:600;font-size:13px;">${v.name}</div><div style="font-size:11px;color:#888;">${v.amazon}</div></div></div></td>
+      <td><span class="agency-tag ${agClass}">${v.agency}</span></td>
+      ${scoreCells}
+      <td><strong style="font-size:14px;">${v.total}</strong><span style="color:#aaa;font-size:11px;">/40</span></td>
+      <td style="min-width:100px;"><div style="display:flex;align-items:center;gap:6px;"><div class="progress-wrap" style="flex:1"><div class="progress-bar ${barClass}" style="width:${pct}%"></div></div><span style="font-size:11px;color:#888;width:32px;">${pct}%</span></div></td>
     </tr>`;
-  });
+  }).join('');
 
-  document.getElementById('leaderboard-body').innerHTML = html ||
-    '<tr><td colspan="13" style="text-align:center;color:#aaa;padding:30px;">No scores yet — use Score Entry, WBC Scoring, or M3 Attendance tabs</td></tr>';
-
-  const totals = rows.map(r=>r.total);
-  const avg = totals.length ? Math.round(totals.reduce((a,b)=>a+b,0)/totals.length) : 0;
-  document.getElementById('stat-avg').textContent = avg;
-  document.getElementById('stat-compliance').textContent = Math.round(avg/40*100)+'%';
-  document.getElementById('stat-attention').textContent = rows.filter(r=>r.pct<70).length;
+  // stats
+  const totals=rows.map(r=>r.total);
+  const avg=(totals.reduce((a,b)=>a+b,0)/totals.length).toFixed(1);
+  const compliance=Math.round((parseFloat(avg)/40)*100)+'%';
+  const attention=totals.filter(t=>(t/40)<0.7).length;
+  document.getElementById('stat-avg').textContent=avg;
+  document.getElementById('stat-compliance').textContent=compliance;
+  document.getElementById('stat-attention').textContent=attention;
+  updateDebugCount();
 }
 
-// ── WBC CSV ────────────────────────────────────────────────────────
-function processWBCFile(input) {
-  const file = input.files[0]; if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const {rows} = parseCSV(e.target.result);
-    analyzeWBC(rows, file.name);
-  };
-  reader.readAsText(file);
+// ═══════════════════════════════════════════════════
+// SCORE ENTRY
+// ═══════════════════════════════════════════════════
+function initScoringPage(){
+  const sel=document.getElementById('score-vpoc');
+  sel.innerHTML='<option value="">— Select VPOC —</option>'+
+    VPOCS.map(v=>`<option value="${v.id}">${v.name} (${v.agency})</option>`).join('');
+  document.getElementById('score-date').value=getUAEDateStr();
 }
 
-function analyzeWBC(rows, filename) {
-  const filtered = rows.filter(r => SITES.includes((r.site||'').toUpperCase().trim()));
-  const agData = {};
-  filtered.forEach(r => {
-    const agKey = AGENCY_MAP[(r.agency||'').toLowerCase().trim()] || 'unknown';
-    if(!agData[agKey]) agData[agKey]={total:0,closedInSLA:0,open:0};
-    const absent=r.absent||'', closed=r.closed||'', status=(r.status||'').toLowerCase();
-    let inSLA = false;
-    if(closed&&absent){const d=daysBetween(absent,closed);inSLA=d>=0&&d<=5;}
-    agData[agKey].total++;
-    if(status==='closed'&&inSLA) agData[agKey].closedInSLA++;
-    if(status==='open'||status==='in progress') agData[agKey].open++;
-  });
-  const uz = document.getElementById('wbc-upload-zone');
-  uz.classList.add('loaded');
-  uz.innerHTML = `<div class="upload-icon">✅</div><div style="font-weight:600;">${filename}</div><div style="font-size:11px;margin-top:4px;">${filtered.length} cases · DXB5/DXB8/DWC3/DDB1</div>`;
-  renderWBCResults(agData, filtered);
-}
-
-function renderWBCResults(agData, allCases) {
-  document.getElementById('wbc-results').style.display = 'block';
-  const AN={dulsco:'Dulsco',fastlink:'Fastlink',adecco:'Adecco',efs:'EFS'};
-  const AC={dulsco:'#e3f2fd',fastlink:'#f3e5f5',adecco:'#e8f5e9',efs:'#fff8e1'};
-  const ATC={dulsco:'#1565c0',fastlink:'#6a1b9a',adecco:'#2e7d32',efs:'#f57f17'};
-  let cards='',tbl=''; const cs={};
-  ['dulsco','fastlink','adecco','efs'].forEach(key => {
-    const d = agData[key]||{total:0,closedInSLA:0,open:0};
-    const pct = d.total>0 ? Math.round(d.closedInSLA/d.total*100) : 0;
-    const score = d.total>0 ? wbcScore(pct) : null;
-    cs[key] = score;
-    const vl = VPOCS.filter(v=>v.agKey===key).map(v=>v.name.split(' ')[0]).join(', ');
-    cards += `<div class="wbc-agency-card" style="background:${AC[key]};border-color:${ATC[key]}30;">
-      <div class="ag-name" style="color:${ATC[key]}">${AN[key]}</div>
-      <div class="ag-stats">Total: <strong>${d.total}</strong><br>In SLA: <strong>${d.closedInSLA}</strong><br>Open: <strong>${d.open}</strong><br>Rate: <strong>${pct}%</strong></div>
-      <div class="ag-score" style="color:${ATC[key]}">${score!==null?score+' / 5':'N/A'}</div>
+function loadScores(){
+  const psoftId=document.getElementById('score-vpoc').value;
+  const dateStr=document.getElementById('score-date').value;
+  if(!psoftId||!dateStr){alert('Please select a VPOC and date.');return;}
+  const vpoc=VPOCS.find(v=>v.id===psoftId);
+  const form=document.getElementById('score-entry-form');
+  form.innerHTML=`
+    <div style="margin-bottom:14px;font-size:14px;font-weight:600;">
+      ${vpoc.name} · <span style="color:#888;">${formatDisplayDate(dateStr)}</span>
+    </div>
+    <table style="width:100%;max-width:600px;">
+      <thead><tr><th>Metric</th><th>Type</th><th>Auto</th><th style="text-align:center;">Score /5</th></tr></thead>
+      <tbody>
+        ${METRICS.map(m=>{
+          const cur=getScore(psoftId,dateStr,m.id);
+          const isAuto=m.auto;
+          return `<tr>
+            <td><strong>${m.id}</strong> — ${m.name}</td>
+            <td><span class="m-type type-${m.type.toLowerCase()}">${m.type}</span></td>
+            <td style="font-size:11px;color:${isAuto?'#2ecc71':'#aaa'};">${isAuto?'✅ Auto':'Manual'}</td>
+            <td style="text-align:center;">
+              <input type="number" class="score-input" id="inp-${m.id}" min="0" max="5" step="1"
+                value="${cur!==null?cur:''}" placeholder="0–5"
+                ${isAuto?'style="background:#f0fff4;border-color:#2ecc71;"':''}
+              >
+            </td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+    <div style="margin-top:16px;display:flex;gap:10px;align-items:center;">
+      <button class="btn btn-primary" onclick="saveScores('${psoftId}','${dateStr}')">💾 Save Scores</button>
+      <span id="save-status" style="font-size:12px;color:#2ecc71;"></span>
     </div>`;
-    tbl += `<tr><td>${agTag(AN[key])}</td><td>${d.total}</td><td>${d.closedInSLA}</td><td><strong>${pct}%</strong> ${pBar(pct)}</td><td>${sb(score)}</td><td style="font-size:11px;color:#666;">${vl}</td></tr>`;
-  });
-  document.getElementById('wbc-agency-cards').innerHTML = cards;
-  document.getElementById('wbc-score-table').innerHTML = tbl;
-  window._wbcScores = cs;
-
-  let ch = '';
-  allCases.slice(0,100).forEach(r => {
-    const agKey = AGENCY_MAP[(r.agency||'').toLowerCase().trim()]||'';
-    const absent=r.absent||'', closed=r.closed||'', status=r.status||'';
-    let days='—', sla='—';
-    if(closed&&absent){const d=daysBetween(absent,closed);days=d;sla=d<=5?'<span style="color:#2ecc71;font-weight:600;">✅ In SLA</span>':'<span style="color:#e74c3c;font-weight:600;">❌ Breached</span>';}
-    else if((status).toLowerCase()==='open'||(status).toLowerCase()==='in progress') sla='<span style="color:#f39c12;font-weight:600;">⏳ Pending</span>';
-    const sc=status==='Closed'?'#2ecc71':status==='Open'?'#e74c3c':'#f39c12';
-    ch += `<tr><td style="font-size:11px;color:#888;">${r.id||''}</td><td style="font-size:12px;">${r.name||''}</td><td style="font-weight:600;font-size:11px;">${(r.site||'').toUpperCase()}</td><td>${agTag(AN[agKey]||r.agency||'')}</td><td style="font-size:12px;">${absent}</td><td style="color:${sc};font-weight:600;font-size:12px;">${status}</td><td style="font-size:12px;">${closed||'—'}</td><td style="font-size:12px;">${days}</td><td>${sla}</td></tr>`;
-  });
-  if(allCases.length>100) ch += `<tr><td colspan="9" style="text-align:center;color:#888;font-size:12px;padding:10px;">Showing 100 of ${allCases.length}</td></tr>`;
-  document.getElementById('wbc-case-table').innerHTML = ch;
 }
 
-function applyWBCScores() {
-  const scores = window._wbcScores;
-  if(!scores){alert('Upload a WBC CSV first.');return;}
-  const today = todayStr();
-  VPOCS.forEach(v => {
-    if(scores[v.agKey]!==null&&scores[v.agKey]!==undefined)
-      setScore(v.id, today, 'm1', scores[v.agKey]);
+function saveScores(psoftId,dateStr){
+  let saved=0;
+  METRICS.forEach(m=>{
+    const inp=document.getElementById('inp-'+m.id);
+    if(inp&&inp.value!==''){
+      const val=Math.min(5,Math.max(0,parseInt(inp.value)||0));
+      setScore(psoftId,dateStr,m.id,val);
+      saved++;
+    }
   });
-  alert(`✅ WBC (M1) scores applied for ${today}!\n\nDulsco: ${scores.dulsco??'N/A'}/5\nFastlink: ${scores.fastlink??'N/A'}/5\nAdecco: ${scores.adecco??'N/A'}/5\nEFS: ${scores.efs??'N/A'}/5`);
+  document.getElementById('save-status').textContent=`✅ ${saved} score(s) saved!`;
+  setTimeout(()=>{document.getElementById('save-status').textContent='';},3000);
+  updateDebugCount();
 }
 
-// ── M3 ATTENDANCE CSV ──────────────────────────────────────────────
-function processM3File(input) {
-  const file = input.files[0]; if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const {headers, rows} = parseCSV(e.target.result);
-    analyzeM3(rows, headers, file.name);
+// ═══════════════════════════════════════════════════
+// CSV PARSER
+// ═══════════════════════════════════════════════════
+function parseCSV(text){
+  const lines=text.trim().split('\n');
+  const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
+  return lines.slice(1).map(line=>{
+    const vals=[];
+    let cur='',inQ=false;
+    for(let i=0;i<line.length;i++){
+      const c=line[i];
+      if(c==='"'){inQ=!inQ;}
+      else if(c===','&&!inQ){vals.push(cur.trim());cur='';}
+      else{cur+=c;}
+    }
+    vals.push(cur.trim());
+    const row={};
+    headers.forEach((h,i)=>row[h]=vals[i]||'');
+    return row;
+  }).filter(r=>Object.values(r).some(v=>v));
+}
+
+// ═══════════════════════════════════════════════════
+// WBC — M1
+// ═══════════════════════════════════════════════════
+const WBC_SITES=['DXB5','DXB8','DWC3','DDB1'];
+
+function extractDateFromWBCFilename(filename){
+  const m=filename.match(/(\d{4}-\d{2}-\d{2})/);
+  return m?m[1]:null;
+}
+
+function processWBCFile(input){
+  const file=input.files[0];
+  if(!file)return;
+  const detectedDate=extractDateFromWBCFilename(file.name)||getUAEDateStr();
+  const dateDiv=document.getElementById('wbc-date-detected');
+  dateDiv.style.display='block';
+  dateDiv.innerHTML=`<div class="alert alert-success">📅 Date detected from filename: <strong>${formatDisplayDate(detectedDate)}</strong> (${detectedDate})</div>`;
+
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const rows=parseCSV(e.target.result);
+    const siteRows=rows.filter(r=>WBC_SITES.includes((r.Site||'').trim().toUpperCase()));
+    const agencies=['Dulsco','Fastlink','Adecco','EFS'];
+    const results={};
+    agencies.forEach(ag=>{
+      const agRows=siteRows.filter(r=>(r.Agency||'').trim()===ag);
+      const closed=agRows.filter(r=>{
+        const status=(r.Status||'').toLowerCase();
+        const outcome=(r.Outcome||'').toLowerCase();
+        const absentStr=r.Absent||'';
+        const closedStr=r.Closed||'';
+        if(!closedStr||(!status.includes('close')&&!outcome.includes('close')))return false;
+        if(!absentStr)return true;
+        const absentDate=new Date(absentStr);
+        const closedDate=new Date(closedStr);
+        if(isNaN(absentDate)||isNaN(closedDate))return true;
+        return(closedDate-absentDate)/(1000*60*60*24)<=5;
+      });
+      const total=agRows.length;
+      const slaCount=closed.length;
+      const rate=total>0?Math.round((slaCount/total)*100):0;
+      const score=rate===100?5:rate>=80?4:rate>=60?3:rate>=40?2:1;
+      results[ag]={total,slaCount,rate,score,rows:agRows};
+    });
+    pendingWBCScores={date:detectedDate,results};
+    renderWBCResults(results,detectedDate,siteRows);
+    const zone=document.getElementById('wbc-upload-zone');
+    zone.classList.add('loaded');
+    zone.innerHTML=`<div class="upload-icon">✅</div><div style="font-weight:600;">${file.name}</div><div style="font-size:11px;margin-top:4px;">${rows.length} rows loaded · ${siteRows.length} matching sites</div>`;
   };
   reader.readAsText(file);
 }
 
-function analyzeM3(rows, headers, filename) {
-  // Detect employee ID column — try common names
-  const empIdCol = headers.find(h => h.includes('employee id') || h.includes('emp id') || h==='id' || h.includes('psoft'));
-  if(!empIdCol) {
-    alert('Could not find Employee ID column.\nDetected columns: ' + headers.join(', ') + '\n\nPlease ensure your CSV has a column named "Employee ID".');
-    return;
-  }
+function renderWBCResults(results,dateStr,allRows){
+  document.getElementById('wbc-results').style.display='block';
+  const agencies=Object.keys(results);
+  document.getElementById('wbc-agency-cards').innerHTML=agencies.map(ag=>{
+    const r=results[ag];
+    const clr=AGENCY_COLORS[ag]||'#333';
+    const bg=AGENCY_BG[ag]||'#f5f5f5';
+    return `<div class="agency-card" style="border-color:${clr};background:${bg};">
+      <div class="ag-name" style="color:${clr};">${ag}</div>
+      <div class="ag-stats">${r.total} total cases<br>${r.slaCount} closed in SLA<br>Rate: ${r.rate}%</div>
+      <div class="ag-score" style="color:${clr};">${r.score}<span style="font-size:13px;font-weight:400;">/5</span></div>
+    </div>`;
+  }).join('');
 
-  // Count punches per Psoft ID
-  const punchCount = {};
-  rows.forEach(r => {
-    const eid = (r[empIdCol]||'').trim();
-    if(!eid) return;
-    if(!punchCount[eid]) punchCount[eid] = 0;
-    punchCount[eid]++;
-  });
-
-  // Map results to VPOCs
-  const results = VPOCS.map(v => {
-    const count = punchCount[v.psoft] || 0;
-    const score = m3Score(count);
-    return { v, count, score };
-  });
-
-  // Update upload zone
-  const uz = document.getElementById('m3-upload-zone');
-  uz.classList.add('loaded');
-  uz.innerHTML = `<div class="upload-icon">✅</div><div style="font-weight:600;">${filename}</div><div style="font-size:11px;margin-top:4px;">${rows.length} punch records · ${Object.keys(punchCount).length} unique employees</div>`;
-
-  renderM3Results(results);
-  window._m3Results = results;
-}
-
-function renderM3Results(results) {
-  document.getElementById('m3-results').style.display = 'block';
-
-  const pass = results.filter(r=>r.score===5).length;
-  const fail = results.filter(r=>r.score===0&&r.count>0).length;
-  const absent = results.filter(r=>r.count===0).length;
-  document.getElementById('m3-summary-bar').innerHTML =
-    `✅ <strong>${pass} VPOCs</strong> with 4 punches (Score: 5) &nbsp;|&nbsp; ❌ <strong>${fail}</strong> incomplete &nbsp;|&nbsp; ⚠️ <strong>${absent}</strong> not found in CSV`;
-
-  let tbl = '';
-  results.forEach(r => {
-    const statusHtml = r.count===0
-      ? '<span style="color:#f39c12;font-weight:600;">⚠️ Not in CSV</span>'
-      : r.score===5
-        ? '<span style="color:#2ecc71;font-weight:600;">✅ Pass</span>'
-        : '<span style="color:#e74c3c;font-weight:600;">❌ Fail</span>';
-    const countColor = r.count>=4?'#2ecc71':r.count>0?'#e74c3c':'#aaa';
-    tbl += `<tr>
-      <td style="font-size:12px;color:#888;">${r.v.psoft}</td>
-      <td style="font-weight:600;">${r.v.name}</td>
-      <td>${agTag(r.v.agency)}</td>
-      <td style="text-align:center;font-size:18px;font-weight:700;color:${countColor}">${r.count}</td>
-      <td style="text-align:center;">${sb(r.score)}</td>
-      <td>${statusHtml}</td>
+  document.getElementById('wbc-score-table').innerHTML=agencies.map(ag=>{
+    const r=results[ag];
+    const vpocList=VPOCS.filter(v=>v.agency===ag).map(v=>v.name.split(' ')[0]).join(', ');
+    return `<tr>
+      <td><span class="agency-tag ag-${ag.toLowerCase()}">${ag}</span></td>
+      <td>${r.total}</td>
+      <td>${r.slaCount}</td>
+      <td><strong>${r.rate}%</strong></td>
+      <td><span class="score-badge score-${r.score}">${r.score}</span></td>
+      <td style="font-size:11px;color:#888;">${vpocList}</td>
     </tr>`;
-  });
-  document.getElementById('m3-vpoc-table').innerHTML = tbl;
+  }).join('');
 
-  const missing = results.filter(r=>r.count===0);
-  const missingEl = document.getElementById('m3-missing-alert');
-  if(missing.length>0) {
-    missingEl.style.display='block';
-    missingEl.innerHTML = `⚠️ <strong>${missing.length} VPOCs not found in CSV</strong> (will score 0): ${missing.map(r=>r.v.name.split(' ')[0]).join(', ')}`;
+  const sample=allRows.slice(0,100);
+  document.getElementById('wbc-case-table').innerHTML=sample.map(r=>{
+    const absentStr=r.Absent||'';
+    const closedStr=r.Closed||'';
+    let days='—';
+    if(absentStr&&closedStr){
+      const diff=(new Date(closedStr)-new Date(absentStr))/(1000*60*60*24);
+      if(!isNaN(diff))days=diff.toFixed(1);
+    }
+    const inSLA=parseFloat(days)<=5;
+    const badge=closedStr?(inSLA?'<span style="color:#2ecc71;font-size:11px;">✅ In SLA</span>':'<span style="color:#e74c3c;font-size:11px;">❌ Late</span>'):'<span style="color:#aaa;font-size:11px;">Open</span>';
+    return `<tr><td style="font-size:11px;">${r.ID||'—'}</td><td style="font-size:11px;">${r.Name||r.Login||'—'}</td><td>${r.Site||'—'}</td><td><span class="agency-tag ag-${(r.Agency||'').toLowerCase()}">${r.Agency||'—'}</span></td><td style="font-size:11px;">${absentStr}</td><td style="font-size:11px;">${r.Status||'—'}</td><td style="font-size:11px;">${closedStr}</td><td style="text-align:center;">${days}</td><td>${badge}</td></tr>`;
+  }).join('');
+}
+
+function applyWBCScores(){
+  if(!pendingWBCScores){alert('No WBC data loaded.');return;}
+  const {date,results}=pendingWBCScores;
+  let count=0;
+  VPOCS.forEach(v=>{
+    const r=results[v.agency];
+    if(r){setScore(v.id,date,'M1',r.score);count++;}
+  });
+  alert(`✅ M1 scores applied to ${count} VPOCs for ${formatDisplayDate(date)}`);
+  updateDebugCount();
+}
+
+// ═══════════════════════════════════════════════════
+// M3 — ATTENDANCE
+// ═══════════════════════════════════════════════════
+function extractDateFromPunchTime(punchTimeStr){
+  // format: "8/9/26, 7:49 AM" or "8/16/26, 7:57 AM"
+  const m=punchTimeStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+  if(!m)return null;
+  let year=parseInt(m[3]);
+  if(year<100)year+=2000;
+  const month=String(m[1]).padStart(2,'0');
+  const day=String(m[2]).padStart(2,'0');
+  return `${year}-${month}-${day}`;
+}
+
+function processM3File(input){
+  const file=input.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const rows=parseCSV(e.target.result);
+    // detect date from first punch time
+    let detectedDate=getUAEDateStr();
+    for(const row of rows){
+      const pt=row['Punch Time']||'';
+      if(pt){const d=extractDateFromPunchTime(pt);if(d){detectedDate=d;break;}}
+    }
+    const dateDiv=document.getElementById('m3-date-detected');
+    dateDiv.style.display='block';
+    dateDiv.innerHTML=`<div class="alert alert-success">📅 Date detected from Punch Time column: <strong>${formatDisplayDate(detectedDate)}</strong> (${detectedDate})</div>`;
+
+    // count punches per Employee ID
+    const punchMap={};
+    rows.forEach(r=>{
+      const eid=(r['Employee ID']||'').trim();
+      if(!eid)return;
+      if(!punchMap[eid])punchMap[eid]=0;
+      punchMap[eid]++;
+    });
+
+    // evaluate each VPOC
+    const vpocResults=VPOCS.map(v=>{
+      const punches=punchMap[v.id]||0;
+      const score=punches>=4?5:0;
+      return {...v,punches,score};
+    });
+
+    const missing=VPOCS.filter(v=>!punchMap[v.id]);
+    pendingM3Scores={date:detectedDate,vpocResults};
+    renderM3Results(vpocResults,missing,detectedDate,rows.length);
+
+    const zone=document.getElementById('m3-upload-zone');
+    zone.classList.add('loaded');
+    zone.innerHTML=`<div class="upload-icon">✅</div><div style="font-weight:600;">${file.name}</div><div style="font-size:11px;margin-top:4px;">${rows.length} rows loaded · Date: ${detectedDate}</div>`;
+  };
+  reader.readAsText(file);
+}
+
+function renderM3Results(vpocResults,missing,dateStr,totalRows){
+  document.getElementById('m3-results').style.display='block';
+  const passed=vpocResults.filter(v=>v.score===5).length;
+  const failed=vpocResults.filter(v=>v.score===0).length;
+  document.getElementById('m3-summary-bar').innerHTML=
+    `📊 <strong>${totalRows}</strong> total punch rows · VPOCs: <strong style="color:#2ecc71;">${passed} passed</strong> (4+ punches) · <strong style="color:#e74c3c;">${failed} failed/absent</strong> · Date: <strong>${formatDisplayDate(dateStr)}</strong>`;
+
+  document.getElementById('m3-vpoc-table').innerHTML=vpocResults.map(v=>{
+    const agClass='ag-'+v.agency.toLowerCase();
+    const result=v.score===5
+      ?`<span style="color:#2ecc71;font-weight:600;">✅ Present (${v.punches} punches)</span>`
+      :v.punches>0
+        ?`<span style="color:#e67e22;font-weight:600;">⚠️ Incomplete (${v.punches} punches)</span>`
+        :`<span style="color:#e74c3c;font-weight:600;">❌ Absent / Not found</span>`;
+    return `<tr>
+      <td style="font-size:12px;color:#888;">${v.id}</td>
+      <td><strong style="font-size:13px;">${v.name}</strong><br><span style="font-size:11px;color:#aaa;">${v.amazon}</span></td>
+      <td><span class="agency-tag ${agClass}">${v.agency}</span></td>
+      <td style="text-align:center;font-size:16px;font-weight:700;">${v.punches}</td>
+      <td style="text-align:center;"><span class="score-badge score-${v.score}">${v.score}</span></td>
+      <td>${result}</td>
+    </tr>`;
+  }).join('');
+
+  const missingDiv=document.getElementById('m3-missing-alert');
+  if(missing.length>0){
+    missingDiv.style.display='block';
+    missingDiv.innerHTML=`⚠️ <strong>${missing.length} VPOC(s) not found in CSV</strong> (scored 0): ${missing.map(v=>v.name).join(', ')}`;
   } else {
-    missingEl.style.display='none';
+    missingDiv.style.display='none';
   }
 }
 
-function applyM3Scores() {
-  const results = window._m3Results;
-  if(!results){alert('Upload a punch clock CSV first.');return;}
-  const today = todayStr();
-  results.forEach(r => setScore(r.v.id, today, 'm3', r.score));
-  const pass = results.filter(r=>r.score===5).length;
-  alert(`✅ M3 scores applied for ${today}!\n\n${pass}/16 VPOCs scored 5\n${16-pass}/16 VPOCs scored 0\n\nGo to Dashboard to see updated leaderboard.`);
+function applyM3Scores(){
+  if(!pendingM3Scores){alert('No M3 data loaded.');return;}
+  const {date,vpocResults}=pendingM3Scores;
+  vpocResults.forEach(v=>setScore(v.id,date,'M3',v.score));
+  alert(`✅ M3 scores applied to ${vpocResults.length} VPOCs for ${formatDisplayDate(date)}`);
+  updateDebugCount();
 }
 
-// ── METRICS ────────────────────────────────────────────────────────
-function renderMetrics() {
-  document.getElementById('metrics-grid').innerHTML = METRICS.map(m => `
+// ═══════════════════════════════════════════════════
+// METRICS PAGE
+// ═══════════════════════════════════════════════════
+function renderMetrics(){
+  document.getElementById('metrics-grid').innerHTML=METRICS.map(m=>`
     <div class="metric-card">
-      <span class="m-type type-${m.type}">${m.type.toUpperCase()}</span>
-      <div class="m-title">📌 ${m.name}</div>
-      <div class="m-criteria">${m.criteria}</div>
+      <span class="m-type type-${m.type.toLowerCase()}">${m.type}</span>
+      ${m.auto?'<span class="badge-green" style="margin-left:6px;font-size:10px;">Auto CSV</span>':''}
+      <div class="m-title">${m.id} — ${m.name}</div>
+      <div class="m-desc">${m.desc}</div>
       <div class="m-target">🎯 ${m.target}</div>
-      <div style="margin-top:8px;display:flex;justify-content:space-between;">
-        <span style="font-size:11px;color:#aaa;">${m.source}</span>
-        <span style="font-size:12px;font-weight:700;color:#3498db;">Max: ${m.max}</span>
-      </div>
     </div>`).join('');
 }
 
-// ── TEAM ───────────────────────────────────────────────────────────
-function renderTeam() {
-  const filter = document.getElementById('filter-agency').value;
-  const today = todayStr();
-  document.getElementById('team-body').innerHTML = VPOCS
-    .filter(v => !filter||v.agency===filter)
-    .map((v,i) => {
-      const total = getTotalForDate(v.id, today);
-      const pct = Math.round(total/40*100);
-      const wbc = getScore(v.id,today)['m1'];
-      const m3  = getScore(v.id,today)['m3'];
-      const status = pct>=80
-        ? '<span style="color:#2ecc71;font-weight:600;">✅ On Track</span>'
-        : pct>=60
-          ? '<span style="color:#f39c12;font-weight:600;">⚠️ Review</span>'
-          : '<span style="color:#e74c3c;font-weight:600;">🔴 Attention</span>';
-      return `<tr>
-        <td style="font-size:12px;color:#888;">${v.psoft}</td>
-        <td style="font-size:12px;font-weight:600;">${v.id}</td>
-        <td><div class="vpoc-name">${getAvatar(v.name,i)}<span style="font-weight:500;">${v.name}</span></div></td>
-        <td>${agTag(v.agency)}</td>
-        <td style="font-size:12px;color:#888;">${v.doj}</td>
-        <td><span style="font-size:18px;font-weight:700;">${total}</span><span style="font-size:11px;color:#888;">/40</span></td>
-        <td>${sb(wbc)}</td>
-        <td>${sb(m3)}</td>
-        <td>${status}</td>
-      </tr>`;
-    }).join('');
+// ═══════════════════════════════════════════════════
+// TEAM PAGE
+// ═══════════════════════════════════════════════════
+function renderTeam(){
+  const filter=document.getElementById('filter-agency').value;
+  const today=getUAEDateStr();
+  const list=filter?VPOCS.filter(v=>v.agency===filter):VPOCS;
+  document.getElementById('team-body').innerHTML=list.map(v=>{
+    const total=getTotalScore(v.id,today);
+    const m1=getScore(v.id,today,'M1');
+    const m3=getScore(v.id,today,'M3');
+    const pct=Math.round((total/40)*100);
+    const statusColor=pct>=80?'#2ecc71':pct>=50?'#f39c12':'#e74c3c';
+    const statusTxt=pct>=80?'On Track':pct>=50?'Needs Effort':'Below Target';
+    const agClass='ag-'+v.agency.toLowerCase();
+    return `<tr>
+      <td style="font-size:12px;color:#888;">${v.id}</td>
+      <td style="font-size:12px;font-family:monospace;">${v.amazon}</td>
+      <td><strong>${v.name}</strong></td>
+      <td><span class="agency-tag ${agClass}">${v.agency}</span></td>
+      <td style="font-size:11px;color:#aaa;">—</td>
+      <td><strong>${total}</strong><span style="color:#aaa;font-size:11px;">/40</span></td>
+      <td style="text-align:center;">${m1!==null?`<span class="score-badge score-${m1}">${m1}</span>`:'<span style="color:#ccc;font-size:11px;">—</span>'}</td>
+      <td style="text-align:center;">${m3!==null?`<span class="score-badge score-${m3}">${m3}</span>`:'<span style="color:#ccc;font-size:11px;">—</span>'}</td>
+      <td><span style="color:${statusColor};font-size:12px;font-weight:600;">${statusTxt}</span></td>
+    </tr>`;
+  }).join('');
 }
 
-// ── SCORE ENTRY ────────────────────────────────────────────────────
-function initScoring() {
-  const sel = document.getElementById('score-vpoc');
-  if(sel.children.length<=1) VPOCS.forEach(v => {
-    const o = document.createElement('option');
-    o.value = v.id;
-    o.textContent = `${v.name} (${v.id})`;
-    sel.appendChild(o);
+// ═══════════════════════════════════════════════════
+// TEST DATA + CLEAR
+// ═══════════════════════════════════════════════════
+function loadTestScores(){
+  if(!confirm('Load test scores for today? This will overwrite today\'s data.'))return;
+  const today=getUAEDateStr();
+  VPOCS.forEach(v=>{
+    METRICS.forEach(m=>{
+      setScore(v.id,today,m.id,Math.floor(Math.random()*4)+2);
+    });
   });
-  document.getElementById('score-date').value = todayStr();
+  renderLeaderboard();
+  alert('✅ Test data loaded for '+formatDisplayDate(today));
 }
 
-function loadScores() {
-  const vpocId = document.getElementById('score-vpoc').value;
-  const date   = document.getElementById('score-date').value;
-  if(!vpocId){alert('Please select a VPOC');return;}
-  const s = getScore(vpocId, date);
-  const vpoc = VPOCS.find(v=>v.id===vpocId);
+function clearAllData(){
+  if(!confirm('Clear ALL stored scores? This cannot be undone.'))return;
+  localStorage.removeItem(STORAGE_KEY);
+  renderLeaderboard();
+  updateDebugCount();
+  alert('🗑 All data cleared.');
+}
 
-  let html = `<div style="margin-bottom:14px;padding:12px;background:#f8f9fa;border-radius:8px;font-size:13px;">
-    <strong>${vpoc.name}</strong> — ${agTag(vpoc.agency)} — ${fmtDate(date)}
-    <span style="float:right;font-size:11px;color:#888;">Key: ${date}</span>
-  </div>
-  <table style="width:100%;border-collapse:collapse;">
-  <thead><tr>
-    <th style="padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;">#</th>
-    <th style="padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;">Metric</th>
-    <th style="padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;text-align:center;">Score (0–5)</th
+// ═══════════════════════════════════════════════════
+// START
+// ═══════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
