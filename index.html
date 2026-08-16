@@ -11,65 +11,76 @@
   .header h1 { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
   .header .subtitle { font-size: 12px; opacity: 0.7; margin-top: 3px; }
   .header .date-badge { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 13px; }
-  .nav { background: #16213e; display: flex; gap: 0; padding: 0 30px; }
-  .nav-btn { color: rgba(255,255,255,0.6); padding: 14px 20px; cursor: pointer; font-size: 13px; font-weight: 500; border-bottom: 3px solid transparent; transition: all 0.2s; border: none; background: none; }
+  .nav { background: #16213e; display: flex; gap: 0; padding: 0 30px; overflow-x: auto; }
+  .nav-btn { color: rgba(255,255,255,0.6); padding: 14px 18px; cursor: pointer; font-size: 13px; font-weight: 500; border-bottom: 3px solid transparent; transition: all 0.2s; border: none; background: none; white-space: nowrap; }
   .nav-btn:hover, .nav-btn.active { color: #e94560; border-bottom-color: #e94560; }
   .main { padding: 25px 30px; }
   .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 25px; }
   .stat-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); border-left: 4px solid; }
-  .stat-card.blue { border-color: #3498db; } .stat-card.green { border-color: #2ecc71; } .stat-card.orange { border-color: #f39c12; } .stat-card.red { border-color: #e74c3c; }
+  .stat-card.blue{border-color:#3498db} .stat-card.green{border-color:#2ecc71} .stat-card.orange{border-color:#f39c12} .stat-card.red{border-color:#e74c3c}
   .stat-card .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
   .stat-card .value { font-size: 28px; font-weight: 700; }
   .stat-card .sub { font-size: 11px; color: #aaa; margin-top: 4px; }
   .section { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 20px; overflow: hidden; }
-  .section-header { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   .section-header h2 { font-size: 15px; font-weight: 600; }
   .badge { background: #e94560; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
   table { width: 100%; border-collapse: collapse; }
-  th { background: #f8f9fa; padding: 11px 14px; text-align: left; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-  td { padding: 12px 14px; border-bottom: 1px solid #f5f5f5; font-size: 13px; }
-  tr:last-child td { border-bottom: none; } tr:hover td { background: #fafbff; }
-  .score-badge { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; font-weight: 700; font-size: 13px; }
-  .score-5 { background: #d4edda; color: #155724; } .score-4 { background: #cce5ff; color: #004085; } .score-3 { background: #fff3cd; color: #856404; } .score-2 { background: #fde; color: #721c24; } .score-1, .score-0 { background: #f8d7da; color: #721c24; }
-  .progress-wrap { background: #f0f0f0; border-radius: 10px; height: 8px; overflow: hidden; }
-  .progress-bar { height: 100%; border-radius: 10px; transition: width 0.5s; }
-  .bar-green { background: linear-gradient(90deg, #2ecc71, #27ae60); } .bar-orange { background: linear-gradient(90deg, #f39c12, #e67e22); } .bar-red { background: linear-gradient(90deg, #e74c3c, #c0392b); }
-  .vpoc-avatar { width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; color: white; margin-right: 8px; }
+  th { background: #f8f9fa; padding: 10px 12px; text-align: left; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  td { padding: 11px 12px; border-bottom: 1px solid #f5f5f5; font-size: 13px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafbff; }
+  .score-badge { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-weight: 700; font-size: 12px; }
+  .score-5{background:#d4edda;color:#155724} .score-4{background:#cce5ff;color:#004085} .score-3{background:#fff3cd;color:#856404} .score-2{background:#ffe;color:#856404} .score-1{background:#fde;color:#721c24} .score-0{background:#f8d7da;color:#721c24}
+  .progress-wrap { background: #f0f0f0; border-radius: 10px; height: 7px; overflow: hidden; min-width: 80px; }
+  .progress-bar { height: 100%; border-radius: 10px; }
+  .bar-green{background:linear-gradient(90deg,#2ecc71,#27ae60)} .bar-orange{background:linear-gradient(90deg,#f39c12,#e67e22)} .bar-red{background:linear-gradient(90deg,#e74c3c,#c0392b)}
+  .vpoc-avatar { width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; color: white; margin-right: 7px; flex-shrink: 0; }
   .vpoc-name { display: flex; align-items: center; }
-  .agency-tag { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
-  .ag-dulsco { background: #e3f2fd; color: #1565c0; } .ag-fastlink { background: #f3e5f5; color: #6a1b9a; } .ag-adecco { background: #e8f5e9; color: #2e7d32; } .ag-efs { background: #fff8e1; color: #f57f17; }
-  .total-score { font-size: 18px; font-weight: 700; } .score-pct { font-size: 11px; color: #888; }
+  .agency-tag { padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 600; white-space: nowrap; }
+  .ag-dulsco{background:#e3f2fd;color:#1565c0} .ag-fastlink{background:#f3e5f5;color:#6a1b9a} .ag-adecco{background:#e8f5e9;color:#2e7d32} .ag-efs{background:#fff8e1;color:#f57f17}
   .page { display: none; } .page.active { display: block; }
-  .score-input { width: 50px; padding: 5px; border: 1px solid #ddd; border-radius: 6px; text-align: center; font-size: 13px; }
+  .score-input { width: 48px; padding: 5px; border: 1px solid #ddd; border-radius: 6px; text-align: center; font-size: 13px; }
   .score-input:focus { outline: none; border-color: #3498db; }
-  .btn { padding: 8px 18px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
-  .btn-primary { background: #e94560; color: white; } .btn-primary:hover { background: #c0392b; }
-  .btn-secondary { background: #f0f2f5; color: #333; } .btn-secondary:hover { background: #e0e2e5; }
-  .btn-green { background: #2ecc71; color: white; } .btn-green:hover { background: #27ae60; }
+  .btn { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+  .btn-primary{background:#e94560;color:white} .btn-primary:hover{background:#c0392b}
+  .btn-secondary{background:#f0f2f5;color:#333} .btn-secondary:hover{background:#dde}
+  .btn-green{background:#2ecc71;color:white} .btn-green:hover{background:#27ae60}
+  .btn-orange{background:#f39c12;color:white} .btn-orange:hover{background:#e67e22}
   .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 20px; }
   .metric-card { border: 1px solid #e8e8e8; border-radius: 10px; padding: 16px; }
   .metric-card .m-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
   .metric-card .m-criteria { font-size: 11px; color: #888; margin-bottom: 8px; line-height: 1.5; }
   .metric-card .m-target { font-size: 11px; color: #e94560; font-weight: 600; }
-  .metric-card .m-type { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin-bottom: 8px; }
-  .type-daily { background: #e3f2fd; color: #1565c0; } .type-weekly { background: #f3e5f5; color: #6a1b9a; }
+  .m-type { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin-bottom: 8px; }
+  .type-daily{background:#e3f2fd;color:#1565c0} .type-weekly{background:#f3e5f5;color:#6a1b9a}
   .alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; }
-  .alert-info { background: #e3f2fd; color: #1565c0; border-left: 4px solid #2196f3; }
-  .alert-success { background: #d4edda; color: #155724; border-left: 4px solid #2ecc71; }
-  .upload-zone { border: 2px dashed #ddd; border-radius: 10px; padding: 30px; text-align: center; color: #aaa; cursor: pointer; transition: all 0.2s; margin: 10px 0; }
-  .upload-zone:hover { border-color: #3498db; color: #3498db; }
-  .upload-zone.loaded { border-color: #2ecc71; background: #f0fff4; color: #155724; }
-  .upload-icon { font-size: 30px; margin-bottom: 8px; }
+  .alert-info{background:#e3f2fd;color:#1565c0;border-left:4px solid #2196f3}
+  .alert-warn{background:#fff3cd;color:#856404;border-left:4px solid #f39c12}
+  .upload-zone { border: 2px dashed #ddd; border-radius: 10px; padding: 28px; text-align: center; color: #aaa; cursor: pointer; transition: all 0.2s; margin: 10px 0; }
+  .upload-zone:hover{border-color:#3498db;color:#3498db}
+  .upload-zone.loaded{border-color:#2ecc71;background:#f0fff4;color:#155724}
+  .upload-icon { font-size: 28px; margin-bottom: 8px; }
   .wbc-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 16px 0; }
   .wbc-agency-card { border-radius: 10px; padding: 14px; border: 1px solid #e8e8e8; }
   .wbc-agency-card .ag-name { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
   .wbc-agency-card .ag-stats { font-size: 11px; color: #666; line-height: 1.8; }
   .wbc-agency-card .ag-score { font-size: 24px; font-weight: 700; margin-top: 8px; }
+  .m3-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 16px 0; }
+  .m3-vpoc-card { border-radius: 8px; padding: 10px 12px; border: 1px solid #e8e8e8; display:flex; align-items:center; justify-content:space-between; }
   .footer { text-align: center; padding: 20px; color: #aaa; font-size: 11px; }
-  @media (max-width: 768px) { .stats-row { grid-template-columns: repeat(2,1fr); } .metric-grid { grid-template-columns: 1fr; } .main { padding: 15px; } .wbc-summary { grid-template-columns: repeat(2,1fr); } }
+  #debug-bar { background:#1a1a2e; color:#7fff7f; font-family:monospace; font-size:11px; padding:6px 16px; display:flex; gap:20px; flex-wrap:wrap; }
+  @media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}.metric-grid{grid-template-columns:1fr}.main{padding:15px}.wbc-summary{grid-template-columns:repeat(2,1fr)}.m3-summary{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
+
+<div id="debug-bar">
+  <span>🕐 UAE Date: <strong id="dbg-date">—</strong></span>
+  <span>💾 Scores stored: <strong id="dbg-count">—</strong></span>
+  <span>📅 Viewing: <strong id="dbg-viewing">today</strong></span>
+</div>
+
 <div class="header">
   <div>
     <h1>🏭 VPOC Activity Tracker</h1>
@@ -77,18 +88,21 @@
   </div>
   <div class="date-badge" id="dateDisplay">📅 Loading...</div>
 </div>
+
 <div class="nav">
   <button class="nav-btn active" onclick="showPage('dashboard',this)">📊 Dashboard</button>
   <button class="nav-btn" onclick="showPage('scoring',this)">✏️ Score Entry</button>
   <button class="nav-btn" onclick="showPage('wbc',this)">📋 WBC Scoring</button>
+  <button class="nav-btn" onclick="showPage('m3',this)">🕐 M3 Attendance</button>
   <button class="nav-btn" onclick="showPage('metrics',this)">📐 Metrics</button>
   <button class="nav-btn" onclick="showPage('team',this)">👥 Team</button>
 </div>
+
 <div class="main">
 
 <!-- DASHBOARD -->
 <div id="page-dashboard" class="page active">
-  <div class="alert alert-info">📌 <strong>Phase 1 Active</strong> — WBC auto-scoring live from CSV (any filename). SharePoint & Email integrations pending setup.</div>
+  <div class="alert alert-info">📌 <strong>How to use:</strong> Upload WBC CSV → <strong>WBC Scoring</strong>. Upload punch CSV → <strong>M3 Attendance</strong>. Manual scores → <strong>Score Entry</strong>. All flow to Dashboard automatically.</div>
   <div class="stats-row">
     <div class="stat-card blue"><div class="label">Total VPOCs</div><div class="value">16</div><div class="sub">DXB5 Based</div></div>
     <div class="stat-card green"><div class="label">Avg Team Score</div><div class="value" id="stat-avg">—</div><div class="sub">Out of 40</div></div>
@@ -98,12 +112,32 @@
   <div class="section">
     <div class="section-header">
       <h2>🏆 VPOC Leaderboard</h2>
-      <span class="badge" id="lb-date">—</span>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span class="badge" id="lb-date">—</span>
+        <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;" onclick="renderLeaderboard()">🔄 Refresh</button>
+        <button class="btn btn-orange" style="font-size:11px;padding:5px 10px;" onclick="loadTestScores()">🧪 Test Data</button>
+        <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;color:#e74c3c;" onclick="clearAllData()">🗑 Clear All</button>
+      </div>
     </div>
-    <table>
-      <thead><tr><th>#</th><th>VPOC</th><th>Agency</th><th>Daily /25</th><th>Weekly /15</th><th>Total /40</th><th>Compliance</th><th>Progress</th></tr></thead>
-      <tbody id="leaderboard-body"></tbody>
-    </table>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>VPOC</th><th>Agency</th>
+            <th style="text-align:center;">M1<br><span style="font-size:9px;font-weight:400;color:#999">WBC</span></th>
+            <th style="text-align:center;">M2<br><span style="font-size:9px;font-weight:400;color:#999">Gemba</span></th>
+            <th style="text-align:center;">M3<br><span style="font-size:9px;font-weight:400;color:#999">Attend</span></th>
+            <th style="text-align:center;">M4<br><span style="font-size:9px;font-weight:400;color:#999">Bridge</span></th>
+            <th style="text-align:center;">M5<br><span style="font-size:9px;font-weight:400;color:#999">SOS</span></th>
+            <th style="text-align:center;">M6<br><span style="font-size:9px;font-weight:400;color:#999">Engage</span></th>
+            <th style="text-align:center;">M7<br><span style="font-size:9px;font-weight:400;color:#999">Punch</span></th>
+            <th style="text-align:center;">M8<br><span style="font-size:9px;font-weight:400;color:#999">Adapt</span></th>
+            <th>Total /40</th><th>Progress</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -112,13 +146,13 @@
   <div class="section">
     <div class="section-header">
       <h2>✏️ Score Entry</h2>
-      <div style="display:flex;gap:8px;align-items:center;">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
         <select id="score-vpoc" style="padding:6px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;"><option value="">— Select VPOC —</option></select>
         <input type="date" id="score-date" style="padding:6px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;">
         <button class="btn btn-primary" onclick="loadScores()">Load</button>
       </div>
     </div>
-    <div style="padding:20px;"><div id="score-entry-form"><div style="text-align:center;color:#aaa;padding:40px;">Select a VPOC and date to enter scores</div></div></div>
+    <div style="padding:20px;"><div id="score-entry-form"><div style="text-align:center;color:#aaa;padding:40px;">Select a VPOC and date, then click Load</div></div></div>
   </div>
 </div>
 
@@ -127,13 +161,13 @@
   <div class="section">
     <div class="section-header">
       <h2>📋 WBC Closure — Auto Scoring</h2>
-      <div style="font-size:12px;color:#888;">SLA: 5 days from absence | Sites: DXB5 · DXB8 · DWC3 · DDB1 | Any CSV filename accepted</div>
+      <div style="font-size:12px;color:#888;">SLA: 5 days | Sites: DXB5·DXB8·DWC3·DDB1</div>
     </div>
     <div style="padding:20px;">
       <div id="wbc-upload-zone" class="upload-zone" onclick="document.getElementById('wbc-file-input').click()">
         <div class="upload-icon">📁</div>
-        <div style="font-weight:600;font-size:14px;">Click to upload WBC CSV file</div>
-        <div style="font-size:11px;margin-top:6px;">Any filename accepted · Required columns: Site, Agency, Absent, Status, Closed</div>
+        <div style="font-weight:600;font-size:14px;">Click to upload WBC CSV</div>
+        <div style="font-size:11px;margin-top:6px;">Required columns: Site, Agency, Absent, Status, Closed</div>
       </div>
       <input type="file" id="wbc-file-input" accept=".csv" style="display:none" onchange="processWBCFile(this)">
       <div id="wbc-results" style="display:none;">
@@ -141,16 +175,13 @@
           <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📊 Agency Breakdown</h3>
           <div class="wbc-summary" id="wbc-agency-cards"></div>
         </div>
-        <div style="margin-bottom:16px;">
-          <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">🎯 Scores by Agency</h3>
-          <table><thead><tr><th>Agency</th><th>Total Cases</th><th>Closed in SLA</th><th>Closure Rate</th><th>Score /5</th><th>VPOCs Affected</th></tr></thead>
-          <tbody id="wbc-score-table"></tbody></table>
-        </div>
+        <table><thead><tr><th>Agency</th><th>Total</th><th>In SLA</th><th>Rate</th><th>Score /5</th><th>VPOCs</th></tr></thead>
+        <tbody id="wbc-score-table"></tbody></table>
         <div style="text-align:right;margin-top:16px;">
-          <button class="btn btn-green" onclick="applyWBCScores()">✅ Apply Scores to Today's Dashboard</button>
+          <button class="btn btn-green" onclick="applyWBCScores()">✅ Apply to Dashboard</button>
         </div>
         <div style="margin-top:20px;">
-          <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📝 Case Details</h3>
+          <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📝 Case Details (first 100)</h3>
           <div style="overflow-x:auto;">
             <table><thead><tr><th>Case ID</th><th>Name</th><th>Site</th><th>Agency</th><th>Absent</th><th>Status</th><th>Closed</th><th>Days</th><th>SLA</th></tr></thead>
             <tbody id="wbc-case-table"></tbody></table>
@@ -158,13 +189,53 @@
         </div>
       </div>
       <div style="margin-top:20px;background:#f8f9fa;border-radius:10px;padding:16px;">
-        <h3 style="font-size:13px;font-weight:600;margin-bottom:10px;color:#666;">📐 Scoring Criteria</h3>
+        <h3 style="font-size:13px;font-weight:600;margin-bottom:10px;color:#666;">📐 WBC Scoring Criteria</h3>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center;">
           <div style="padding:10px;background:#d4edda;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#155724;">5</div><div style="font-size:11px;color:#155724;">100%</div></div>
           <div style="padding:10px;background:#cce5ff;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#004085;">4</div><div style="font-size:11px;color:#004085;">80–99%</div></div>
           <div style="padding:10px;background:#fff3cd;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#856404;">3</div><div style="font-size:11px;color:#856404;">60–79%</div></div>
           <div style="padding:10px;background:#fde;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#721c24;">2</div><div style="font-size:11px;color:#721c24;">40–59%</div></div>
-          <div style="padding:10px;background:#f8d7da;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#721c24;">1</div><div style="font-size:11px;color:#721c24;">Below 40%</div></div>
+          <div style="padding:10px;background:#f8d7da;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#721c24;">1</div><div style="font-size:11px;color:#721c24;">&lt;40%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- M3 ATTENDANCE -->
+<div id="page-m3" class="page">
+  <div class="section">
+    <div class="section-header">
+      <h2>🕐 M3 Attendance — Auto Scoring</h2>
+      <div style="font-size:12px;color:#888;">Rule: 4 punches = 5 pts | Less than 4 = 0 pts | Per VPOC individually</div>
+    </div>
+    <div style="padding:20px;">
+      <div class="alert alert-info">📌 Upload the punch clock CSV for a shift. The app filters your 16 VPOCs by <strong>Psoft ID</strong> and counts punches per person.</div>
+      <div id="m3-upload-zone" class="upload-zone" onclick="document.getElementById('m3-file-input').click()">
+        <div class="upload-icon">📁</div>
+        <div style="font-weight:600;font-size:14px;">Click to upload Punch Clock CSV</div>
+        <div style="font-size:11px;margin-top:6px;">Required columns: Employee ID, Punch Type (or similar) · Any filename</div>
+      </div>
+      <input type="file" id="m3-file-input" accept=".csv" style="display:none" onchange="processM3File(this)">
+      <div id="m3-results" style="display:none;">
+        <div style="margin-bottom:8px;padding:10px 14px;background:#f0fff4;border-radius:8px;font-size:13px;" id="m3-summary-bar"></div>
+        <h3 style="font-size:14px;font-weight:600;margin:16px 0 10px;">👤 VPOC Punch Results</h3>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead><tr><th>Psoft ID</th><th>Name</th><th>Agency</th><th>Punches Found</th><th>Score /5</th><th>Status</th></tr></thead>
+            <tbody id="m3-vpoc-table"></tbody>
+          </table>
+        </div>
+        <div style="margin-top:12px;padding:12px;background:#fff3cd;border-radius:8px;font-size:12px;color:#856404;" id="m3-missing-alert" style="display:none;"></div>
+        <div style="text-align:right;margin-top:16px;">
+          <button class="btn btn-green" onclick="applyM3Scores()">✅ Apply M3 Scores to Dashboard</button>
+        </div>
+      </div>
+      <div style="margin-top:20px;background:#f8f9fa;border-radius:10px;padding:16px;">
+        <h3 style="font-size:13px;font-weight:600;margin-bottom:10px;color:#666;">📐 M3 Scoring Rule</h3>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;text-align:center;max-width:300px;">
+          <div style="padding:12px;background:#d4edda;border-radius:8px;"><div style="font-size:22px;font-weight:700;color:#155724;">5</div><div style="font-size:12px;color:#155724;">4 punches ✅</div></div>
+          <div style="padding:12px;background:#f8d7da;border-radius:8px;"><div style="font-size:22px;font-weight:700;color:#721c24;">0</div><div style="font-size:12px;color:#721c24;">Less than 4 ❌</div></div>
         </div>
       </div>
     </div>
@@ -186,51 +257,446 @@
         <option>Dulsco</option><option>Fastlink</option><option>Adecco</option><option>EFS</option>
       </select>
     </div>
-    <table><thead><tr><th>Psoft ID</th><th>Amazon ID</th><th>Name</th><th>Agency</th><th>DOJ</th><th>Total Score</th><th>WBC Score</th><th>Status</th></tr></thead>
-    <tbody id="team-body"></tbody></table>
+    <div style="overflow-x:auto;">
+      <table><thead><tr><th>Psoft ID</th><th>Amazon ID</th><th>Name</th><th>Agency</th><th>DOJ</th><th>Total /40</th><th>WBC /5</th><th>M3 /5</th><th>Status</th></tr></thead>
+      <tbody id="team-body"></tbody></table>
+    </div>
   </div>
 </div>
 
-</div>
-<div class="footer">VPOC Activity Tracker v1.1 — DXB5 · DXB8 · DWC3 · DDB1 | Phase 1 | WBC Auto-Scoring Active</div>
-
+</div><!-- end .main -->
+<div class="footer">VPOC Activity Tracker v1.4 — DXB5·DXB8·DWC3·DDB1 | Phase 1 | WBC + M3 Auto-Scoring</div>
 <script>
-const VPOCS=[{psoft:'205671526',id:'miadnana',name:'Adnan Amir Afridi',agency:'Dulsco',agKey:'dulsco',doj:'17-Jul-25'},{psoft:'207302255',id:'muarfaar',name:'Arfa Arif',agency:'Fastlink',agKey:'fastlink',doj:'15-Apr-26'},{psoft:'207799093',id:'javeiqrn',name:'Javed Iqra',agency:'Dulsco',agKey:'dulsco',doj:'23-Jun-26'},{psoft:'205688378',id:'osmakhai',name:'Khairi Mohamed',agency:'Fastlink',agKey:'fastlink',doj:'22-Jul-25'},{psoft:'205730381',id:'lalucema',name:'Marc Angel Luce',agency:'Dulsco',agKey:'dulsco',doj:'30-Jul-25'},{psoft:'207283256',id:'mbikkiri',name:'Hubaib Bikkiri',agency:'Dulsco',agKey:'dulsco',doj:'14-Apr-26'},{psoft:'204604983',id:'mohaanwn',name:'Anwar Mohammed',agency:'Adecco',agKey:'adecco',doj:'20-Nov-24'},{psoft:'204604982',id:'niapeedi',name:'Nihala Yas Peedi',agency:'Adecco',agKey:'adecco',doj:'20-Nov-24'},{psoft:'205776070',id:'okupragt',name:'Pragti Kumar',agency:'Fastlink',agKey:'fastlink',doj:'08-Aug-25'},{psoft:'203305831',id:'predesnb',name:'Tinated Elsheba',agency:'Adecco',agKey:'adecco',doj:'09-May-24'},{psoft:'203331748',id:'renmanya',name:'Ny Ochieng Manya',agency:'Adecco',agKey:'adecco',doj:'16-May-24'},{psoft:'205441633',id:'jamoafos',name:'Sandra Amoafo',agency:'Dulsco',agKey:'dulsco',doj:'16-Jun-25'},{psoft:'207275154',id:'sivakmit',name:'Mitravakumar',agency:'EFS',agKey:'efs',doj:'12-Apr-26'},{psoft:'205389687',id:'gusweene',name:'Sweeney Gunaseke',agency:'Fastlink',agKey:'fastlink',doj:'09-Jun-25'},{psoft:'205699662',id:'tambohes',name:'Stephan Awinda',agency:'Fastlink',agKey:'fastlink',doj:'28-Jul-25'},{psoft:'200641956',id:'sazehra',name:'Zehra Sana',agency:'Fastlink',agKey:'fastlink',doj:'30-Oct-22'}];
-const AGENCY_MAP={'dulsco l.l.c.':'dulsco','dulsco':'dulsco','fastlink outsourcing':'fastlink','fastlink':'fastlink','adecco':'adecco','efs facilities services':'efs','efs':'efs'};
-const SITES=['DXB5','DXB8','DWC3','DDB1'];
-const METRICS=[{id:'m1',name:'WBC Closure',type:'daily',max:5,criteria:'% of WBC completed within SLA (within 5 days) for returning associates',target:'100% closure',source:'CSV Upload (Auto-Score)'},{id:'m2',name:'HR Gemba',type:'daily',max:5,criteria:'Scheduled Gemba walks completed; findings documented and actioned',target:'100% compliance',source:'Manual (Pulse)'},{id:'m3',name:'VPOC Attendance & Compliance',type:'daily',max:5,criteria:'Personal attendance, punctuality, adherence to site schedule',target:'≥98% attendance',source:'CSV Upload (DWD)'},{id:'m4',name:'Daily Attendance Analysis & Bridging',type:'daily',max:5,criteria:'Attendance tracking; bridging absences submitted within 2hrs from SOS',target:'Daily within 2hrs',source:'Email Inbox (Placeholder)'},{id:'m5',name:'SOS Meeting Attendance & Update',type:'daily',max:5,criteria:'Attendance at SOS briefings with PXT updates',target:'100% attendance',source:'SharePoint (Placeholder)'},{id:'m6',name:'Engagement Activity Management',type:'weekly',max:5,criteria:'Execution of planned associate engagement activities per quarterly calendar',target:'100% execution',source:'SharePoint (Placeholder)'},{id:'m7',name:'Punch Analysis & Pay Defect',type:'weekly',max:5,criteria:'Mispunch tracked weekly; pay defect audit and timely correction',target:'Mispunch 0%; Pay Defect 0%',source:'CSV Upload'},{id:'m8',name:'Adapt Feedback Closure',type:'weekly',max:5,criteria:'Warning letter issuance within SLA; Bravo pin distribution',target:'WL ≤48h',source:'SharePoint (Placeholder)'}];
-const COLORS=['#e94560','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#4caf50','#ff5722','#607d8b','#795548','#8bc34a','#ff9800','#673ab7'];
-function saveScores(d){localStorage.setItem('vpoc_scores',JSON.stringify(d));}
-function loadAllScores(){return JSON.parse(localStorage.getItem('vpoc_scores')||'{}');}
-function getScore(v,d){const a=loadAllScores();return a[v]?.[d]||{};}
-function setScore(v,d,m,val){const a=loadAllScores();if(!a[v])a[v]={};if(!a[v][d])a[v][d]={};a[v][d][m]=val;saveScores(a);}
-function getTotalScore(v,d){const s=getScore(v,d);return Object.values(s).reduce((a,b)=>a+(Number(b)||0),0);}
-function saveWBCScores(d){localStorage.setItem('vpoc_wbc',JSON.stringify(d));}
-function loadWBCScores(){return JSON.parse(localStorage.getItem('vpoc_wbc')||'{}');}
-function todayStr(){return new Date().toISOString().split('T')[0];}
-function fmtDate(d){return new Date(d).toLocaleDateString('en-GB',{weekday:'short',day:'2-digit',month:'short',year:'numeric'});}
-function daysBetween(d1,d2){const a=new Date(d1),b=new Date(d2);return Math.round((b-a)/(1000*60*60*24));}
-function wbcScore(pct){if(pct>=100)return 5;if(pct>=80)return 4;if(pct>=60)return 3;if(pct>=40)return 2;if(pct>0)return 1;return 0;}
-function getAvatar(name,i){const ini=name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();return `<div class="vpoc-avatar" style="background:${COLORS[i%COLORS.length]}">${ini}</div>`;}
-function agTag(ag){const cls={Dulsco:'ag-dulsco',Fastlink:'ag-fastlink',Adecco:'ag-adecco',EFS:'ag-efs'};return `<span class="agency-tag ${cls[ag]||''}">${ag}</span>`;}
-function scoreBadge(s){if(s===null||s===undefined||s==='')return `<span class="score-badge" style="background:#eee;color:#aaa;">—</span>`;const n=Number(s);const cls=n>=5?'score-5':n>=4?'score-4':n>=3?'score-3':n>=2?'score-2':'score-0';return `<span class="score-badge ${cls}">${n}</span>`;}
-function progressBar(pct){const cls=pct>=80?'bar-green':pct>=60?'bar-orange':'bar-red';return `<div class="progress-wrap"><div class="progress-bar ${cls}" style="width:${Math.min(pct,100)}%"></div></div><div style="font-size:11px;color:#888;margin-top:3px;">${pct}%</div>`;}
-function showPage(name,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('page-'+name).classList.add('active');if(btn)btn.classList.add('active');if(name==='dashboard')renderLeaderboard();if(name==='metrics')renderMetrics();if(name==='team')renderTeam();if(name==='scoring')initScoring();}
-function renderLeaderboard(){const today=todayStr();document.getElementById('lb-date').textContent=fmtDate(today);const wbc=loadWBCScores();const rows=VPOCS.map((v,i)=>{const s=getScore(v.id,today);if(wbc[v.agKey]!==undefined&&s['m1']===undefined)s['m1']=wbc[v.agKey];let daily=0,weekly=0;METRICS.forEach(m=>{const val=Number(s[m.id]||0);if(m.type==='daily')daily+=val;else weekly+=val;});const total=daily+weekly,pct=Math.round(total/40*100);return{v,i,daily,weekly,total,pct};}).sort((a,b)=>b.total-a.total);let html='';rows.forEach((r,rank)=>{const medal=rank===0?'🥇':rank===1?'🥈':rank===2?'🥉':`${rank+1}`;const sc=r.pct>=80?'#2ecc71':r.pct>=60?'#f39c12':'#e74c3c';html+=`<tr><td style="font-weight:700;font-size:15px;">${medal}</td><td><div class="vpoc-name">${getAvatar(r.v.name,r.i)}<div><div style="font-weight:600;font-size:13px;">${r.v.name}</div><div style="font-size:11px;color:#aaa;">${r.v.id}</div></div></div></td><td>${agTag(r.v.agency)}</td><td>${scoreBadge(r.daily)}</td><td>${scoreBadge(r.weekly)}</td><td><span class="total-score" style="color:${sc}">${r.total}</span><span class="score-pct"> /40</span></td><td>${progressBar(r.pct)}</td></tr>`;});document.getElementById('leaderboard-body').innerHTML=html;const scores=rows.map(r=>r.total);const avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;document.getElementById('stat-avg').textContent=avg;document.getElementById('stat-compliance').textContent=Math.round(avg/40*100)+'%';document.getElementById('stat-attention').textContent=rows.filter(r=>r.pct<70).length;}
-function parseCSVLine(line){const result=[];let cur='';let inQ=false;for(let c of line){if(c==='"')inQ=!inQ;else if(c===','&&!inQ){result.push(cur);cur='';}else cur+=c;}result.push(cur);return result;}
-function processWBCFile(input){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{const lines=e.target.result.split('\n').filter(l=>l.trim());const headers=lines[0].split(',').map(h=>h.trim().toLowerCase().replace(/"/g,''));const rows=[];for(let i=1;i<lines.length;i++){const vals=parseCSVLine(lines[i]);if(vals.length<2)continue;const row={};headers.forEach((h,j)=>row[h]=(vals[j]||'').trim().replace(/"/g,''));rows.push(row);}analyzeWBC(rows,file.name);};reader.readAsText(file);}
-function analyzeWBC(rows,filename){const filtered=rows.filter(r=>SITES.includes((r.site||'').toUpperCase().trim()));const agencyData={};filtered.forEach(r=>{const agRaw=(r.agency||'').toLowerCase().trim();const agKey=AGENCY_MAP[agRaw]||agRaw;if(!agencyData[agKey])agencyData[agKey]={total:0,closedInSLA:0,open:0,cases:[]};const absentDate=r.absent||'';const closedDate=r.closed||'';const status=(r.status||'').toLowerCase();let days=null,inSLA=false;if(closedDate&&absentDate){days=daysBetween(absentDate,closedDate);inSLA=days<=5&&days>=0;}agencyData[agKey].total++;if(status==='closed'&&inSLA)agencyData[agKey].closedInSLA++;if(status==='open'||status==='in progress')agencyData[agKey].open++;agencyData[agKey].cases.push({...r,days,inSLA,status});});const uz=document.getElementById('wbc-upload-zone');uz.classList.add('loaded');uz.innerHTML=`<div class="upload-icon">✅</div><div style="font-weight:600;">${filename}</div><div style="font-size:11px;margin-top:4px;">${filtered.length} cases across DXB5 · DXB8 · DWC3 · DDB1</div>`;renderWBCResults(agencyData,filtered);}
-function renderWBCResults(agencyData,allCases){document.getElementById('wbc-results').style.display='block';const agNames={dulsco:'Dulsco',fastlink:'Fastlink',adecco:'Adecco',efs:'EFS'};const agColors={dulsco:'#e3f2fd',fastlink:'#f3e5f5',adecco:'#e8f5e9',efs:'#fff8e1'};const agTextColors={dulsco:'#1565c0',fastlink:'#6a1b9a',adecco:'#2e7d32',efs:'#f57f17'};let cardsHtml='',scoreTableHtml='';const computedScores={};['dulsco','fastlink','adecco','efs'].forEach(key=>{const d=agencyData[key]||{total:0,closedInSLA:0,open:0};const pct=d.total>0?Math.round(d.closedInSLA/d.total*100):0;const score=d.total>0?wbcScore(pct):null;computedScores[key]=score;const vpocList=VPOCS.filter(v=>v.agKey===key).map(v=>v.name.split(' ')[0]).join(', ');cardsHtml+=`<div class="wbc-agency-card" style="background:${agColors[key]};border-color:${agTextColors[key]}30;"><div class="ag-name" style="color:${agTextColors[key]}">${agNames[key]}</div><div class="ag-stats">Total cases: <strong>${d.total}</strong><br>Closed in SLA: <strong>${d.closedInSLA}</strong><br>Open/In Progress: <strong>${d.open}</strong><br>Closure rate: <strong>${pct}%</strong></div><div class="ag-score" style="color:${agTextColors[key]}">${score!==null?score+' / 5':'N/A'}</div></div>`;scoreTableHtml+=`<tr><td>${agTag(agNames[key])}</td><td>${d.total}</td><td>${d.closedInSLA}</td><td><strong>${pct}%</strong> ${progressBar(pct)}</td><td>${scoreBadge(score)}</td><td style="font-size:11px;color:#666;">${vpocList||'—'}</td></tr>`;});document.getElementById('wbc-agency-cards').innerHTML=cardsHtml;document.getElementById('wbc-score-table').innerHTML=scoreTableHtml;window._wbcComputedScores=computedScores;let caseHtml='';const display=allCases.slice(0,100);display.forEach(r=>{const agRaw=(r.agency||'').toLowerCase().trim();const agKey=AGENCY_MAP[agRaw]||agRaw;const absentDate=r.absent||'';const closedDate=r.closed||'';const status=r.status||'';let days='—',slaTag='—';if(closedDate&&absentDate){const d=daysBetween(absentDate,closedDate);days=d;slaTag=d<=5?`<span style="color:#2ecc71;font-weight:600;">✅ In SLA</span>`:`<span style="color:#e74c3c;font-weight:600;">❌ Breached</span>`;}else if(status.toLowerCase()==='open'||status.toLowerCase()==='in progress'){slaTag=`<span style="color:#f39c12;font-weight:600;">⏳ Pending</span>`;}const statusColor=status==='Closed'?'#2ecc71':status==='Open'?'#e74c3c':'#f39c12';caseHtml+=`<tr><td style="font-size:11px;color:#888;">${r.id||''}</td><td style="font-size:12px;">${r.name||''}</td><td><span style="font-size:11px;font-weight:600;">${(r.site||'').toUpperCase()}</span></td><td>${agTag(agNames[agKey]||r.agency||'')}</td><td style="font-size:12px;">${absentDate}</td><td><span style="color:${statusColor};font-weight:600;font-size:12px;">${status}</span></td><td style="font-size:12px;">${closedDate||'—'}</td><td style="font-size:12px;">${days}</td><td>${slaTag}</td></tr>`;});if(allCases.length>100)caseHtml+=`<tr><td colspan="9" style="text-align:center;color:#888;font-size:12px;padding:12px;">Showing 100 of ${allCases.length} cases</td></tr>`;document.getElementById('wbc-case-table').innerHTML=caseHtml;}
-function applyWBCScores(){const scores=window._wbcComputedScores;if(!scores){alert('No WBC data loaded yet. Please upload a CSV first.');return;}const today=todayStr();saveWBCScores(scores);VPOCS.forEach(v=>{if(scores[v.agKey]!==undefined)setScore(v.id,today,'m1',scores[v.agKey]);});alert(`✅ WBC scores applied to ${today}!\n\nDulsco: ${scores.dulsco??'N/A'}/5\nFastlink: ${scores.fastlink??'N/A'}/5\nAdecco: ${scores.adecco??'N/A'}/5\nEFS: ${scores.efs??'N/A'}/5`);renderLeaderboard();}
-function renderMetrics(){let html='';METRICS.forEach(m=>{html+=`<div class="metric-card"><span class="m-type type-${m.type}">${m.type.toUpperCase()}</span><div class="m-title">📌 ${m.name}</div><div class="m-criteria">${m.criteria}</div><div class="m-target">🎯 Target: ${m.target}</div><div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:#aaa;">Source: ${m.source}</span><span style="font-size:12px;font-weight:700;color:#3498db;">Max: ${m.max} pts</span></div></div>`;});document.getElementById('metrics-grid').innerHTML=html;}
-function renderTeam(){const filter=document.getElementById('filter-agency').value;const today=todayStr();const wbc=loadWBCScores();let html='';VPOCS.filter(v=>!filter||v.agency===filter).forEach((v,i)=>{const total=getTotalScore(v.id,today);const pct=Math.round(total/40*100);const wbcS=wbc[v.agKey];const status=pct>=80?`<span style="color:#2ecc71;font-weight:600;">✅ On Track</span>`:pct>=60?`<span style="color:#f39c12;font-weight:600;">⚠️ Review</span>`:`<span style="color:#e74c3c;font-weight:600;">🔴 Attention</span>`;html+=`<tr><td style="font-size:12px;color:#888;">${v.psoft}</td><td style="font-size:12px;font-weight:600;">${v.id}</td><td><div class="vpoc-name">${getAvatar(v.name,i)}<span style="font-weight:500;">${v.name}</span></div></td><td>${agTag(v.agency)}</td><td style="font-size:12px;color:#888;">${v.doj}</td><td><span class="total-score">${total}</span><span class="score-pct">/40</span></td><td>${scoreBadge(wbcS)}</td><td>${status}</td></tr>`;});document.getElementById('team-body').innerHTML=html;}
-function initScoring(){const sel=document.getElementById('score-vpoc');if(sel.children.length<=1){VPOCS.forEach(v=>{const o=document.createElement('option');o.value=v.id;o.textContent=`${v.name} (${v.id})`;sel.appendChild(o);});}document.getElementById('score-date').value=todayStr();}
-function loadScores(){const vpocId=document.getElementById('score-vpoc').value;const date=document.getElementById('score-date').value;if(!vpocId){alert('Please select a VPOC');return;}const scores=getScore(vpocId,date);const vpoc=VPOCS.find(v=>v.id===vpocId);const wbc=loadWBCScores();if(wbc[vpoc.agKey]!==undefined&&scores['m1']===undefined)scores['m1']=wbc[vpoc.agKey];let html=`<div style="margin-bottom:16px;padding:12px;background:#f8f9fa;border-radius:8px;font-size:13px;"><strong>${vpoc.name}</strong> — ${agTag(vpoc.agency)} — ${fmtDate(date)}</div><table style="width:100%;border-collapse:collapse;"><thead><tr><th style="text-align:left;padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;">#</th><th style="text-align:left;padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;">Metric</th><th style="text-align:center;padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;">Type</th><th style="text-align:center;padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;">Score (0-5)</th><th style="text-align:left;padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;">Target</th></tr></thead><tbody>`;METRICS.forEach((m,i)=>{const val=scores[m.id]!==undefined?scores[m.id]:'';const isAuto=m.id==='m1'&&wbc[vpoc.agKey]!==undefined;html+=`<tr style="border-bottom:1px solid #f5f5f5;"><td style="padding:12px 10px;color:#888;font-size:12px;">${i+1}</td><td style="padding:12px 10px;"><div style="font-weight:600;font-size:13px;">${m.name} ${isAuto?'<span style="background:#d4edda;color:#155724;font-size:10px;padding:2px 6px;border-radius:8px;font-weight:600;">AUTO</span>':''}</div><div style="font-size:11px;color:#aaa;">${m.source}</div></td><td style="padding:12px 10px;text-align:center;"><span class="m-type type-${m.type}" style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;">${m.type}</span></td><td style="padding:12px 10px;text-align:center;"><input type="number" class="score-input" id="si-${m.id}" min="0" max="5" value="${val}" ${isAuto?'style="background:#f0fff4;border-color:#2ecc71;"':''} onchange="setScore('${vpocId}','${date}','${m.id}',this.value);updateTotal('${vpocId}','${date}')"></td><td style="padding:12px 10px;font-size:11px;color:#e94560;">${m.target}</td></tr>`;});html+=`</tbody></table><div style="margin-top:16px;padding:14px;background:#f0f8ff;border-radius:8px;display:flex;justify-content:space-between;align-items:center;"><div style="font-size:14px;font-weight:600;">Total Score</div><div id="running-total" style="font-size:22px;font-weight:700;color:#3498db;">— / 40</div></div><div style="margin-top:12px;text-align:right;"><button class="btn btn-secondary" onclick="clearScores('${vpocId}','${date}')">Clear</button> &nbsp; <button class="btn btn-primary" onclick="saveAndRefresh('${vpocId}','${date}')">💾 Save Scores</button></div>`;document.getElementById('score-entry-form').innerHTML=html;updateTotal(vpocId,date);}
-function updateTotal(vpocId,date){const total=getTotalScore(vpocId,date);const el=document.getElementById('running-total');if(el){const pct=Math.round(total/40*100);el.textContent=`${total} / 40 (${pct}%)`;el.style.color=pct>=80?'#2ecc71':pct>=60?'#f39c12':'#e74c3c';}}
-function saveAndRefresh(vpocId,date){METRICS.forEach(m=>{const el=document.getElementById('si-'+m.id);if(el)setScore(vpocId,date,m.id,Number(el.value)||0);});updateTotal(vpocId,date);alert('✅ Scores saved!');}
-function clearScores(vpocId,date){if(!confirm('Clear all scores for this VPOC on this date?'))return;const a=loadAllScores();if(a[vpocId])delete a[vpocId][date];saveScores(a);loadScores();}
-function init(){const now=new Date();document.getElementById('dateDisplay').textContent='📅 '+now.toLocaleDateString('en-GB',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});renderLeaderboard();}
-init();
-</script>
-</body>
-</html>
+// ── DATA ──────────────────────────────────────────────────────────
+const VPOCS = [
+  {psoft:'205671526', id:'miadnana', name:'Adnan Amir Afridi',  agency:'Dulsco',   agKey:'dulsco',   doj:'17-Jul-25'},
+  {psoft:'207302255', id:'muarfaar', name:'Arfa Arif',          agency:'Fastlink', agKey:'fastlink', doj:'15-Apr-26'},
+  {psoft:'207799093', id:'javeiqrn', name:'Javed Iqra',         agency:'Dulsco',   agKey:'dulsco',   doj:'23-Jun-26'},
+  {psoft:'205688378', id:'osmakhai', name:'Khairi Mohamed',     agency:'Fastlink', agKey:'fastlink', doj:'22-Jul-25'},
+  {psoft:'205730381', id:'lalucema', name:'Marc Angel Luce',    agency:'Dulsco',   agKey:'dulsco',   doj:'30-Jul-25'},
+  {psoft:'207283256', id:'mbikkiri', name:'Hubaib Bikkiri',     agency:'Dulsco',   agKey:'dulsco',   doj:'14-Apr-26'},
+  {psoft:'204604983', id:'mohaanwn', name:'Anwar Mohammed',     agency:'Adecco',   agKey:'adecco',   doj:'20-Nov-24'},
+  {psoft:'204604982', id:'niapeedi', name:'Nihala Yas Peedi',   agency:'Adecco',   agKey:'adecco',   doj:'20-Nov-24'},
+  {psoft:'205776070', id:'okupragt', name:'Pragti Kumar',       agency:'Fastlink', agKey:'fastlink', doj:'08-Aug-25'},
+  {psoft:'203305831', id:'predesnb', name:'Tinated Elsheba',    agency:'Adecco',   agKey:'adecco',   doj:'09-May-24'},
+  {psoft:'203331748', id:'renmanya', name:'Ny Ochieng Manya',   agency:'Adecco',   agKey:'adecco',   doj:'16-May-24'},
+  {psoft:'205441633', id:'jamoafos', name:'Sandra Amoafo',      agency:'Dulsco',   agKey:'dulsco',   doj:'16-Jun-25'},
+  {psoft:'207275154', id:'sivakmit', name:'Mitravakumar',       agency:'EFS',      agKey:'efs',      doj:'12-Apr-26'},
+  {psoft:'205389687', id:'gusweene', name:'Sweeney Gunaseke',   agency:'Fastlink', agKey:'fastlink', doj:'09-Jun-25'},
+  {psoft:'205699662', id:'tambohes', name:'Stephan Awinda',     agency:'Fastlink', agKey:'fastlink', doj:'28-Jul-25'},
+  {psoft:'200641956', id:'sazehra',  name:'Zehra Sana',         agency:'Fastlink', agKey:'fastlink', doj:'30-Oct-22'},
+];
+
+const AGENCY_MAP = {
+  'dulsco l.l.c.':'dulsco','dulsco':'dulsco',
+  'fastlink outsourcing':'fastlink','fastlink':'fastlink',
+  'adecco':'adecco',
+  'efs facilities services':'efs','efs':'efs'
+};
+
+const SITES = ['DXB5','DXB8','DWC3','DDB1'];
+
+const METRICS = [
+  {id:'m1', name:'WBC Closure',                    type:'daily',  max:5, criteria:'WBC completed within 5-day SLA',             target:'100% closure',           source:'CSV Auto (WBC)'},
+  {id:'m2', name:'HR Gemba',                       type:'daily',  max:5, criteria:'Gemba walks completed; findings actioned',    target:'100% compliance',        source:'Manual'},
+  {id:'m3', name:'VPOC Attendance & Compliance',   type:'daily',  max:5, criteria:'4 punches in shift = 5pts, less than 4 = 0', target:'4 punches per shift',    source:'CSV Auto (Punch Clock)'},
+  {id:'m4', name:'Daily Attendance & Bridging',    type:'daily',  max:5, criteria:'Bridging submitted within 2hrs from SOS',     target:'Daily within 2hrs',      source:'Email (Pending)'},
+  {id:'m5', name:'SOS Meeting Attendance',         type:'daily',  max:5, criteria:'SOS attendance with PXT updates',             target:'100% attendance',        source:'SharePoint (Pending)'},
+  {id:'m6', name:'Engagement Activity Management', type:'weekly', max:5, criteria:'Engagement per quarterly calendar',           target:'100% execution',         source:'SharePoint (Pending)'},
+  {id:'m7', name:'Punch Analysis & Pay Defect',    type:'weekly', max:5, criteria:'Mispunch tracked; pay defect corrected',      target:'Mispunch 0%; Defect 0%', source:'CSV Upload'},
+  {id:'m8', name:'Adapt Feedback Closure',         type:'weekly', max:5, criteria:'WL issued within SLA; Bravo pin given',       target:'WL ≤48h',                source:'SharePoint (Pending)'},
+];
+
+const COLORS = ['#e94560','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#4caf50','#ff5722','#607d8b','#795548','#8bc34a','#ff9800','#673ab7'];
+
+// ── DATE (UAE = UTC+4) ─────────────────────────────────────────────
+function todayStr() {
+  const uae = new Date(Date.now() + 4*60*60*1000);
+  return uae.toISOString().split('T')[0];
+}
+function fmtDate(d) {
+  const [y,m,day] = d.split('-').map(Number);
+  return new Date(y,m-1,day).toLocaleDateString('en-GB',{weekday:'short',day:'2-digit',month:'short',year:'numeric'});
+}
+
+// ── STORAGE ────────────────────────────────────────────────────────
+const STORE_KEY = 'vpoc_scores_v2';
+function saveScores(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); updateDebug(); }
+function loadAllScores() { return JSON.parse(localStorage.getItem(STORE_KEY)||'{}'); }
+function getScore(vpocId, date) { const a=loadAllScores(); return (a[vpocId]&&a[vpocId][date]) ? a[vpocId][date] : {}; }
+function setScore(vpocId, date, metricId, val) {
+  const a = loadAllScores();
+  if(!a[vpocId]) a[vpocId]={};
+  if(!a[vpocId][date]) a[vpocId][date]={};
+  a[vpocId][date][metricId] = (val===''||val===null||val===undefined) ? null : Number(val);
+  saveScores(a);
+}
+function getTotalForDate(vpocId, date) {
+  const s = getScore(vpocId, date);
+  return METRICS.reduce((sum,m) => sum + (s[m.id]!=null ? Number(s[m.id]) : 0), 0);
+}
+
+// ── DEBUG BAR ──────────────────────────────────────────────────────
+function updateDebug() {
+  const today = todayStr();
+  document.getElementById('dbg-date').textContent = today;
+  const all = loadAllScores();
+  let count = 0;
+  Object.values(all).forEach(dates => Object.values(dates).forEach(() => count++));
+  document.getElementById('dbg-count').textContent = count + ' entries';
+  document.getElementById('dbg-viewing').textContent = today;
+}
+
+// ── HELPERS ────────────────────────────────────────────────────────
+function daysBetween(d1,d2) { return Math.round((new Date(d2)-new Date(d1))/864e5); }
+function wbcScore(pct) { return pct>=100?5:pct>=80?4:pct>=60?3:pct>=40?2:pct>0?1:0; }
+function m3Score(punches) { return punches>=4 ? 5 : 0; }
+function getAvatar(name,i) { const ini=name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase(); return `<div class="vpoc-avatar" style="background:${COLORS[i%COLORS.length]}">${ini}</div>`; }
+function agTag(ag) { const cls={Dulsco:'ag-dulsco',Fastlink:'ag-fastlink',Adecco:'ag-adecco',EFS:'ag-efs'}; return `<span class="agency-tag ${cls[ag]||''}">${ag||''}</span>`; }
+function sb(s) {
+  if(s===null||s===undefined||s==='') return `<span class="score-badge" style="background:#eee;color:#bbb;">—</span>`;
+  const n=Number(s);
+  const c=n>=5?'score-5':n>=4?'score-4':n>=3?'score-3':n>=2?'score-2':n>=1?'score-1':'score-0';
+  return `<span class="score-badge ${c}">${n}</span>`;
+}
+function pBar(pct) {
+  const c=pct>=80?'bar-green':pct>=60?'bar-orange':'bar-red';
+  return `<div style="min-width:90px"><div class="progress-wrap"><div class="progress-bar ${c}" style="width:${Math.min(pct,100)}%"></div></div><div style="font-size:11px;color:#888;margin-top:2px;">${pct}%</div></div>`;
+}
+
+// ── CSV PARSER ─────────────────────────────────────────────────────
+function parseCSV(text) {
+  const lines = text.split('\n').filter(l=>l.trim());
+  const headers = lines[0].split(',').map(h=>h.trim().toLowerCase().replace(/"/g,'').replace(/\s+/g,' '));
+  const rows = [];
+  for(let i=1;i<lines.length;i++) {
+    const vals = parseCSVLine(lines[i]);
+    if(vals.length<2) continue;
+    const row = {};
+    headers.forEach((h,j) => row[h] = (vals[j]||'').trim().replace(/"/g,''));
+    rows.push(row);
+  }
+  return {headers, rows};
+}
+function parseCSVLine(line) {
+  const r=[]; let c='',q=false;
+  for(let ch of line){if(ch==='"')q=!q;else if(ch===','&&!q){r.push(c);c='';}else c+=ch;}
+  r.push(c); return r;
+}
+
+// ── TEST DATA ──────────────────────────────────────────────────────
+function loadTestScores() {
+  if(!confirm('Load sample scores for today?\n(Clear anytime with "Clear All")')) return;
+  const today = todayStr();
+  const sample = [5,4,5,3,4,3,5,4];
+  VPOCS.forEach((v,i) => {
+    METRICS.forEach((m,j) => {
+      setScore(v.id, today, m.id, Math.max(1, Math.min(5, sample[j]-Math.floor(i/5))));
+    });
+  });
+  renderLeaderboard();
+  alert('✅ Test scores loaded for '+today);
+}
+function clearAllData() {
+  if(!confirm('Clear ALL saved scores? Cannot be undone.')) return;
+  localStorage.removeItem(STORE_KEY);
+  updateDebug();
+  renderLeaderboard();
+}
+
+// ── NAV ────────────────────────────────────────────────────────────
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(name==='dashboard') renderLeaderboard();
+  if(name==='metrics') renderMetrics();
+  if(name==='team') renderTeam();
+  if(name==='scoring') initScoring();
+}
+
+// ── LEADERBOARD ────────────────────────────────────────────────────
+function renderLeaderboard() {
+  const today = todayStr();
+  document.getElementById('lb-date').textContent = fmtDate(today);
+  updateDebug();
+  const rows = VPOCS.map((v,i) => {
+    const s = getScore(v.id, today);
+    const ms = {};
+    METRICS.forEach(m => { ms[m.id] = s[m.id]!=null ? Number(s[m.id]) : null; });
+    const total = METRICS.reduce((sum,m) => sum+(ms[m.id]||0), 0);
+    const pct = Math.round(total/40*100);
+    return {v, i, ms, total, pct};
+  }).sort((a,b) => b.total-a.total);
+
+  let html = '';
+  rows.forEach((r,rank) => {
+    const medal = rank===0?'🥇':rank===1?'🥈':rank===2?'🥉':`${rank+1}`;
+    const tc = r.pct>=80?'#2ecc71':r.pct>=60?'#f39c12':'#e74c3c';
+    const hasAny = METRICS.some(m=>r.ms[m.id]!==null);
+    html += `<tr style="${!hasAny?'opacity:0.45':''}">
+      <td style="font-weight:700;font-size:14px;">${medal}</td>
+      <td><div class="vpoc-name">${getAvatar(r.v.name,r.i)}<div>
+        <div style="font-weight:600;font-size:13px;">${r.v.name}</div>
+        <div style="font-size:10px;color:#aaa;">${r.v.id}</div>
+      </div></div></td>
+      <td>${agTag(r.v.agency)}</td>
+      ${METRICS.map(m=>`<td style="text-align:center;">${sb(r.ms[m.id])}</td>`).join('')}
+      <td><span style="font-size:20px;font-weight:800;color:${tc}">${r.total}</span><span style="font-size:11px;color:#aaa;">/40</span></td>
+      <td>${pBar(r.pct)}</td>
+    </tr>`;
+  });
+
+  document.getElementById('leaderboard-body').innerHTML = html ||
+    '<tr><td colspan="13" style="text-align:center;color:#aaa;padding:30px;">No scores yet — use Score Entry, WBC Scoring, or M3 Attendance tabs</td></tr>';
+
+  const totals = rows.map(r=>r.total);
+  const avg = totals.length ? Math.round(totals.reduce((a,b)=>a+b,0)/totals.length) : 0;
+  document.getElementById('stat-avg').textContent = avg;
+  document.getElementById('stat-compliance').textContent = Math.round(avg/40*100)+'%';
+  document.getElementById('stat-attention').textContent = rows.filter(r=>r.pct<70).length;
+}
+
+// ── WBC CSV ────────────────────────────────────────────────────────
+function processWBCFile(input) {
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const {rows} = parseCSV(e.target.result);
+    analyzeWBC(rows, file.name);
+  };
+  reader.readAsText(file);
+}
+
+function analyzeWBC(rows, filename) {
+  const filtered = rows.filter(r => SITES.includes((r.site||'').toUpperCase().trim()));
+  const agData = {};
+  filtered.forEach(r => {
+    const agKey = AGENCY_MAP[(r.agency||'').toLowerCase().trim()] || 'unknown';
+    if(!agData[agKey]) agData[agKey]={total:0,closedInSLA:0,open:0};
+    const absent=r.absent||'', closed=r.closed||'', status=(r.status||'').toLowerCase();
+    let inSLA = false;
+    if(closed&&absent){const d=daysBetween(absent,closed);inSLA=d>=0&&d<=5;}
+    agData[agKey].total++;
+    if(status==='closed'&&inSLA) agData[agKey].closedInSLA++;
+    if(status==='open'||status==='in progress') agData[agKey].open++;
+  });
+  const uz = document.getElementById('wbc-upload-zone');
+  uz.classList.add('loaded');
+  uz.innerHTML = `<div class="upload-icon">✅</div><div style="font-weight:600;">${filename}</div><div style="font-size:11px;margin-top:4px;">${filtered.length} cases · DXB5/DXB8/DWC3/DDB1</div>`;
+  renderWBCResults(agData, filtered);
+}
+
+function renderWBCResults(agData, allCases) {
+  document.getElementById('wbc-results').style.display = 'block';
+  const AN={dulsco:'Dulsco',fastlink:'Fastlink',adecco:'Adecco',efs:'EFS'};
+  const AC={dulsco:'#e3f2fd',fastlink:'#f3e5f5',adecco:'#e8f5e9',efs:'#fff8e1'};
+  const ATC={dulsco:'#1565c0',fastlink:'#6a1b9a',adecco:'#2e7d32',efs:'#f57f17'};
+  let cards='',tbl=''; const cs={};
+  ['dulsco','fastlink','adecco','efs'].forEach(key => {
+    const d = agData[key]||{total:0,closedInSLA:0,open:0};
+    const pct = d.total>0 ? Math.round(d.closedInSLA/d.total*100) : 0;
+    const score = d.total>0 ? wbcScore(pct) : null;
+    cs[key] = score;
+    const vl = VPOCS.filter(v=>v.agKey===key).map(v=>v.name.split(' ')[0]).join(', ');
+    cards += `<div class="wbc-agency-card" style="background:${AC[key]};border-color:${ATC[key]}30;">
+      <div class="ag-name" style="color:${ATC[key]}">${AN[key]}</div>
+      <div class="ag-stats">Total: <strong>${d.total}</strong><br>In SLA: <strong>${d.closedInSLA}</strong><br>Open: <strong>${d.open}</strong><br>Rate: <strong>${pct}%</strong></div>
+      <div class="ag-score" style="color:${ATC[key]}">${score!==null?score+' / 5':'N/A'}</div>
+    </div>`;
+    tbl += `<tr><td>${agTag(AN[key])}</td><td>${d.total}</td><td>${d.closedInSLA}</td><td><strong>${pct}%</strong> ${pBar(pct)}</td><td>${sb(score)}</td><td style="font-size:11px;color:#666;">${vl}</td></tr>`;
+  });
+  document.getElementById('wbc-agency-cards').innerHTML = cards;
+  document.getElementById('wbc-score-table').innerHTML = tbl;
+  window._wbcScores = cs;
+
+  let ch = '';
+  allCases.slice(0,100).forEach(r => {
+    const agKey = AGENCY_MAP[(r.agency||'').toLowerCase().trim()]||'';
+    const absent=r.absent||'', closed=r.closed||'', status=r.status||'';
+    let days='—', sla='—';
+    if(closed&&absent){const d=daysBetween(absent,closed);days=d;sla=d<=5?'<span style="color:#2ecc71;font-weight:600;">✅ In SLA</span>':'<span style="color:#e74c3c;font-weight:600;">❌ Breached</span>';}
+    else if((status).toLowerCase()==='open'||(status).toLowerCase()==='in progress') sla='<span style="color:#f39c12;font-weight:600;">⏳ Pending</span>';
+    const sc=status==='Closed'?'#2ecc71':status==='Open'?'#e74c3c':'#f39c12';
+    ch += `<tr><td style="font-size:11px;color:#888;">${r.id||''}</td><td style="font-size:12px;">${r.name||''}</td><td style="font-weight:600;font-size:11px;">${(r.site||'').toUpperCase()}</td><td>${agTag(AN[agKey]||r.agency||'')}</td><td style="font-size:12px;">${absent}</td><td style="color:${sc};font-weight:600;font-size:12px;">${status}</td><td style="font-size:12px;">${closed||'—'}</td><td style="font-size:12px;">${days}</td><td>${sla}</td></tr>`;
+  });
+  if(allCases.length>100) ch += `<tr><td colspan="9" style="text-align:center;color:#888;font-size:12px;padding:10px;">Showing 100 of ${allCases.length}</td></tr>`;
+  document.getElementById('wbc-case-table').innerHTML = ch;
+}
+
+function applyWBCScores() {
+  const scores = window._wbcScores;
+  if(!scores){alert('Upload a WBC CSV first.');return;}
+  const today = todayStr();
+  VPOCS.forEach(v => {
+    if(scores[v.agKey]!==null&&scores[v.agKey]!==undefined)
+      setScore(v.id, today, 'm1', scores[v.agKey]);
+  });
+  alert(`✅ WBC (M1) scores applied for ${today}!\n\nDulsco: ${scores.dulsco??'N/A'}/5\nFastlink: ${scores.fastlink??'N/A'}/5\nAdecco: ${scores.adecco??'N/A'}/5\nEFS: ${scores.efs??'N/A'}/5`);
+}
+
+// ── M3 ATTENDANCE CSV ──────────────────────────────────────────────
+function processM3File(input) {
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const {headers, rows} = parseCSV(e.target.result);
+    analyzeM3(rows, headers, file.name);
+  };
+  reader.readAsText(file);
+}
+
+function analyzeM3(rows, headers, filename) {
+  // Detect employee ID column — try common names
+  const empIdCol = headers.find(h => h.includes('employee id') || h.includes('emp id') || h==='id' || h.includes('psoft'));
+  if(!empIdCol) {
+    alert('Could not find Employee ID column.\nDetected columns: ' + headers.join(', ') + '\n\nPlease ensure your CSV has a column named "Employee ID".');
+    return;
+  }
+
+  // Count punches per Psoft ID
+  const punchCount = {};
+  rows.forEach(r => {
+    const eid = (r[empIdCol]||'').trim();
+    if(!eid) return;
+    if(!punchCount[eid]) punchCount[eid] = 0;
+    punchCount[eid]++;
+  });
+
+  // Map results to VPOCs
+  const results = VPOCS.map(v => {
+    const count = punchCount[v.psoft] || 0;
+    const score = m3Score(count);
+    return { v, count, score };
+  });
+
+  // Update upload zone
+  const uz = document.getElementById('m3-upload-zone');
+  uz.classList.add('loaded');
+  uz.innerHTML = `<div class="upload-icon">✅</div><div style="font-weight:600;">${filename}</div><div style="font-size:11px;margin-top:4px;">${rows.length} punch records · ${Object.keys(punchCount).length} unique employees</div>`;
+
+  renderM3Results(results);
+  window._m3Results = results;
+}
+
+function renderM3Results(results) {
+  document.getElementById('m3-results').style.display = 'block';
+
+  const pass = results.filter(r=>r.score===5).length;
+  const fail = results.filter(r=>r.score===0&&r.count>0).length;
+  const absent = results.filter(r=>r.count===0).length;
+  document.getElementById('m3-summary-bar').innerHTML =
+    `✅ <strong>${pass} VPOCs</strong> with 4 punches (Score: 5) &nbsp;|&nbsp; ❌ <strong>${fail}</strong> incomplete &nbsp;|&nbsp; ⚠️ <strong>${absent}</strong> not found in CSV`;
+
+  let tbl = '';
+  results.forEach(r => {
+    const statusHtml = r.count===0
+      ? '<span style="color:#f39c12;font-weight:600;">⚠️ Not in CSV</span>'
+      : r.score===5
+        ? '<span style="color:#2ecc71;font-weight:600;">✅ Pass</span>'
+        : '<span style="color:#e74c3c;font-weight:600;">❌ Fail</span>';
+    const countColor = r.count>=4?'#2ecc71':r.count>0?'#e74c3c':'#aaa';
+    tbl += `<tr>
+      <td style="font-size:12px;color:#888;">${r.v.psoft}</td>
+      <td style="font-weight:600;">${r.v.name}</td>
+      <td>${agTag(r.v.agency)}</td>
+      <td style="text-align:center;font-size:18px;font-weight:700;color:${countColor}">${r.count}</td>
+      <td style="text-align:center;">${sb(r.score)}</td>
+      <td>${statusHtml}</td>
+    </tr>`;
+  });
+  document.getElementById('m3-vpoc-table').innerHTML = tbl;
+
+  const missing = results.filter(r=>r.count===0);
+  const missingEl = document.getElementById('m3-missing-alert');
+  if(missing.length>0) {
+    missingEl.style.display='block';
+    missingEl.innerHTML = `⚠️ <strong>${missing.length} VPOCs not found in CSV</strong> (will score 0): ${missing.map(r=>r.v.name.split(' ')[0]).join(', ')}`;
+  } else {
+    missingEl.style.display='none';
+  }
+}
+
+function applyM3Scores() {
+  const results = window._m3Results;
+  if(!results){alert('Upload a punch clock CSV first.');return;}
+  const today = todayStr();
+  results.forEach(r => setScore(r.v.id, today, 'm3', r.score));
+  const pass = results.filter(r=>r.score===5).length;
+  alert(`✅ M3 scores applied for ${today}!\n\n${pass}/16 VPOCs scored 5\n${16-pass}/16 VPOCs scored 0\n\nGo to Dashboard to see updated leaderboard.`);
+}
+
+// ── METRICS ────────────────────────────────────────────────────────
+function renderMetrics() {
+  document.getElementById('metrics-grid').innerHTML = METRICS.map(m => `
+    <div class="metric-card">
+      <span class="m-type type-${m.type}">${m.type.toUpperCase()}</span>
+      <div class="m-title">📌 ${m.name}</div>
+      <div class="m-criteria">${m.criteria}</div>
+      <div class="m-target">🎯 ${m.target}</div>
+      <div style="margin-top:8px;display:flex;justify-content:space-between;">
+        <span style="font-size:11px;color:#aaa;">${m.source}</span>
+        <span style="font-size:12px;font-weight:700;color:#3498db;">Max: ${m.max}</span>
+      </div>
+    </div>`).join('');
+}
+
+// ── TEAM ───────────────────────────────────────────────────────────
+function renderTeam() {
+  const filter = document.getElementById('filter-agency').value;
+  const today = todayStr();
+  document.getElementById('team-body').innerHTML = VPOCS
+    .filter(v => !filter||v.agency===filter)
+    .map((v,i) => {
+      const total = getTotalForDate(v.id, today);
+      const pct = Math.round(total/40*100);
+      const wbc = getScore(v.id,today)['m1'];
+      const m3  = getScore(v.id,today)['m3'];
+      const status = pct>=80
+        ? '<span style="color:#2ecc71;font-weight:600;">✅ On Track</span>'
+        : pct>=60
+          ? '<span style="color:#f39c12;font-weight:600;">⚠️ Review</span>'
+          : '<span style="color:#e74c3c;font-weight:600;">🔴 Attention</span>';
+      return `<tr>
+        <td style="font-size:12px;color:#888;">${v.psoft}</td>
+        <td style="font-size:12px;font-weight:600;">${v.id}</td>
+        <td><div class="vpoc-name">${getAvatar(v.name,i)}<span style="font-weight:500;">${v.name}</span></div></td>
+        <td>${agTag(v.agency)}</td>
+        <td style="font-size:12px;color:#888;">${v.doj}</td>
+        <td><span style="font-size:18px;font-weight:700;">${total}</span><span style="font-size:11px;color:#888;">/40</span></td>
+        <td>${sb(wbc)}</td>
+        <td>${sb(m3)}</td>
+        <td>${status}</td>
+      </tr>`;
+    }).join('');
+}
+
+// ── SCORE ENTRY ────────────────────────────────────────────────────
+function initScoring() {
+  const sel = document.getElementById('score-vpoc');
+  if(sel.children.length<=1) VPOCS.forEach(v => {
+    const o = document.createElement('option');
+    o.value = v.id;
+    o.textContent = `${v.name} (${v.id})`;
+    sel.appendChild(o);
+  });
+  document.getElementById('score-date').value = todayStr();
+}
+
+function loadScores() {
+  const vpocId = document.getElementById('score-vpoc').value;
+  const date   = document.getElementById('score-date').value;
+  if(!vpocId){alert('Please select a VPOC');return;}
+  const s = getScore(vpocId, date);
+  const vpoc = VPOCS.find(v=>v.id===vpocId);
+
+  let html = `<div style="margin-bottom:14px;padding:12px;background:#f8f9fa;border-radius:8px;font-size:13px;">
+    <strong>${vpoc.name}</strong> — ${agTag(vpoc.agency)} — ${fmtDate(date)}
+    <span style="float:right;font-size:11px;color:#888;">Key: ${date}</span>
+  </div>
+  <table style="width:100%;border-collapse:collapse;">
+  <thead><tr>
+    <th style="padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;">#</th>
+    <th style="padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;">Metric</th>
+    <th style="padding:10px;background:#f8f9fa;font-size:11px;color:#666;text-transform:uppercase;text-align:center;">Score (0–5)</th
