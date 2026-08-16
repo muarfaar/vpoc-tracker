@@ -316,13 +316,54 @@
 
 <!-- ═══════════════════════════════════════ ADAPT M8 -->
 <div id="page-m8" class="page">
+
+  <!-- RESULTS SECTION -->
+  <div class="section" style="margin-bottom:20px;" id="m8-results-section" style="display:none;">
+    <div class="section-header">
+      <h2>📊 M8 Results</h2>
+      <span id="m8-week-label" class="badge"></span>
+    </div>
+    <div style="padding:16px 20px;">
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Agency</th>
+              <th style="text-align:center;">Total Cases</th>
+              <th style="text-align:center;">Delivered ≤5 days</th>
+              <th style="text-align:center;">SLA %</th>
+              <th style="text-align:center;">Score /5</th>
+              <th>Pending / No Date</th>
+            </tr>
+          </thead>
+          <tbody id="m8-agency-table"></tbody>
+        </table>
+      </div>
+      <div style="text-align:right;margin-top:16px;">
+        <button class="btn btn-green" onclick="applyM8()">✅ Save M8 Scores to Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPLOAD SECTION -->
   <div class="section">
-    <div class="section-header"><h2>📝 Adapt Feedback Closure — M8</h2></div>
-    <div class="coming-soon">
-      <div class="cs-icon">🔨</div>
-      <h2>Working on it</h2>
-      <p>M8 Adapt Feedback Closure will be scored from a Quip export. Once the export format is confirmed, upload will be enabled here.</p>
-      <span class="cs-badge">🔜 Coming Soon</span>
+    <div class="section-header">
+      <h2>📝 Adapt Feedback Closure — M8</h2>
+      <div style="font-size:12px;color:#888;">Per Agency · SLA = Quip date → Delivery ≤ 5 days (Wed → Sun)</div>
+    </div>
+    <div style="padding:20px;">
+      <div class="alert alert-info">
+        📌 Export the <strong>DXB5 ADAPT Tracker</strong> as CSV and upload here.<br>
+        <strong>Required columns:</strong> Date Added on Quip (DD/MM/YYYY) · Delivery date (MM/DD/YYYY) · Delivered (YES/NO) · 3P · Employee Name<br>
+        <strong>SLA:</strong> Quip date → Delivery date ≤ 5 days · <strong>Quesscorp excluded</strong> (no VPOC assigned yet)
+      </div>
+      <div class="upload-zone" onclick="document.getElementById('m8-file').click()">
+        <div class="upload-icon">📁</div>
+        <div style="font-weight:600;font-size:14px;">Click to upload ADAPT Tracker CSV</div>
+        <div style="font-size:11px;color:#888;margin-top:6px;">Columns: Employee Login, Employee Name, Date Added on Quip, 3P, Delivery date, Delivered (YES/NO) ...</div>
+      </div>
+      <input type="file" id="m8-file" accept=".csv" style="display:none" onchange="processM8(this)">
+      <div id="m8-upload-status" style="margin-top:8px;"></div>
     </div>
   </div>
 </div>
@@ -949,6 +990,147 @@ function applyM3(){
   renderM3Calendar();
   alert(`✅ M3 Attendance saved for ${formatDisplayDate(dateStr)}!\n\nCalendar updated — go to Dashboard for leaderboard.`);
   pendingM3 = null;
+}
+
+// ═══════════════════════════════════════════════════
+// M8 — ADAPT FEEDBACK CLOSURE
+// ═══════════════════════════════════════════════════
+let pendingM8 = null;
+
+function parseQuipDate(s){
+  // DD/MM/YYYY
+  s = s.trim();
+  if(!s) return null;
+  const p = s.replace(/-/g,'/').split('/');
+  if(p.length!==3) return null;
+  try{ return new Date(parseInt(p[2]), parseInt(p[1])-1, parseInt(p[0])); }
+  catch(e){ return null; }
+}
+
+function parseDeliveryDate(s){
+  // MM/DD/YYYY default, but if first part >12 → DD/MM/YYYY
+  s = s.trim();
+  if(!s) return null;
+  const p = s.replace(/-/g,'/').split('/');
+  if(p.length!==3) return null;
+  const a=parseInt(p[0]), b=parseInt(p[1]), c=parseInt(p[2]);
+  try{
+    if(a>12) return new Date(c, b-1, a);   // DD/MM/YYYY
+    return new Date(c, a-1, b);             // MM/DD/YYYY
+  } catch(e){ return null; }
+}
+
+function daysBetween(d1, d2){
+  if(!d1||!d2) return null;
+  return Math.round((d2-d1)/(1000*60*60*24));
+}
+
+function processM8(input){
+  const file = input.files[0];
+  if(!file){ return; }
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const rows = parseCSV(e.target.result);
+    if(!rows.length){ alert('No data found.'); return; }
+
+    // Detect week label from first Date Added on Quip
+    const firstQuip = rows[0]['Date Added on Quip']||rows[0]['date added on quip']||'';
+    const weekLabel = firstQuip ? 'Week of '+firstQuip : file.name;
+
+    // Score per agency — exclude Quesscorp
+    const agencies = ['Dulsco','Fastlink','Adecco','EFS'];
+    const agStats = {};
+    agencies.forEach(ag=>{ agStats[ag]={total:0, slaMet:0, pending:[]}; });
+
+    const agMap = (raw)=>{
+      raw = (raw||'').trim().toLowerCase();
+      if(raw.includes('dulsco')) return 'Dulsco';
+      if(raw.includes('fastlink')) return 'Fastlink';
+      if(raw.includes('adecco')) return 'Adecco';
+      if(raw.includes('efs')) return 'EFS';
+      return null; // Quesscorp and others excluded
+    };
+
+    rows.forEach(r=>{
+      const ag = agMap(r['3P']||r['3p']||'');
+      if(!ag) return;
+
+      const quipDate     = parseQuipDate(r['Date Added on Quip']||r['date added on quip']||'');
+      const deliveryDate = parseDeliveryDate(r['Delivery date']||r['delivery date']||'');
+      const delivered    = (r['Delivered (YES/NO)']||r['delivered (yes/no)']||'').trim().toUpperCase()==='YES';
+
+      const days = daysBetween(quipDate, deliveryDate);
+      const slaMet = days!==null && days<=5 && delivered;
+
+      agStats[ag].total++;
+      if(slaMet) agStats[ag].slaMet++;
+      else agStats[ag].pending.push((r['Employee Name']||'').trim());
+    });
+
+    // Build score per agency
+    const agScores = {};
+    agencies.forEach(ag=>{
+      const s = agStats[ag];
+      if(!s.total){ agScores[ag]=null; return; }
+      const pct = s.slaMet/s.total*100;
+      agScores[ag] = pct===100?5 : pct>=80?4 : pct>=60?3 : pct>=40?2 : 1;
+    });
+
+    // Detect week date from file (use today UAE as fallback)
+    const dateStr = getUAEDateStr();
+    pendingM8 = {agStats, agScores, dateStr, weekLabel};
+
+    // Render results
+    document.getElementById('m8-results-section').style.display='block';
+    document.getElementById('m8-week-label').textContent = weekLabel;
+
+    const AGENCY_COLORS2 = {Dulsco:'ag-dulsco', Fastlink:'ag-fastlink', Adecco:'ag-adecco', EFS:'ag-efs'};
+    document.getElementById('m8-agency-table').innerHTML = agencies.map(ag=>{
+      const s = agStats[ag];
+      const score = agScores[ag];
+      if(!s.total) return `<tr><td><span class="agency-tag ${AGENCY_COLORS2[ag]}">${ag}</span></td><td colspan="5" style="color:#aaa;font-size:12px;">No cases this week</td></tr>`;
+      const pct = Math.round(s.slaMet/s.total*100);
+      const barColor = pct>=80?'bar-green':pct>=50?'bar-orange':'bar-red';
+      const pending = s.pending.length ? s.pending.join(', ') : '—';
+      return `<tr>
+        <td><span class="agency-tag ${AGENCY_COLORS2[ag]}">${ag}</span></td>
+        <td style="text-align:center;font-weight:700;">${s.total}</td>
+        <td style="text-align:center;font-weight:700;">${s.slaMet}</td>
+        <td style="text-align:center;">
+          <div style="display:flex;align-items:center;gap:6px;justify-content:center;">
+            <div class="progress-wrap" style="width:80px;"><div class="progress-bar ${barColor}" style="width:${pct}%"></div></div>
+            <span style="font-weight:700;">${pct}%</span>
+          </div>
+        </td>
+        <td style="text-align:center;"><span class="score-badge score-${score}">${score}</span></td>
+        <td style="font-size:11px;color:${s.pending.length?'#e74c3c':'#aaa'};">${pending}</td>
+      </tr>`;
+    }).join('');
+
+    document.getElementById('m8-upload-status').innerHTML = `<div class="alert alert-success">✅ File processed — ${rows.length} cases read. Review results above then click Save.</div>`;
+
+    // Scroll to results
+    document.getElementById('m8-results-section').scrollIntoView({behavior:'smooth'});
+  };
+  reader.readAsText(file);
+}
+
+function applyM8(){
+  if(!pendingM8) return;
+  const {agScores, dateStr, weekLabel} = pendingM8;
+
+  // M8 is per agency — save score against each VPOC in that agency
+  VPOCS.forEach(v=>{
+    const score = agScores[v.agency];
+    if(score!==null && score!==undefined){
+      setScore(v.id, dateStr, 'M8', score);
+    }
+  });
+
+  updateDebugCount();
+  renderLeaderboard();
+  alert(`✅ M8 scores saved for ${weekLabel}!\n\nDulsco: ${agScores['Dulsco']??'N/D'}/5 · Fastlink: ${agScores['Fastlink']??'N/D'}/5 · Adecco: ${agScores['Adecco']??'N/D'}/5 · EFS: ${agScores['EFS']??'N/D'}/5`);
+  pendingM8 = null;
 }
 
 // ═══════════════════════════════════════════════════
