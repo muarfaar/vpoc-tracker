@@ -168,8 +168,8 @@
   </div>
   <div class="stats-row">
     <div class="stat-card blue"><div class="label">Total VPOCs</div><div class="value">16</div><div class="sub">DXB5 Based</div></div>
-    <div class="stat-card green"><div class="label">Avg Weighted Score</div><div class="value" id="stat-avg">—</div><div class="sub">Operational metrics</div></div>
-    <div class="stat-card orange"><div class="label">Top Performer</div><div class="value" id="stat-top" style="font-size:15px;margin-top:4px;">—</div><div class="sub">Highest score today</div></div>
+    <div class="stat-card green"><div class="label">Avg Monthly Score</div><div class="value" id="stat-avg">—</div><div class="sub">Weighted · all VPOCs</div></div>
+    <div class="stat-card orange"><div class="label">Top Performer</div><div class="value" id="stat-top" style="font-size:15px;margin-top:4px;">—</div><div class="sub">Highest score this month</div></div>
     <div class="stat-card red"><div class="label">Needs Attention</div><div class="value" id="stat-attention">—</div><div class="sub">Score below 60%</div></div>
   </div>
 
@@ -177,7 +177,9 @@
     <div class="section-header">
       <h2>🏆 VPOC Leaderboard</h2>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <span class="badge" id="lb-date">Today</span>
+        <button class="btn btn-secondary" style="font-size:11px;padding:4px 9px;" onclick="shiftLbMonth(-1)">◀</button>
+        <span id="lb-date" style="font-weight:700;font-size:13px;min-width:110px;text-align:center;">—</span>
+        <button class="btn btn-secondary" style="font-size:11px;padding:4px 9px;" onclick="shiftLbMonth(1)">▶</button>
         <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;" onclick="renderLeaderboard()">🔄 Refresh</button>
         <button class="btn btn-primary" style="font-size:11px;padding:5px 10px;" onclick="downloadMonthlyPDF()">📄 Monthly Report</button>
         <button class="btn btn-orange" style="font-size:11px;padding:5px 10px;" onclick="loadTestScores()">🧪 Test Data</button>
@@ -675,27 +677,63 @@ function updateDebugCount(){
 // ═══════════════════════════════════════════════════
 // LEADERBOARD
 // ═══════════════════════════════════════════════════
+// ── Leaderboard month state ──
+let lbYear = 0, lbMonth = 0; // 0-indexed month
+
+function shiftLbMonth(delta){
+  lbMonth += delta;
+  if(lbMonth < 0){ lbMonth=11; lbYear--; }
+  if(lbMonth > 11){ lbMonth=0; lbYear++; }
+  renderLeaderboard();
+}
+
+function getMonthlyAvgScore(psoftId, y, m){
+  // Returns {metricAvgs, weightedScore} for a given VPOC in year y, month m (0-indexed)
+  const d = loadData();
+  if(!d[psoftId]) return {metricAvgs:{}, weightedScore:null};
+  const prefix = y+'-'+(''+(m+1)).padStart(2,'0');
+  const days = Object.keys(d[psoftId]).filter(k=>k.startsWith(prefix));
+  const metricAvgs = {};
+  METRICS.forEach(met=>{
+    const vals = days.map(day=>d[psoftId][day]?.[met.id]).filter(x=>x!==undefined&&x!==null);
+    metricAvgs[met.id] = vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
+  });
+  let wSum=0, wAvail=0;
+  METRICS.forEach(met=>{
+    if(metricAvgs[met.id]!==null){ wSum+=(metricAvgs[met.id]/5)*met.weight; wAvail+=met.weight; }
+  });
+  const weightedScore = wAvail>0 ? (wSum/wAvail)*5 : null;
+  return {metricAvgs, weightedScore, days:days.length};
+}
+
 function renderLeaderboard(){
-  const today = getUAEDateStr();
-  document.getElementById('lb-date').textContent = formatDisplayDate(today);
+  const uae = getUAEDateStr();
+  if(lbYear===0){
+    const [ty,tm] = uae.split('-');
+    lbYear=parseInt(ty); lbMonth=parseInt(tm)-1;
+  }
+  const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const label = monthNames[lbMonth]+' '+lbYear;
+
+  // Mark current month
+  const [cy,cm] = uae.split('-');
+  const isCurrentMonth = (lbYear===parseInt(cy) && lbMonth===parseInt(cm)-1);
+  document.getElementById('lb-date').textContent = label + (isCurrentMonth?' (current)':'');
+
   const tbody = document.getElementById('leaderboard-body');
 
   const rows = VPOCS.map(v=>{
-    const scores = {};
-    METRICS.forEach(m=>{ scores[m.id] = getScore(v.id, today, m.id); });
-    const ws = getWeightedScore(v.id, today);
-    return {v, scores, ws};
-  }).sort((a,b)=>b.ws.score - a.ws.score);
+    const {metricAvgs, weightedScore, days} = getMonthlyAvgScore(v.id, lbYear, lbMonth);
+    return {v, metricAvgs, weightedScore, days};
+  }).sort((a,b)=>(b.weightedScore||0)-(a.weightedScore||0));
 
-  let sumScore=0, attentionCount=0, topName='—';
-  rows.forEach((r,i)=>{
-    sumScore += r.ws.score;
-    if(r.ws.available>0 && r.ws.score < 3) attentionCount++;
-    if(i===0 && r.ws.available>0) topName = r.v.name.split(' ')[0];
-  });
-
-  document.getElementById('stat-avg').textContent = rows.length ? (sumScore/rows.length).toFixed(1) : '—';
-  document.getElementById('stat-top').textContent = topName;
+  // Stats
+  const scored = rows.filter(r=>r.weightedScore!==null);
+  const sumScore = scored.reduce((a,r)=>a+r.weightedScore,0);
+  const attentionCount = scored.filter(r=>r.weightedScore<3).length;
+  const top = scored.length ? scored[0].v.name.split(' ')[0] : '—';
+  document.getElementById('stat-avg').textContent = scored.length ? (sumScore/scored.length).toFixed(1) : '—';
+  document.getElementById('stat-top').textContent = top;
   document.getElementById('stat-attention').textContent = attentionCount;
 
   tbody.innerHTML = rows.map((r,i)=>{
@@ -703,16 +741,19 @@ function renderLeaderboard(){
     const initials = r.v.name.split(' ').slice(0,2).map(n=>n[0]).join('');
     const agClass = 'ag-'+r.v.agency.toLowerCase();
     const metricCells = METRICS.map(m=>{
-      const s = r.scores[m.id];
+      const s = r.metricAvgs[m.id];
       if(s===null||s===undefined) return `<td style="text-align:center;"><span class="score-badge score-nd">N/D</span></td>`;
-      return `<td style="text-align:center;"><span class="score-badge score-${s}">${s}</span></td>`;
+      const rounded = Math.round(s);
+      const display = s.toFixed(1);
+      return `<td style="text-align:center;"><span class="score-badge score-${rounded}" title="${m.name}: ${display}/5">${display}</span></td>`;
     }).join('');
-    const pct = r.ws.available>0 ? Math.round((r.ws.score/5)*100) : 0;
+    const pct = r.weightedScore!==null ? Math.round((r.weightedScore/5)*100) : 0;
     const barClass = pct>=80?'bar-green':pct>=50?'bar-orange':'bar-red';
-    const wsDisplay = r.ws.available>0 ? r.ws.score.toFixed(1)+'/5' : '—';
+    const wsDisplay = r.weightedScore!==null ? r.weightedScore.toFixed(1)+'/5' : '—';
+    const daysLabel = r.days ? `<div style="font-size:9px;color:#bbb;">${r.days}d recorded</div>` : '';
     return `<tr>
       <td style="font-weight:700;color:#888;">${i+1}</td>
-      <td><div class="vpoc-name"><div class="vpoc-avatar" style="background:${av}">${initials}</div><div><div style="font-weight:600;">${r.v.name}</div><div style="font-size:10px;color:#aaa;">${r.v.amazon}</div></div></div></td>
+      <td><div class="vpoc-name"><div class="vpoc-avatar" style="background:${av}">${initials}</div><div><div style="font-weight:600;">${r.v.name}</div><div style="font-size:10px;color:#aaa;">${r.v.amazon}</div>${daysLabel}</div></div></td>
       <td><span class="agency-tag ${agClass}">${r.v.agency}</span></td>
       ${metricCells}
       <td style="font-weight:700;">${wsDisplay}</td>
