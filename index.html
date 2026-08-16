@@ -125,65 +125,65 @@
 </head>
 <body>
 <div id="debug-bar">
-  <span>🕐 UAE Date: <strong id="dbg-date">—</strong></span>
-  <span>💾 Entries stored: <strong id="dbg-count">—</strong></span>
-  <span>📅 Storage key: <strong>vpoc_scores_v2</strong></span>
+  <span>ðŸ• UAE Date: <strong id="dbg-date">â€”</strong></span>
+  <span>ðŸ’¾ Entries stored: <strong id="dbg-count">â€”</strong></span>
+  <span>ðŸ“… Storage key: <strong>vpoc_scores_v2</strong></span>
 </div>
 
 <div class="header">
   <div>
-    <h1>🏭 VPOC Activity Tracker</h1>
-    <div class="subtitle">DXB5 · DXB8 · DWC3 · DDB1 | Line Manager: mnnnafee</div>
+    <h1>ðŸ­ VPOC Activity Tracker</h1>
+    <div class="subtitle">DXB5 Â· DXB8 Â· DWC3 Â· DDB1 | Line Manager: mnnnafee</div>
   </div>
   <div style="display:flex;align-items:center;gap:10px;">
     <span id="gh-sync-badge" style="display:none;background:rgba(255,255,255,0.15);padding:5px 12px;border-radius:12px;font-size:12px;"></span>
-    <div class="date-badge" id="dateDisplay">📅 Loading...</div>
+    <div class="date-badge" id="dateDisplay">ðŸ“… Loading...</div>
   </div>
 </div>
-<div id="gh-token-status" style="padding:10px 30px;font-size:12px;" class="alert alert-warning">⚠️ Checking GitHub token...</div>
+<div id="gh-token-status" style="padding:10px 30px;font-size:12px;" class="alert alert-warning">âš ï¸ Checking GitHub token...</div>
 
 <div class="nav">
-  <button class="nav-btn active" onclick="showPage('dashboard',this)">📊 Dashboard</button>
-  <button class="nav-btn" onclick="showPage('wbc',this)">📋 WBC — M1</button>
-  <button class="nav-btn" onclick="showPage('m3',this)">🕐 Attendance — M3</button>
-  <button class="nav-btn" onclick="showPage('m4',this)">📧 Bridging — M4</button>
-  <button class="nav-btn" onclick="showPage('m8',this)">📝 Adapt — M8</button>
-  <button class="nav-btn" onclick="showPage('m2',this)">🚧 HR Gemba — M2</button>
-  <button class="nav-btn" onclick="showPage('m5',this)">🚧 SOS — M5</button>
-  <button class="nav-btn" onclick="showPage('m6',this)">🚧 Engagement — M6</button>
-  <button class="nav-btn" onclick="showPage('m7',this)">🚧 Punch Analysis — M7</button>
-  <button class="nav-btn" onclick="showPage('metrics',this)">📐 Metrics</button>
-  <button class="nav-btn" onclick="showPage('team',this)">👥 Team</button>
+  <button class="nav-btn active" onclick="showPage('dashboard',this)">ðŸ“Š Dashboard</button>
+  <button class="nav-btn" onclick="showPage('wbc',this)">ðŸ“‹ WBC â€” M1</button>
+  <button class="nav-btn" onclick="showPage('m3',this)">ðŸ• Attendance â€” M3</button>
+  <button class="nav-btn" onclick="showPage('m4',this)">ðŸ“§ Bridging â€” M4</button>
+  <button class="nav-btn" onclick="showPage('m8',this)">ðŸ“ Adapt â€” M8</button>
+  <button class="nav-btn" onclick="showPage('m2',this)">ðŸš§ HR Gemba â€” M2</button>
+  <button class="nav-btn" onclick="showPage('m5',this)">ðŸš§ SOS â€” M5</button>
+  <button class="nav-btn" onclick="showPage('m6',this)">ðŸš§ Engagement â€” M6</button>
+  <button class="nav-btn" onclick="showPage('m7',this)">ðŸš§ Punch Analysis â€” M7</button>
+  <button class="nav-btn" onclick="showPage('metrics',this)">ðŸ“ Metrics</button>
+  <button class="nav-btn" onclick="showPage('team',this)">ðŸ‘¥ Team</button>
 </div>
 
 <div class="main">
 
-<!-- ═══════════════════════════════════════ DASHBOARD -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DASHBOARD -->
 <div id="page-dashboard" class="page active">
   <div class="alert alert-info">
-    📌 <strong>Workflow:</strong>
-    Upload WBC CSV → <strong>WBC tab</strong> &nbsp;|&nbsp;
-    Upload punch CSV → <strong>Attendance tab</strong> &nbsp;|&nbsp;
+    ðŸ“Œ <strong>Workflow:</strong>
+    Upload WBC CSV â†’ <strong>WBC tab</strong> &nbsp;|&nbsp;
+    Upload punch CSV â†’ <strong>Attendance tab</strong> &nbsp;|&nbsp;
     More metrics coming soon
   </div>
   <div class="stats-row">
     <div class="stat-card blue"><div class="label">Total VPOCs</div><div class="value">16</div><div class="sub">DXB5 Based</div></div>
-    <div class="stat-card green"><div class="label">Avg Monthly Score</div><div class="value" id="stat-avg">—</div><div class="sub">Weighted · all VPOCs</div></div>
-    <div class="stat-card orange"><div class="label">Top Performer</div><div class="value" id="stat-top" style="font-size:15px;margin-top:4px;">—</div><div class="sub">Highest score this month</div></div>
-    <div class="stat-card red"><div class="label">Needs Attention</div><div class="value" id="stat-attention">—</div><div class="sub">Score below 60%</div></div>
+    <div class="stat-card green"><div class="label">Avg Monthly Score</div><div class="value" id="stat-avg">â€”</div><div class="sub">Weighted Â· all VPOCs</div></div>
+    <div class="stat-card orange"><div class="label">Top Performer</div><div class="value" id="stat-top" style="font-size:15px;margin-top:4px;">â€”</div><div class="sub">Highest score this month</div></div>
+    <div class="stat-card red"><div class="label">Needs Attention</div><div class="value" id="stat-attention">â€”</div><div class="sub">Score below 60%</div></div>
   </div>
 
   <div class="section">
     <div class="section-header">
-      <h2>🏆 VPOC Leaderboard</h2>
+      <h2>ðŸ† VPOC Leaderboard</h2>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <button class="btn btn-secondary" style="font-size:11px;padding:4px 9px;" onclick="shiftLbMonth(-1)">◀</button>
-        <span id="lb-date" style="font-weight:700;font-size:13px;min-width:110px;text-align:center;">—</span>
-        <button class="btn btn-secondary" style="font-size:11px;padding:4px 9px;" onclick="shiftLbMonth(1)">▶</button>
-        <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;" onclick="renderLeaderboard()">🔄 Refresh</button>
-        <button class="btn btn-primary" style="font-size:11px;padding:5px 10px;" onclick="downloadMonthlyPDF()">📄 Monthly Report</button>
-        <button class="btn btn-orange" style="font-size:11px;padding:5px 10px;" onclick="loadTestScores()">🧪 Test Data</button>
-        <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;color:#e74c3c;" onclick="clearAllData()">🗑 Clear All</button>
+        <button class="btn btn-secondary" style="font-size:11px;padding:4px 9px;" onclick="shiftLbMonth(-1)">â—€</button>
+        <span id="lb-date" style="font-weight:700;font-size:13px;min-width:110px;text-align:center;">â€”</span>
+        <button class="btn btn-secondary" style="font-size:11px;padding:4px 9px;" onclick="shiftLbMonth(1)">â–¶</button>
+        <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;" onclick="renderLeaderboard()">ðŸ”„ Refresh</button>
+        <button class="btn btn-primary" style="font-size:11px;padding:5px 10px;" onclick="downloadMonthlyPDF()">ðŸ“„ Monthly Report</button>
+        <button class="btn btn-orange" style="font-size:11px;padding:5px 10px;" onclick="loadTestScores()">ðŸ§ª Test Data</button>
+        <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;color:#e74c3c;" onclick="clearAllData()">ðŸ—‘ Clear All</button>
       </div>
     </div>
     <div style="overflow-x:auto;">
@@ -211,26 +211,26 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ WBC M1 -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• WBC M1 -->
 <div id="page-wbc" class="page">
   <div class="section">
     <div class="section-header">
-      <h2>📋 WBC Closure — M1</h2>
-      <div style="font-size:12px;color:#888;">Per Agency · 5-day SLA · Sites: DXB5·DXB8·DWC3·DDB1 · Date from filename</div>
+      <h2>ðŸ“‹ WBC Closure â€” M1</h2>
+      <div style="font-size:12px;color:#888;">Per Agency Â· 5-day SLA Â· Sites: DXB5Â·DXB8Â·DWC3Â·DDB1 Â· Date from filename</div>
     </div>
     <div style="padding:20px;">
       <div class="alert alert-info">
-        📌 Filename must include date: <code>wbc_cases_YYYY-MM-DD.csv</code> — score saved to that date automatically.
+        ðŸ“Œ Filename must include date: <code>wbc_cases_YYYY-MM-DD.csv</code> â€” score saved to that date automatically.
       </div>
       <div class="upload-zone" onclick="document.getElementById('wbc-file').click()">
-        <div class="upload-icon">📁</div>
+        <div class="upload-icon">ðŸ“</div>
         <div style="font-weight:600;font-size:14px;">Click to upload WBC CSV</div>
         <div style="font-size:11px;color:#888;margin-top:6px;">Columns: ID, Login, Name, EmpID, Site, Agency, Absent, Status, Outcome, Escalation, Closed, Source</div>
       </div>
       <input type="file" id="wbc-file" accept=".csv" style="display:none" onchange="processWBC(this)">
       <div id="wbc-date-info" style="display:none;margin-bottom:12px;"></div>
       <div id="wbc-results" style="display:none;">
-        <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📊 Agency Breakdown</h3>
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">ðŸ“Š Agency Breakdown</h3>
         <div class="wbc-summary" id="wbc-cards"></div>
         <div style="overflow-x:auto;">
           <table>
@@ -239,29 +239,29 @@
           </table>
         </div>
         <div style="text-align:right;margin-top:16px;">
-          <button class="btn btn-green" onclick="applyWBC()">✅ Save M1 Scores to Dashboard</button>
+          <button class="btn btn-green" onclick="applyWBC()">âœ… Save M1 Scores to Dashboard</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ ATTENDANCE M3 -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• ATTENDANCE M3 -->
 <div id="page-m3" class="page">
 
   <!-- CALENDAR SECTION -->
   <div class="section" style="margin-bottom:20px;">
     <div class="section-header">
-      <h2>📅 Monthly Attendance Calendar</h2>
+      <h2>ðŸ“… Monthly Attendance Calendar</h2>
       <div style="display:flex;gap:8px;align-items:center;">
-        <button class="btn btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="shiftCalMonth(-1)">◀ Prev</button>
+        <button class="btn btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="shiftCalMonth(-1)">â—€ Prev</button>
         <span id="cal-month-label" style="font-weight:700;font-size:13px;"></span>
-        <button class="btn btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="shiftCalMonth(1)">Next ▶</button>
+        <button class="btn btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="shiftCalMonth(1)">Next â–¶</button>
       </div>
     </div>
     <div style="padding:16px 20px;">
       <div style="font-size:11px;color:#888;margin-bottom:12px;">
-        🟢 = data uploaded for that date &nbsp;·&nbsp; ⬜ = no data &nbsp;·&nbsp; Grey = weekend/future
+        ðŸŸ¢ = data uploaded for that date &nbsp;Â·&nbsp; â¬œ = no data &nbsp;Â·&nbsp; Grey = weekend/future
       </div>
       <div id="m3-calendar"></div>
     </div>
@@ -270,22 +270,22 @@
   <!-- UPLOAD SECTION -->
   <div class="section">
     <div class="section-header">
-      <h2>🕐 Upload Attendance CSV — M3</h2>
-      <div style="font-size:12px;color:#888;">Per VPOC · Present = any punch · ≥98% monthly target</div>
+      <h2>ðŸ• Upload Attendance CSV â€” M3</h2>
+      <div style="font-size:12px;color:#888;">Per VPOC Â· Present = any punch Â· â‰¥98% monthly target</div>
     </div>
     <div style="padding:20px;">
       <div class="alert alert-info">
-        📌 Upload the daily punch clock CSV. Date is auto-detected from <strong>Punch Time</strong> column. <strong>Present</strong> (any punch) = 5pts · <strong>Absent</strong> (0 punches) = 0pts.
+        ðŸ“Œ Upload the daily punch clock CSV. Date is auto-detected from <strong>Punch Time</strong> column. <strong>Present</strong> (any punch) = 5pts Â· <strong>Absent</strong> (0 punches) = 0pts.
       </div>
       <div class="upload-zone" onclick="document.getElementById('m3-file').click()">
-        <div class="upload-icon">📁</div>
+        <div class="upload-icon">ðŸ“</div>
         <div style="font-weight:600;font-size:14px;">Click to upload Attendance CSV</div>
         <div style="font-size:11px;color:#888;margin-top:6px;">Columns: Employee ID, Employee Name, Manager, Shift, Punch Type, Punch Time</div>
       </div>
       <input type="file" id="m3-file" accept=".csv" style="display:none" onchange="processM3(this)">
       <div id="m3-date-info" style="display:none;margin-bottom:12px;"></div>
       <div id="m3-results" style="display:none;">
-        <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📊 VPOC Punch Results</h3>
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">ðŸ“Š VPOC Punch Results</h3>
         <div style="overflow-x:auto;">
           <table>
             <thead><tr><th>VPOC</th><th>Agency</th><th>Psoft ID</th><th>Punches Found</th><th>Status</th><th>Score /5</th><th>Month Att%</th></tr></thead>
@@ -294,33 +294,33 @@
         </div>
         <div id="m3-missing" style="margin-top:12px;display:none;"></div>
         <div style="text-align:right;margin-top:16px;">
-          <button class="btn btn-green" onclick="applyM3()">✅ Save M3 Scores to Dashboard</button>
+          <button class="btn btn-green" onclick="applyM3()">âœ… Save M3 Scores to Dashboard</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ BRIDGING M4 -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• BRIDGING M4 -->
 <div id="page-m4" class="page">
   <div class="section">
-    <div class="section-header"><h2>📧 Daily Bridging — M4</h2></div>
+    <div class="section-header"><h2>ðŸ“§ Daily Bridging â€” M4</h2></div>
     <div class="coming-soon">
-      <div class="cs-icon">🔨</div>
+      <div class="cs-icon">ðŸ”¨</div>
       <h2>Working on it</h2>
       <p>M4 Daily Attendance & Bridging will be scored automatically once the standard email format is set up. VPOCs will send bridging submissions to a dedicated inbox and the app will parse them.</p>
-      <span class="cs-badge">🔜 Coming Soon</span>
+      <span class="cs-badge">ðŸ”œ Coming Soon</span>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ ADAPT M8 -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• ADAPT M8 -->
 <div id="page-m8" class="page">
 
   <!-- RESULTS SECTION -->
   <div class="section" style="margin-bottom:20px;" id="m8-results-section" style="display:none;">
     <div class="section-header">
-      <h2>📊 M8 Results</h2>
+      <h2>ðŸ“Š M8 Results</h2>
       <span id="m8-week-label" class="badge"></span>
     </div>
     <div style="padding:16px 20px;">
@@ -330,7 +330,7 @@
             <tr>
               <th>Agency</th>
               <th style="text-align:center;">Total Cases</th>
-              <th style="text-align:center;">Delivered ≤5 days</th>
+              <th style="text-align:center;">Delivered â‰¤5 days</th>
               <th style="text-align:center;">SLA %</th>
               <th style="text-align:center;">Score /5</th>
               <th>Pending / No Date</th>
@@ -340,7 +340,7 @@
         </table>
       </div>
       <div style="text-align:right;margin-top:16px;">
-        <button class="btn btn-green" onclick="applyM8()">✅ Save M8 Scores to Dashboard</button>
+        <button class="btn btn-green" onclick="applyM8()">âœ… Save M8 Scores to Dashboard</button>
       </div>
     </div>
   </div>
@@ -348,17 +348,17 @@
   <!-- UPLOAD SECTION -->
   <div class="section">
     <div class="section-header">
-      <h2>📝 Adapt Feedback Closure — M8</h2>
-      <div style="font-size:12px;color:#888;">Per Agency · SLA = Quip date → Delivery ≤ 5 days (Wed → Sun)</div>
+      <h2>ðŸ“ Adapt Feedback Closure â€” M8</h2>
+      <div style="font-size:12px;color:#888;">Per Agency Â· SLA = Quip date â†’ Delivery â‰¤ 5 days (Wed â†’ Sun)</div>
     </div>
     <div style="padding:20px;">
       <div class="alert alert-info">
-        📌 Export the <strong>DXB5 ADAPT Tracker</strong> as CSV and upload here.<br>
-        <strong>Required columns:</strong> Date Added on Quip (DD/MM/YYYY) · Delivery date (MM/DD/YYYY) · Delivered (YES/NO) · 3P · Employee Name<br>
-        <strong>SLA:</strong> Quip date → Delivery date ≤ 5 days · <strong>Quesscorp excluded</strong> (no VPOC assigned yet)
+        ðŸ“Œ Export the <strong>DXB5 ADAPT Tracker</strong> as CSV and upload here.<br>
+        <strong>Required columns:</strong> Date Added on Quip (DD/MM/YYYY) Â· Delivery date (MM/DD/YYYY) Â· Delivered (YES/NO) Â· 3P Â· Employee Name<br>
+        <strong>SLA:</strong> Quip date â†’ Delivery date â‰¤ 5 days Â· <strong>Quesscorp excluded</strong> (no VPOC assigned yet)
       </div>
       <div class="upload-zone" onclick="document.getElementById('m8-file').click()">
-        <div class="upload-icon">📁</div>
+        <div class="upload-icon">ðŸ“</div>
         <div style="font-weight:600;font-size:14px;">Click to upload ADAPT Tracker CSV</div>
         <div style="font-size:11px;color:#888;margin-top:6px;">Columns: Employee Login, Employee Name, Date Added on Quip, 3P, Delivery date, Delivered (YES/NO) ...</div>
       </div>
@@ -368,84 +368,84 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ HR GEMBA M2 -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• HR GEMBA M2 -->
 <div id="page-m2" class="page">
   <div class="section">
-    <div class="section-header"><h2>🚧 HR Gemba — M2</h2></div>
+    <div class="section-header"><h2>ðŸš§ HR Gemba â€” M2</h2></div>
     <div class="coming-soon">
-      <div class="cs-icon">🚧</div>
+      <div class="cs-icon">ðŸš§</div>
       <h2>Working on it</h2>
       <p>M2 HR Gemba scoring will be automated once the daily Gemba survey is built. Completion responses will feed directly into this tracker.</p>
-      <span class="cs-badge">⏳ In Planning</span>
+      <span class="cs-badge">â³ In Planning</span>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ SOS M5 -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SOS M5 -->
 <div id="page-m5" class="page">
   <div class="section">
-    <div class="section-header"><h2>🚧 SOS Meeting Attendance — M5</h2></div>
+    <div class="section-header"><h2>ðŸš§ SOS Meeting Attendance â€” M5</h2></div>
     <div class="coming-soon">
-      <div class="cs-icon">🚧</div>
+      <div class="cs-icon">ðŸš§</div>
       <h2>Working on it</h2>
       <p>M5 SOS Meeting Attendance tracking method is being finalized. Once confirmed, scoring will be automated here.</p>
-      <span class="cs-badge">⏳ In Planning</span>
+      <span class="cs-badge">â³ In Planning</span>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ ENGAGEMENT M6 -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• ENGAGEMENT M6 -->
 <div id="page-m6" class="page">
   <div class="section">
-    <div class="section-header"><h2>🚧 Engagement Activity — M6</h2></div>
+    <div class="section-header"><h2>ðŸš§ Engagement Activity â€” M6</h2></div>
     <div class="coming-soon">
-      <div class="cs-icon">🚧</div>
+      <div class="cs-icon">ðŸš§</div>
       <h2>Working on it</h2>
       <p>M6 Engagement Activity Management will be tracked once the quarterly engagement calendar and tracker are standardized across sites.</p>
-      <span class="cs-badge">⏳ In Planning</span>
+      <span class="cs-badge">â³ In Planning</span>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ PUNCH ANALYSIS M7 -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• PUNCH ANALYSIS M7 -->
 <div id="page-m7" class="page">
   <div class="section">
-    <div class="section-header"><h2>🚧 Punch Analysis & Pay Defect — M7</h2></div>
+    <div class="section-header"><h2>ðŸš§ Punch Analysis & Pay Defect â€” M7</h2></div>
     <div class="coming-soon">
-      <div class="cs-icon">🚧</div>
+      <div class="cs-icon">ðŸš§</div>
       <h2>Working on it</h2>
       <p>M7 Punch Analysis & Pay Defect Management will be scored from the compliance dashboard export once the weekly export format is confirmed.</p>
-      <span class="cs-badge">⏳ In Planning</span>
+      <span class="cs-badge">â³ In Planning</span>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ METRICS INFO -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• METRICS INFO -->
 <div id="page-metrics" class="page">
   <div class="section">
-    <div class="section-header"><h2>📐 Metrics Overview</h2><span class="badge-blue badge">8 Metrics · Weighted Score</span></div>
+    <div class="section-header"><h2>ðŸ“ Metrics Overview</h2><span class="badge-blue badge">8 Metrics Â· Weighted Score</span></div>
     <div style="padding:16px 20px;">
       <div class="alert alert-info">
-        📌 <strong>Scoring Formula:</strong> Weighted Average — High Priority metrics (M1, M2, M3, M7, M8) count <strong>1.5x</strong>, Medium Priority (M4, M5, M6) count <strong>1.0x</strong>. Monthly score = average of all daily/weekly entries.
+        ðŸ“Œ <strong>Scoring Formula:</strong> Weighted Average â€” High Priority metrics (M1, M2, M3, M7, M8) count <strong>1.5x</strong>, Medium Priority (M4, M5, M6) count <strong>1.0x</strong>. Monthly score = average of all daily/weekly entries.
       </div>
     </div>
     <div class="metric-grid" id="metric-grid"></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ TEAM -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• TEAM -->
 <div id="page-team" class="page">
   <div class="section">
-    <div class="section-header"><h2>👥 VPOC Team — DXB5</h2><span class="badge">16 VPOCs · 4 Agencies</span></div>
+    <div class="section-header"><h2>ðŸ‘¥ VPOC Team â€” DXB5</h2><span class="badge">16 VPOCs Â· 4 Agencies</span></div>
     <div class="team-grid" id="team-grid"></div>
   </div>
 </div>
 
 </div><!-- end .main -->
 <script>
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // DATA
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 const VPOCS = [
   {id:'205671526',amazon:'miadnana',name:'Adnan Amir Afridi',agency:'Dulsco'},
   {id:'207302255',amazon:'muarfaar',name:'Arfa Arif',agency:'Fastlink'},
@@ -466,14 +466,14 @@ const VPOCS = [
 ];
 
 const METRICS = [
-  {id:'M1',name:'WBC Closure',type:'Daily',priority:'High',weight:1.5,desc:'Welcome Back Conversation closure within SLA.',target:'5-day SLA · 100% closure',auto:true,perAgency:true},
-  {id:'M2',name:'HR Gemba',type:'Daily',priority:'High',weight:1.5,desc:'Scheduled Gemba walks completed and documented.',target:'100% compliance · 1 walk/day',auto:false,perAgency:false},
-  {id:'M3',name:'VPOC Attendance',type:'Daily',priority:'High',weight:1.5,desc:'Personal attendance, punctuality, and adherence to site schedule.',target:'≥98% monthly attendance · Present = 5pts | Absent = 0pts',auto:true,perAgency:false},
+  {id:'M1',name:'WBC Closure',type:'Daily',priority:'High',weight:1.5,desc:'Welcome Back Conversation closure within SLA.',target:'5-day SLA Â· 100% closure',auto:true,perAgency:true},
+  {id:'M2',name:'HR Gemba',type:'Daily',priority:'High',weight:1.5,desc:'Scheduled Gemba walks completed and documented.',target:'100% compliance Â· 1 walk/day',auto:false,perAgency:false},
+  {id:'M3',name:'VPOC Attendance',type:'Daily',priority:'High',weight:1.5,desc:'Personal attendance, punctuality, and adherence to site schedule.',target:'â‰¥98% monthly attendance Â· Present = 5pts | Absent = 0pts',auto:true,perAgency:false},
   {id:'M4',name:'Daily Bridging',type:'Daily',priority:'Medium',weight:1.0,desc:'Bridging submitted within 2 hours from SOS.',target:'Daily within 2 hours from SOS',auto:false,perAgency:false},
   {id:'M5',name:'SOS Meeting',type:'Daily',priority:'Medium',weight:1.0,desc:'SOS briefing attendance with PXT updates.',target:'100% attendance',auto:false,perAgency:false},
-  {id:'M6',name:'Engagement Activity',type:'Weekly',priority:'Medium',weight:1.0,desc:'Planned engagement activities executed per calendar.',target:'100% execution · 6/quarter',auto:false,perAgency:false},
-  {id:'M7',name:'Punch Analysis & Pay Defect',type:'Weekly',priority:'High',weight:1.5,desc:'Mispunch tracked weekly; pay defect audit and correction.',target:'Mispunch 0% · Pay Defect 0%',auto:false,perAgency:false},
-  {id:'M8',name:'Adapt Feedback Closure',type:'Weekly',priority:'High',weight:1.5,desc:'Warning letters issued within SLA; Bravo pin distribution.',target:'WL ≤48h · Zero pending',auto:false,perAgency:false}
+  {id:'M6',name:'Engagement Activity',type:'Weekly',priority:'Medium',weight:1.0,desc:'Planned engagement activities executed per calendar.',target:'100% execution Â· 6/quarter',auto:false,perAgency:false},
+  {id:'M7',name:'Punch Analysis & Pay Defect',type:'Weekly',priority:'High',weight:1.5,desc:'Mispunch tracked weekly; pay defect audit and correction.',target:'Mispunch 0% Â· Pay Defect 0%',auto:false,perAgency:false},
+  {id:'M8',name:'Adapt Feedback Closure',type:'Weekly',priority:'High',weight:1.5,desc:'Warning letters issued within SLA; Bravo pin distribution.',target:'WL â‰¤48h Â· Zero pending',auto:false,perAgency:false}
 ];
 
 const AGENCY_COLORS = {Dulsco:'#1565c0',Fastlink:'#6a1b9a',Adecco:'#2e7d32',EFS:'#f57f17'};
@@ -484,9 +484,9 @@ const STORAGE_KEY = 'vpoc_scores_v2';
 let pendingWBC = null;
 let pendingM3  = null;
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // GITHUB STORAGE CONFIG
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 const GH_REPO   = 'muarfaar/vpoc-tracker';
 const GH_FILE   = 'scores.json';
 const GH_BRANCH = 'main';
@@ -504,10 +504,10 @@ function updateTokenStatus(){
   const el = document.getElementById('gh-token-status');
   if(!el) return;
   if(ghToken){
-    el.innerHTML = '🔒 GitHub sync <strong>active</strong> — scores save to cloud automatically. <a href="#" onclick="clearToken();return false;" style="color:#e94560;font-size:12px;">Change token</a>';
+    el.innerHTML = 'ðŸ”’ GitHub sync <strong>active</strong> â€” scores save to cloud automatically. <a href="#" onclick="clearToken();return false;" style="color:#e94560;font-size:12px;">Change token</a>';
     el.className = 'alert alert-success';
   } else {
-    el.innerHTML = '⚠️ No GitHub token — scores saved <strong>locally only</strong> (lost if cache is cleared). <button class="btn btn-primary" style="padding:4px 12px;font-size:12px;margin-left:8px;" onclick="promptToken()">🔑 Set Token</button>';
+    el.innerHTML = 'âš ï¸ No GitHub token â€” scores saved <strong>locally only</strong> (lost if cache is cleared). <button class="btn btn-primary" style="padding:4px 12px;font-size:12px;margin-left:8px;" onclick="promptToken()">ðŸ”‘ Set Token</button>';
     el.className = 'alert alert-warning';
   }
 }
@@ -517,9 +517,9 @@ function promptToken(){
 }
 function clearToken(){ if(confirm('Remove saved GitHub token?')){ setToken(''); } }
 
-// ═══════════════════════════════════════════════════
-// STORAGE — GitHub primary, localStorage fallback
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// STORAGE â€” GitHub primary, localStorage fallback
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function loadData(){
   try{ return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}; }
   catch(e){ return {}; }
@@ -537,7 +537,7 @@ function setScore(psoftId,dateStr,metric,val){
   saveData(d);
 }
 
-// ── Push to GitHub ──
+// â”€â”€ Push to GitHub â”€â”€
 async function pushToGitHub(data){
   if(!ghToken) return;
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
@@ -559,37 +559,36 @@ async function pushToGitHub(data){
   if(res.ok){
     const j = await res.json();
     ghScoresSha = j.content.sha;
-    showGHSyncBadge('✅ Synced to GitHub');
+    showGHSyncBadge('âœ… Synced to GitHub');
   } else {
     const err = await res.json().catch(()=>({}));
-    showGHSyncBadge('⚠️ Sync failed: '+(err.message||res.status));
+    showGHSyncBadge('âš ï¸ Sync failed: '+(err.message||res.status));
   }
 }
 
-// ── Pull from GitHub on load ──
+// â”€â”€ Pull from GitHub on load â”€â”€
 async function pullFromGitHub(){
   if(!ghToken){ updateTokenStatus(); return; }
-  showGHSyncBadge('🔄 Loading from GitHub...');
+  showGHSyncBadge('ðŸ”„ Loading from GitHub...');
   try{
     const r = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}?ts=`+Date.now(),
       {headers:{'Authorization':'token '+ghToken,'Accept':'application/vnd.github.v3+json'}});
     if(r.ok){
       const j = await r.json();
       ghScoresSha = j.sha;
-      const decoded = decodeURIComponent(escape(atob(j.content.replace(/
-/g,''))));
+      const decoded = decodeURIComponent(escape(atob(j.content.replace(/\n/g,''))));
       const data = JSON.parse(decoded);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      showGHSyncBadge('✅ Loaded from GitHub');
+      showGHSyncBadge('âœ… Loaded from GitHub');
       renderLeaderboard();
       renderM3Calendar();
       updateDebugCount();
     } else if(r.status===404){
-      showGHSyncBadge('📭 No cloud data yet — will create on first save');
+      showGHSyncBadge('ðŸ“­ No cloud data yet â€” will create on first save');
     } else {
-      showGHSyncBadge('⚠️ Load failed: '+r.status);
+      showGHSyncBadge('âš ï¸ Load failed: '+r.status);
     }
-  } catch(e){ showGHSyncBadge('⚠️ GitHub error'); }
+  } catch(e){ showGHSyncBadge('âš ï¸ GitHub error'); }
   updateTokenStatus();
 }
 
@@ -599,9 +598,9 @@ function showGHSyncBadge(msg){
     setTimeout(()=>{ el.style.display='none'; }, 4000); }
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // WEIGHTED SCORE
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function getWeightedScore(psoftId, dateStr){
   const d = loadData();
   if(!d[psoftId]||!d[psoftId][dateStr]) return {score:0, available:0, total:0};
@@ -619,7 +618,7 @@ function getWeightedScore(psoftId, dateStr){
   return {score: Math.round(score*10)/10, available: weightAvail, total: weightTotal};
 }
 
-// ── Monthly attendance % for a VPOC (M3 days in current calendar month) ──
+// â”€â”€ Monthly attendance % for a VPOC (M3 days in current calendar month) â”€â”€
 function getMonthlyAttendancePct(psoftId){
   const d = loadData();
   if(!d[psoftId]) return null;
@@ -632,12 +631,12 @@ function getMonthlyAttendancePct(psoftId){
   return (present/days.length)*100;
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // DATE HELPERS
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function getUAEDateStr(){return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Dubai'});}
 function formatDisplayDate(s){
-  if(!s)return '—';
+  if(!s)return 'â€”';
   const [y,m,d]=s.split('-');
   const mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return `${parseInt(d)} ${mn[parseInt(m)-1]} ${y}`;
@@ -656,9 +655,9 @@ function extractWBCDate(filename){
   return m ? m[1] : getUAEDateStr();
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CSV PARSER
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function parseCSV(text){
   const lines = text.trim().split('\n');
   const headers = lines[0].split(',').map(h=>h.replace(/"/g,'').trim());
@@ -676,9 +675,9 @@ function parseCSV(text){
   }).filter(r=>Object.values(r).some(v=>v!==''));
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // NAV
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function showPage(name,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -690,12 +689,12 @@ function showPage(name,btn){
   if(name==='m3')renderM3Calendar();
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // INIT
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function init(){
   const uae = getUAEDateStr();
-  document.getElementById('dateDisplay').textContent = '📅 '+formatDisplayDate(uae);
+  document.getElementById('dateDisplay').textContent = 'ðŸ“… '+formatDisplayDate(uae);
   document.getElementById('dbg-date').textContent = uae;
   updateDebugCount();
   renderLeaderboard();
@@ -715,10 +714,10 @@ function updateDebugCount(){
   document.getElementById('dbg-count').textContent=c;
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // LEADERBOARD
-// ═══════════════════════════════════════════════════
-// ── Leaderboard month state ──
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// â”€â”€ Leaderboard month state â”€â”€
 let lbYear = 0, lbMonth = 0; // 0-indexed month
 
 function shiftLbMonth(delta){
@@ -772,8 +771,8 @@ function renderLeaderboard(){
   const scored = rows.filter(r=>r.weightedScore!==null);
   const sumScore = scored.reduce((a,r)=>a+r.weightedScore,0);
   const attentionCount = scored.filter(r=>r.weightedScore<3).length;
-  const top = scored.length ? scored[0].v.name.split(' ')[0] : '—';
-  document.getElementById('stat-avg').textContent = scored.length ? (sumScore/scored.length).toFixed(1) : '—';
+  const top = scored.length ? scored[0].v.name.split(' ')[0] : 'â€”';
+  document.getElementById('stat-avg').textContent = scored.length ? (sumScore/scored.length).toFixed(1) : 'â€”';
   document.getElementById('stat-top').textContent = top;
   document.getElementById('stat-attention').textContent = attentionCount;
 
@@ -790,7 +789,7 @@ function renderLeaderboard(){
     }).join('');
     const pct = r.weightedScore!==null ? Math.round((r.weightedScore/5)*100) : 0;
     const barClass = pct>=80?'bar-green':pct>=50?'bar-orange':'bar-red';
-    const wsDisplay = r.weightedScore!==null ? r.weightedScore.toFixed(1)+'/5' : '—';
+    const wsDisplay = r.weightedScore!==null ? r.weightedScore.toFixed(1)+'/5' : 'â€”';
     const daysLabel = r.days ? `<div style="font-size:9px;color:#bbb;">${r.days}d recorded</div>` : '';
     return `<tr>
       <td style="font-weight:700;color:#888;">${i+1}</td>
@@ -808,15 +807,15 @@ function renderLeaderboard(){
   }).join('');
 }
 
-// ═══════════════════════════════════════════════════
-// WBC — M1
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// WBC â€” M1
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function processWBC(input){
   const file = input.files[0];
   if(!file) return;
   const dateStr = extractWBCDate(file.name);
   document.getElementById('wbc-date-info').style.display='block';
-  document.getElementById('wbc-date-info').innerHTML=`<div class="alert alert-success">📅 Date detected from filename: <strong>${formatDisplayDate(dateStr)}</strong> — scores will be saved to this date.</div>`;
+  document.getElementById('wbc-date-info').innerHTML=`<div class="alert alert-success">ðŸ“… Date detected from filename: <strong>${formatDisplayDate(dateStr)}</strong> â€” scores will be saved to this date.</div>`;
 
   const reader = new FileReader();
   reader.onload = e=>{
@@ -877,7 +876,7 @@ function processWBC(input){
       return `<div class="wbc-card" style="background:${bg};">
         <div class="wbc-agency" style="color:${col};">${ag}</div>
         <div class="wbc-score" style="color:${col};">${r.score}<span style="font-size:14px;">/5</span></div>
-        <div class="wbc-rate" style="color:${col};">${r.rate}% · ${r.closed}/${r.total} cases</div>
+        <div class="wbc-rate" style="color:${col};">${r.rate}% Â· ${r.closed}/${r.total} cases</div>
       </div>`;
     }).join('');
 
@@ -909,13 +908,13 @@ function applyWBC(){
     setScore(v.id, dateStr, 'M1', score);
   });
   updateDebugCount();
-  alert(`✅ M1 WBC scores saved for ${formatDisplayDate(dateStr)}!\n\nGo to Dashboard to see the leaderboard.`);
+  alert(`âœ… M1 WBC scores saved for ${formatDisplayDate(dateStr)}!\n\nGo to Dashboard to see the leaderboard.`);
   pendingWBC = null;
 }
 
-// ═══════════════════════════════════════════════════
-// ATTENDANCE — M3
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ATTENDANCE â€” M3
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function processM3(input){
   const file = input.files[0];
   if(!file) return;
@@ -929,7 +928,7 @@ function processM3(input){
     const dateStr = parsePunchDate(firstPunch) || getUAEDateStr();
 
     document.getElementById('m3-date-info').style.display='block';
-    document.getElementById('m3-date-info').innerHTML=`<div class="alert alert-success">📅 Date detected from Punch Time: <strong>${formatDisplayDate(dateStr)}</strong> — scores will be saved to this date.</div>`;
+    document.getElementById('m3-date-info').innerHTML=`<div class="alert alert-success">ðŸ“… Date detected from Punch Time: <strong>${formatDisplayDate(dateStr)}</strong> â€” scores will be saved to this date.</div>`;
 
     // Count punches per Employee ID
     const punchCount = {};
@@ -953,13 +952,13 @@ function processM3(input){
     // Render table
     document.getElementById('m3-table').innerHTML = vpocResults.map(r=>{
       const agClass = 'ag-'+r.agency.toLowerCase();
-      const statusIcon = !r.found ? '⚠️ Not in CSV' : r.count>=1 ? '✅ Present' : '❌ Absent';
+      const statusIcon = !r.found ? 'âš ï¸ Not in CSV' : r.count>=1 ? 'âœ… Present' : 'âŒ Absent';
       const rowStyle = !r.found ? 'background:#fffbf0;' : '';
       return `<tr style="${rowStyle}">
         <td style="font-weight:600;">${r.name}</td>
         <td><span class="agency-tag ${agClass}">${r.agency}</span></td>
         <td style="font-size:11px;color:#aaa;">${r.id}</td>
-        <td style="text-align:center;font-weight:700;">${r.found ? r.count : '—'}</td>
+        <td style="text-align:center;font-weight:700;">${r.found ? r.count : 'â€”'}</td>
         <td>${statusIcon}</td>
         <td style="text-align:center;"><span class="score-badge score-${r.score}">${r.score}</span></td>
       </tr>`;
@@ -970,7 +969,7 @@ function processM3(input){
     const missingEl = document.getElementById('m3-missing');
     if(missing.length>0){
       missingEl.style.display='block';
-      missingEl.innerHTML=`<div class="alert alert-warning">⚠️ <strong>${missing.length} VPOC(s) not found in CSV</strong> — they will receive 0pts for M3: ${missing.map(r=>r.name).join(', ')}</div>`;
+      missingEl.innerHTML=`<div class="alert alert-warning">âš ï¸ <strong>${missing.length} VPOC(s) not found in CSV</strong> â€” they will receive 0pts for M3: ${missing.map(r=>r.name).join(', ')}</div>`;
     } else {
       missingEl.style.display='none';
     }
@@ -988,13 +987,13 @@ function applyM3(){
   });
   updateDebugCount();
   renderM3Calendar();
-  alert(`✅ M3 Attendance saved for ${formatDisplayDate(dateStr)}!\n\nCalendar updated — go to Dashboard for leaderboard.`);
+  alert(`âœ… M3 Attendance saved for ${formatDisplayDate(dateStr)}!\n\nCalendar updated â€” go to Dashboard for leaderboard.`);
   pendingM3 = null;
 }
 
-// ═══════════════════════════════════════════════════
-// M8 — ADAPT FEEDBACK CLOSURE
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// M8 â€” ADAPT FEEDBACK CLOSURE
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 let pendingM8 = null;
 
 function parseQuipDate(s){
@@ -1008,7 +1007,7 @@ function parseQuipDate(s){
 }
 
 function parseDeliveryDate(s){
-  // MM/DD/YYYY default, but if first part >12 → DD/MM/YYYY
+  // MM/DD/YYYY default, but if first part >12 â†’ DD/MM/YYYY
   s = s.trim();
   if(!s) return null;
   const p = s.replace(/-/g,'/').split('/');
@@ -1037,7 +1036,7 @@ function processM8(input){
     const firstQuip = rows[0]['Date Added on Quip']||rows[0]['date added on quip']||'';
     const weekLabel = firstQuip ? 'Week of '+firstQuip : file.name;
 
-    // Score per agency — exclude Quesscorp
+    // Score per agency â€” exclude Quesscorp
     const agencies = ['Dulsco','Fastlink','Adecco','EFS'];
     const agStats = {};
     agencies.forEach(ag=>{ agStats[ag]={total:0, slaMet:0, pending:[]}; });
@@ -1093,7 +1092,7 @@ function processM8(input){
       if(!s.total) return `<tr><td><span class="agency-tag ${AGENCY_COLORS2[ag]}">${ag}</span></td><td colspan="5" style="color:#aaa;font-size:12px;">No cases this week</td></tr>`;
       const pct = Math.round(s.slaMet/s.total*100);
       const barColor = pct>=80?'bar-green':pct>=50?'bar-orange':'bar-red';
-      const pending = s.pending.length ? s.pending.join(', ') : '—';
+      const pending = s.pending.length ? s.pending.join(', ') : 'â€”';
       return `<tr>
         <td><span class="agency-tag ${AGENCY_COLORS2[ag]}">${ag}</span></td>
         <td style="text-align:center;font-weight:700;">${s.total}</td>
@@ -1109,7 +1108,7 @@ function processM8(input){
       </tr>`;
     }).join('');
 
-    document.getElementById('m8-upload-status').innerHTML = `<div class="alert alert-success">✅ File processed — ${rows.length} cases read. Review results above then click Save.</div>`;
+    document.getElementById('m8-upload-status').innerHTML = `<div class="alert alert-success">âœ… File processed â€” ${rows.length} cases read. Review results above then click Save.</div>`;
 
     // Scroll to results
     document.getElementById('m8-results-section').scrollIntoView({behavior:'smooth'});
@@ -1121,7 +1120,7 @@ function applyM8(){
   if(!pendingM8) return;
   const {agScores, dateStr, weekLabel} = pendingM8;
 
-  // M8 is per agency — save score against each VPOC in that agency
+  // M8 is per agency â€” save score against each VPOC in that agency
   VPOCS.forEach(v=>{
     const score = agScores[v.agency];
     if(score!==null && score!==undefined){
@@ -1131,19 +1130,19 @@ function applyM8(){
 
   updateDebugCount();
   renderLeaderboard();
-  alert(`✅ M8 scores saved for ${weekLabel}!\n\nDulsco: ${agScores['Dulsco']??'N/D'}/5 · Fastlink: ${agScores['Fastlink']??'N/D'}/5 · Adecco: ${agScores['Adecco']??'N/D'}/5 · EFS: ${agScores['EFS']??'N/D'}/5`);
+  alert(`âœ… M8 scores saved for ${weekLabel}!\n\nDulsco: ${agScores['Dulsco']??'N/D'}/5 Â· Fastlink: ${agScores['Fastlink']??'N/D'}/5 Â· Adecco: ${agScores['Adecco']??'N/D'}/5 Â· EFS: ${agScores['EFS']??'N/D'}/5`);
   pendingM8 = null;
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // METRICS PAGE
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function renderMetrics(){
   document.getElementById('metric-grid').innerHTML = METRICS.map(m=>{
     const typeClass = m.type==='Daily'?'type-daily':'type-weekly';
     const statusBadge = m.auto
-      ? `<span class="m-status-live">✅ Live — CSV Upload</span>`
-      : `<span class="m-status-wip">🔨 Working on it</span>`;
+      ? `<span class="m-status-live">âœ… Live â€” CSV Upload</span>`
+      : `<span class="m-status-wip">ðŸ”¨ Working on it</span>`;
     const perTag = m.perAgency
       ? `<span style="font-size:10px;background:#fff3cd;color:#856404;padding:2px 7px;border-radius:10px;font-weight:600;">Per Agency</span>`
       : `<span style="font-size:10px;background:#e8f5e9;color:#2e7d32;padding:2px 7px;border-radius:10px;font-weight:600;">Per VPOC</span>`;
@@ -1152,20 +1151,20 @@ function renderMetrics(){
         <span style="font-size:12px;font-weight:800;color:#e94560;">${m.id}</span>
         <div style="display:flex;gap:4px;align-items:center;">
           <span class="m-type ${typeClass}">${m.type}</span>
-          <span style="font-size:10px;background:#f0f0f0;color:#555;padding:2px 7px;border-radius:10px;font-weight:600;">${m.priority} · ${m.weight}x</span>
+          <span style="font-size:10px;background:#f0f0f0;color:#555;padding:2px 7px;border-radius:10px;font-weight:600;">${m.priority} Â· ${m.weight}x</span>
           ${perTag}
         </div>
       </div>
       <div class="m-title">${m.name} ${statusBadge}</div>
       <div class="m-desc">${m.desc}</div>
-      <div class="m-target">🎯 ${m.target}</div>
+      <div class="m-target">ðŸŽ¯ ${m.target}</div>
     </div>`;
   }).join('');
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // TEAM PAGE
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function renderTeam(){
   document.getElementById('team-grid').innerHTML = VPOCS.map((v,i)=>{
     const col = AVATAR_COLORS[i % AVATAR_COLORS.length];
@@ -1174,15 +1173,15 @@ function renderTeam(){
     return `<div class="team-card">
       <div class="tc-avatar" style="background:${col};">${initials}</div>
       <div class="tc-name">${v.name}</div>
-      <div class="tc-id">${v.amazon} · ${v.id}</div>
+      <div class="tc-id">${v.amazon} Â· ${v.id}</div>
       <span class="agency-tag ${agClass}">${v.agency}</span>
     </div>`;
   }).join('');
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // TEST DATA
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function loadTestScores(){
   if(!confirm('Load test scores for today? This will overwrite any existing scores for today.')) return;
   const today = getUAEDateStr();
@@ -1192,23 +1191,23 @@ function loadTestScores(){
   });
   updateDebugCount();
   renderLeaderboard();
-  alert('🧪 Test scores loaded for today!');
+  alert('ðŸ§ª Test scores loaded for today!');
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CLEAR ALL
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function clearAllData(){
-  if(!confirm('⚠️ Clear ALL stored scores? This cannot be undone.')) return;
+  if(!confirm('âš ï¸ Clear ALL stored scores? This cannot be undone.')) return;
   localStorage.removeItem(STORAGE_KEY);
   updateDebugCount();
   renderLeaderboard();
-  alert('🗑 All scores cleared.');
+  alert('ðŸ—‘ All scores cleared.');
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // M3 ATTENDANCE CALENDAR
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 let calYear  = 0;
 let calMonth = 0;  // 0-indexed
 
@@ -1276,9 +1275,9 @@ function renderM3Calendar(){
     } else if(isWeekend){
       bg='#f0f0f0'; color='#bbb'; title='Weekend';
     } else if(hasData){
-      bg='#d4edda'; color='#155724'; title='✅ Data uploaded';
+      bg='#d4edda'; color='#155724'; title='âœ… Data uploaded';
     } else {
-      bg='#fde8e8'; color='#721c24'; title='❌ No data uploaded';
+      bg='#fde8e8'; color='#721c24'; title='âŒ No data uploaded';
     }
     if(isToday) border='2px solid #e94560;';
 
@@ -1301,21 +1300,21 @@ function renderM3Calendar(){
 
   html3 += `<div style="margin-top:14px;background:#f8f9fa;border-radius:8px;padding:12px 14px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <span style="font-size:12px;font-weight:600;color:#444;">Upload Progress — ${monthNames[m]} ${y}</span>
+      <span style="font-size:12px;font-weight:600;color:#444;">Upload Progress â€” ${monthNames[m]} ${y}</span>
       <span style="font-size:13px;font-weight:800;color:${barColor};">${uploaded} / ${workdays.length} workdays (${pct}%)</span>
     </div>
     <div style="background:#e0e0e0;border-radius:6px;height:8px;overflow:hidden;">
       <div style="background:${barColor};height:8px;width:${pct}%;border-radius:6px;transition:width 0.3s;"></div>
     </div>
-    <div style="font-size:10px;color:#aaa;margin-top:5px;">🟢 Uploaded &nbsp;·&nbsp; 🔴 Missing &nbsp;·&nbsp; Grey = weekend/future &nbsp;·&nbsp; UAE weekend = Fri/Sat</div>
+    <div style="font-size:10px;color:#aaa;margin-top:5px;">ðŸŸ¢ Uploaded &nbsp;Â·&nbsp; ðŸ”´ Missing &nbsp;Â·&nbsp; Grey = weekend/future &nbsp;Â·&nbsp; UAE weekend = Fri/Sat</div>
   </div>`;
 
   el.innerHTML = html3;
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // MONTHLY PDF REPORT
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function downloadMonthlyPDF(){
   const uae = getUAEDateStr();
   const [y,m] = uae.split('-');
@@ -1342,7 +1341,7 @@ function downloadMonthlyPDF(){
     // M3 attendance %
     const m3days = days.filter(day=>d[v.id]?.[day]?.['M3']!==undefined);
     const m3present = m3days.filter(day=>d[v.id]?.[day]?.['M3']===5).length;
-    const attPct = m3days.length ? ((m3present/m3days.length)*100).toFixed(1)+'%' : '—';
+    const attPct = m3days.length ? ((m3present/m3days.length)*100).toFixed(1)+'%' : 'â€”';
     return {v, metricAvgs, monthlyScore, attPct};
   }).sort((a,b)=>(b.monthlyScore||0)-(a.monthlyScore||0));
 
@@ -1366,18 +1365,18 @@ function downloadMonthlyPDF(){
     const aCol = agColors[r.v.agency]||'#333';
     const metCells = METRICS.map(met=>{
       const val = r.metricAvgs[met.id];
-      if(val===null) return '<td style="text-align:center;color:#ccc;font-size:10px;padding:6px 8px;">—</td>';
+      if(val===null) return '<td style="text-align:center;color:#ccc;font-size:10px;padding:6px 8px;">â€”</td>';
       const bg = val>=4.5?'#d4edda':val>=3?'#fff3cd':'#fde8e8';
       const fc = val>=4.5?'#155724':val>=3?'#856404':'#721c24';
       return `<td style="text-align:center;padding:6px 4px;"><span style="background:${bg};color:${fc};font-weight:700;font-size:10px;border-radius:4px;padding:2px 5px;">${val.toFixed(1)}</span></td>`;
     }).join('');
     const rowBg = i%2===0?'white':'#fafbff';
-    const attColor = r.attPct!=='—'&&parseFloat(r.attPct)>=98?'#2e7d32':'#c62828';
+    const attColor = r.attPct!=='â€”'&&parseFloat(r.attPct)>=98?'#2e7d32':'#c62828';
     return `<tr style="background:${rowBg};border-bottom:1px solid #f0f0f0;">
       <td style="padding:7px 8px;font-weight:600;color:#333;font-size:11px;">${i+1}. ${r.v.name}</td>
       <td style="padding:7px 8px;"><span style="background:${aBg};color:${aCol};padding:2px 8px;border-radius:8px;font-size:9px;font-weight:700;">${r.v.agency}</span></td>
       ${metCells}
-      <td style="padding:7px 8px;text-align:center;"><span style="font-weight:800;font-size:13px;color:${sColor};">${r.monthlyScore!==null?r.monthlyScore.toFixed(1)+'/5':'—'}</span></td>
+      <td style="padding:7px 8px;text-align:center;"><span style="font-weight:800;font-size:13px;color:${sColor};">${r.monthlyScore!==null?r.monthlyScore.toFixed(1)+'/5':'â€”'}</span></td>
       <td style="padding:7px 8px;text-align:center;font-size:10px;color:${attColor};font-weight:700;">${r.attPct}</td>
     </tr>`;
   }).join('');
@@ -1388,7 +1387,7 @@ function downloadMonthlyPDF(){
     const bar = pct>=80?'#2ecc71':pct>=50?'#f39c12':'#e74c3c';
     return `<div style="flex:1;background:${agBg[ag]};border-radius:10px;padding:16px;text-align:center;border:1px solid ${agColors[ag]}44;">
       <div style="font-size:11px;font-weight:700;color:${agColors[ag]};margin-bottom:8px;">${ag}</div>
-      <div style="font-size:28px;font-weight:800;color:${agColors[ag]};">${s!==null?s.toFixed(1)+'/5':'—'}</div>
+      <div style="font-size:28px;font-weight:800;color:${agColors[ag]};">${s!==null?s.toFixed(1)+'/5':'â€”'}</div>
       <div style="background:#e0e0e0;border-radius:4px;height:6px;margin-top:10px;overflow:hidden;"><div style="background:${bar};height:6px;width:${pct}%;"></div></div>
       <div style="font-size:10px;color:#888;margin-top:5px;">${pct}% of target</div>
     </div>`;
@@ -1397,7 +1396,7 @@ function downloadMonthlyPDF(){
   const genDate = new Date().toLocaleDateString('en-GB',{timeZone:'Asia/Dubai',day:'numeric',month:'long',year:'numeric'});
 
   const reportHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
-  <title>VPOC Monthly Report — ${monthLabel}</title>
+  <title>VPOC Monthly Report â€” ${monthLabel}</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'Segoe UI',Arial,sans-serif;color:#1a1a2e;background:#fff;padding:0;}
@@ -1408,8 +1407,8 @@ function downloadMonthlyPDF(){
   <!-- HEADER -->
   <div style="background:linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%);color:white;padding:18px 24px;border-radius:10px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;">
     <div>
-      <div style="font-size:19px;font-weight:800;letter-spacing:0.5px;">🏭 VPOC Activity Tracker — Monthly Report</div>
-      <div style="font-size:11px;opacity:0.65;margin-top:3px;">DXB5 · DXB8 · DWC3 · DDB1 | Line Manager: mnnnafee</div>
+      <div style="font-size:19px;font-weight:800;letter-spacing:0.5px;">ðŸ­ VPOC Activity Tracker â€” Monthly Report</div>
+      <div style="font-size:11px;opacity:0.65;margin-top:3px;">DXB5 Â· DXB8 Â· DWC3 Â· DDB1 | Line Manager: mnnnafee</div>
     </div>
     <div style="text-align:right;">
       <div style="font-size:20px;font-weight:700;">${monthLabel}</div>
@@ -1425,7 +1424,7 @@ function downloadMonthlyPDF(){
   </div>
 
   <!-- LEADERBOARD -->
-  <div style="font-size:12px;font-weight:700;color:#444;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">🏆 VPOC Leaderboard — Monthly Averages</div>
+  <div style="font-size:12px;font-weight:700;color:#444;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">ðŸ† VPOC Leaderboard â€” Monthly Averages</div>
   <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:16px;">
     <thead><tr style="background:#f0f2f5;">
       <th style="padding:8px;text-align:left;font-size:9px;color:#555;text-transform:uppercase;border-bottom:2px solid #ddd;">VPOC</th>
@@ -1439,18 +1438,18 @@ function downloadMonthlyPDF(){
 
   <!-- FOOTER / LEGEND -->
   <div style="background:#f8f9fa;border-radius:8px;padding:12px 16px;font-size:9.5px;color:#666;line-height:1.7;">
-    <strong style="color:#1a1a2e;">Scoring Guide</strong>&nbsp;·&nbsp;
-    M3 Attendance: ≥98% monthly = 5pts (Present any day = pass, Absent = 0pts) &nbsp;·&nbsp;
-    M1 WBC: 100%=5 | 80%+=4 | 60%+=3 | 40%+=2 | &lt;40%=1 &nbsp;·&nbsp;
-    High Priority (M1·M2·M3·M7·M8) = 1.5× weight &nbsp;·&nbsp;
-    Medium (M4·M5·M6) = 1.0× &nbsp;·&nbsp;
+    <strong style="color:#1a1a2e;">Scoring Guide</strong>&nbsp;Â·&nbsp;
+    M3 Attendance: â‰¥98% monthly = 5pts (Present any day = pass, Absent = 0pts) &nbsp;Â·&nbsp;
+    M1 WBC: 100%=5 | 80%+=4 | 60%+=3 | 40%+=2 | &lt;40%=1 &nbsp;Â·&nbsp;
+    High Priority (M1Â·M2Â·M3Â·M7Â·M8) = 1.5Ã— weight &nbsp;Â·&nbsp;
+    Medium (M4Â·M5Â·M6) = 1.0Ã— &nbsp;Â·&nbsp;
     Score = weighted avg of recorded days only
   </div>
   </div>
 
   <div class="no-print" style="text-align:center;padding:20px;">
-    <button onclick="window.print()" style="background:#e94560;color:white;border:none;padding:12px 32px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-right:8px;">🖨️ Print / Save as PDF</button>
-    <button onclick="window.close()" style="background:#f0f2f5;color:#333;border:none;padding:12px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">✖ Close</button>
+    <button onclick="window.print()" style="background:#e94560;color:white;border:none;padding:12px 32px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-right:8px;">ðŸ–¨ï¸ Print / Save as PDF</button>
+    <button onclick="window.close()" style="background:#f0f2f5;color:#333;border:none;padding:12px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">âœ– Close</button>
   </div>
   </body></html>`;
 
@@ -1459,9 +1458,9 @@ function downloadMonthlyPDF(){
   win.document.close();
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // START
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 window.onload = init;
 </script>
 </body>
