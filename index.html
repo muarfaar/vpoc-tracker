@@ -41,8 +41,6 @@
   .agency-tag { padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 600; white-space: nowrap; }
   .ag-dulsco{background:#e3f2fd;color:#1565c0} .ag-fastlink{background:#f3e5f5;color:#6a1b9a} .ag-adecco{background:#e8f5e9;color:#2e7d32} .ag-efs{background:#fff8e1;color:#f57f17}
   .page { display: none; } .page.active { display: block; }
-  .score-input { width: 48px; padding: 5px; border: 1px solid #ddd; border-radius: 6px; text-align: center; font-size: 13px; }
-  .score-input:focus { outline: none; border-color: #3498db; }
   .btn { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
   .btn-primary{background:#e94560;color:white} .btn-primary:hover{background:#c0392b}
   .btn-secondary{background:#f0f2f5;color:#333} .btn-secondary:hover{background:#dde}
@@ -91,7 +89,6 @@
 
 <div class="nav">
   <button class="nav-btn active" onclick="showPage('dashboard',this)">📊 Dashboard</button>
-  <button class="nav-btn" onclick="showPage('scoring',this)">✏️ Score Entry</button>
   <button class="nav-btn" onclick="showPage('wbc',this)">📋 WBC — M1</button>
   <button class="nav-btn" onclick="showPage('m3',this)">🕐 Attendance — M3</button>
   <button class="nav-btn" onclick="showPage('metrics',this)">📐 Metrics</button>
@@ -105,8 +102,7 @@
   <div class="alert alert-info">
     📌 <strong>Workflow:</strong>
     Upload WBC CSV → <strong>WBC tab</strong> (scores M1, date auto-detected from filename) &nbsp;|&nbsp;
-    Upload punch CSV → <strong>Attendance tab</strong> (scores M3, date auto-detected from punch time) &nbsp;|&nbsp;
-    Other metrics → <strong>Score Entry</strong>
+    Upload punch CSV → <strong>Attendance tab</strong> (scores M3, date auto-detected from Punch Time column)
   </div>
   <div class="stats-row">
     <div class="stat-card blue"><div class="label">Total VPOCs</div><div class="value">16</div><div class="sub">DXB5 Based</div></div>
@@ -146,27 +142,6 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ SCORE ENTRY -->
-<div id="page-scoring" class="page">
-  <div class="section">
-    <div class="section-header">
-      <h2>✏️ Manual Score Entry</h2>
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-        <select id="score-vpoc" style="padding:6px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;">
-          <option value="">— Select VPOC —</option>
-        </select>
-        <input type="date" id="score-date" style="padding:6px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;">
-        <button class="btn btn-primary" onclick="loadScores()">Load</button>
-      </div>
-    </div>
-    <div style="padding:20px;">
-      <div id="score-entry-form">
-        <div style="text-align:center;color:#aaa;padding:40px;">Select a VPOC and date, then click Load</div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ═══════════════════════════════════════════════════════════ WBC — M1 -->
 <div id="page-wbc" class="page">
   <div class="section">
@@ -176,7 +151,7 @@
     </div>
     <div style="padding:20px;">
       <div class="alert alert-info">
-        📌 Filename format: <code>wbc_cases_YYYY-MM-DD.csv</code> — date is read automatically. Score is saved to that date, not today.
+        📌 Filename format: <code>wbc_cases_YYYY-MM-DD.csv</code> — date is read automatically. Score is saved to that date.
       </div>
       <div id="wbc-upload-zone" class="upload-zone" onclick="document.getElementById('wbc-file-input').click()">
         <div class="upload-icon">📁</div>
@@ -184,9 +159,7 @@
         <div style="font-size:11px;margin-top:6px;">Columns: ID, Login, Name, EmpID, Site, Agency, Absent, Status, Closed</div>
       </div>
       <input type="file" id="wbc-file-input" accept=".csv" style="display:none" onchange="processWBCFile(this)">
-
       <div id="wbc-date-detected" style="display:none;margin:10px 0;"></div>
-
       <div id="wbc-results" style="display:none;">
         <h3 style="font-size:14px;font-weight:600;margin:16px 0 10px;">📊 Agency Breakdown</h3>
         <div class="wbc-summary" id="wbc-agency-cards"></div>
@@ -207,7 +180,6 @@
           </div>
         </div>
       </div>
-
       <div style="margin-top:20px;background:#f8f9fa;border-radius:10px;padding:16px;">
         <h3 style="font-size:13px;font-weight:600;margin-bottom:10px;color:#666;">📐 WBC Scoring Criteria</h3>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center;">
@@ -231,7 +203,7 @@
     </div>
     <div style="padding:20px;">
       <div class="alert alert-info">
-        📌 Upload the completed shift CSV (after shift ends — must contain In <strong>and</strong> Out punches). Date is read automatically from the <code>Punch Time</code> column — no manual input needed.
+        📌 Upload the completed shift CSV (after shift ends — must contain In <strong>and</strong> Out punches). Date is read automatically from the <code>Punch Time</code> column.
       </div>
       <div id="m3-upload-zone" class="upload-zone" onclick="document.getElementById('m3-file-input').click()">
         <div class="upload-icon">📁</div>
@@ -239,9 +211,7 @@
         <div style="font-size:11px;margin-top:6px;">Columns: Employee ID, Employee Name, Shift, Punch Type, Punch Time</div>
       </div>
       <input type="file" id="m3-file-input" accept=".csv" style="display:none" onchange="processM3File(this)">
-
       <div id="m3-date-detected" style="display:none;margin:10px 0;"></div>
-
       <div id="m3-results" style="display:none;">
         <div id="m3-summary-bar" style="margin-bottom:12px;padding:12px 14px;background:#f0fff4;border-radius:8px;font-size:13px;"></div>
         <div style="overflow-x:auto;">
@@ -262,7 +232,6 @@
           <button class="btn btn-green" onclick="applyM3Scores()">✅ Apply M3 Scores to Dashboard</button>
         </div>
       </div>
-
       <div style="margin-top:20px;background:#f8f9fa;border-radius:10px;padding:16px;">
         <h3 style="font-size:13px;font-weight:600;margin-bottom:10px;color:#666;">📐 M3 Scoring Rule</h3>
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;text-align:center;max-width:280px;">
@@ -301,7 +270,7 @@
     <div style="overflow-x:auto;">
       <table>
         <thead>
-          <tr><th>Psoft ID</th><th>Amazon ID</th><th>Name</th><th>Agency</th><th>DOJ</th><th>Total /40</th><th>M1 WBC</th><th>M3 Attend</th><th>Status</th></tr>
+          <tr><th>Psoft ID</th><th>Amazon ID</th><th>Name</th><th>Agency</th><th>Total /40</th><th>M1 WBC</th><th>M3 Attend</th><th>Status</th></tr>
         </thead>
         <tbody id="team-body"></tbody>
       </table>
@@ -310,7 +279,7 @@
 </div>
 
 </div><!-- end .main -->
-<div class="footer">VPOC Activity Tracker v1.5 — DXB5·DXB8·DWC3·DDB1 | M1 + M3 Auto-Scoring | Date auto-detected from CSV</div>
+<div class="footer">VPOC Activity Tracker v1.6 — DXB5·DXB8·DWC3·DDB1 | M1 + M3 Auto-Scoring | No manual entry</div>
 <script>
 // ═══════════════════════════════════════════════════
 // DATA
@@ -350,7 +319,6 @@ const AGENCY_BG = {Dulsco:'#e3f2fd',Fastlink:'#f3e5f5',Adecco:'#e8f5e9',EFS:'#ff
 const AVATAR_COLORS = ['#e94560','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e74c3c'];
 const STORAGE_KEY = 'vpoc_scores_v2';
 
-// temp holders for pending CSV scores
 let pendingWBCScores = null;
 let pendingM3Scores = null;
 
@@ -359,30 +327,14 @@ let pendingM3Scores = null;
 // ═══════════════════════════════════════════════════
 function loadData(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch(e){return {};}}
 function saveData(d){localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}
-
-function getScore(psoftId, dateStr, metric){
-  const d=loadData();
-  return d[psoftId]?.[dateStr]?.[metric]??null;
-}
-function setScore(psoftId, dateStr, metric, val){
-  const d=loadData();
-  if(!d[psoftId])d[psoftId]={};
-  if(!d[psoftId][dateStr])d[psoftId][dateStr]={};
-  d[psoftId][dateStr][metric]=val;
-  saveData(d);
-}
-function getTotalScore(psoftId, dateStr){
-  const d=loadData();
-  if(!d[psoftId]||!d[psoftId][dateStr])return 0;
-  return METRICS.reduce((s,m)=>s+(d[psoftId][dateStr][m.id]||0),0);
-}
+function getScore(psoftId,dateStr,metric){const d=loadData();return d[psoftId]?.[dateStr]?.[metric]??null;}
+function setScore(psoftId,dateStr,metric,val){const d=loadData();if(!d[psoftId])d[psoftId]={};if(!d[psoftId][dateStr])d[psoftId][dateStr]={};d[psoftId][dateStr][metric]=val;saveData(d);}
+function getTotalScore(psoftId,dateStr){const d=loadData();if(!d[psoftId]||!d[psoftId][dateStr])return 0;return METRICS.reduce((s,m)=>s+(d[psoftId][dateStr][m.id]||0),0);}
 
 // ═══════════════════════════════════════════════════
 // DATE HELPERS (UAE)
 // ═══════════════════════════════════════════════════
-function getUAEDateStr(){
-  return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Dubai'});
-}
+function getUAEDateStr(){return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Dubai'});}
 function formatDisplayDate(dateStr){
   if(!dateStr)return '—';
   const [y,m,d]=dateStr.split('-');
@@ -401,14 +353,12 @@ function showPage(name,btn){
   if(name==='dashboard')renderLeaderboard();
   if(name==='metrics')renderMetrics();
   if(name==='team')renderTeam();
-  if(name==='scoring')initScoringPage();
 }
 
 // ═══════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════
-
- function init(){
+function init(){
   const uae=getUAEDateStr();
   document.getElementById('dateDisplay').textContent='📅 '+formatDisplayDate(uae);
   document.getElementById('dbg-date').textContent=uae;
@@ -416,7 +366,6 @@ function showPage(name,btn){
   renderLeaderboard();
   renderMetrics();
   renderTeam();
-  initScoringPage();
   // ensure dashboard is active on load
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -464,7 +413,6 @@ function renderLeaderboard(){
     </tr>`;
   }).join('');
 
-  // stats
   const totals=rows.map(r=>r.total);
   const avg=(totals.reduce((a,b)=>a+b,0)/totals.length).toFixed(1);
   const compliance=Math.round((parseFloat(avg)/40)*100)+'%';
@@ -476,75 +424,13 @@ function renderLeaderboard(){
 }
 
 // ═══════════════════════════════════════════════════
-// SCORE ENTRY
-// ═══════════════════════════════════════════════════
-function initScoringPage(){
-  const sel=document.getElementById('score-vpoc');
-  sel.innerHTML='<option value="">— Select VPOC —</option>'+
-    VPOCS.map(v=>`<option value="${v.id}">${v.name} (${v.agency})</option>`).join('');
-  document.getElementById('score-date').value=getUAEDateStr();
-}
-
-function loadScores(){
-  const psoftId=document.getElementById('score-vpoc').value;
-  const dateStr=document.getElementById('score-date').value;
-  if(!psoftId||!dateStr){alert('Please select a VPOC and date.');return;}
-  const vpoc=VPOCS.find(v=>v.id===psoftId);
-  const form=document.getElementById('score-entry-form');
-  form.innerHTML=`
-    <div style="margin-bottom:14px;font-size:14px;font-weight:600;">
-      ${vpoc.name} · <span style="color:#888;">${formatDisplayDate(dateStr)}</span>
-    </div>
-    <table style="width:100%;max-width:600px;">
-      <thead><tr><th>Metric</th><th>Type</th><th>Auto</th><th style="text-align:center;">Score /5</th></tr></thead>
-      <tbody>
-        ${METRICS.map(m=>{
-          const cur=getScore(psoftId,dateStr,m.id);
-          const isAuto=m.auto;
-          return `<tr>
-            <td><strong>${m.id}</strong> — ${m.name}</td>
-            <td><span class="m-type type-${m.type.toLowerCase()}">${m.type}</span></td>
-            <td style="font-size:11px;color:${isAuto?'#2ecc71':'#aaa'};">${isAuto?'✅ Auto':'Manual'}</td>
-            <td style="text-align:center;">
-              <input type="number" class="score-input" id="inp-${m.id}" min="0" max="5" step="1"
-                value="${cur!==null?cur:''}" placeholder="0–5"
-                ${isAuto?'style="background:#f0fff4;border-color:#2ecc71;"':''}
-              >
-            </td>
-          </tr>`;
-        }).join('')}
-      </tbody>
-    </table>
-    <div style="margin-top:16px;display:flex;gap:10px;align-items:center;">
-      <button class="btn btn-primary" onclick="saveScores('${psoftId}','${dateStr}')">💾 Save Scores</button>
-      <span id="save-status" style="font-size:12px;color:#2ecc71;"></span>
-    </div>`;
-}
-
-function saveScores(psoftId,dateStr){
-  let saved=0;
-  METRICS.forEach(m=>{
-    const inp=document.getElementById('inp-'+m.id);
-    if(inp&&inp.value!==''){
-      const val=Math.min(5,Math.max(0,parseInt(inp.value)||0));
-      setScore(psoftId,dateStr,m.id,val);
-      saved++;
-    }
-  });
-  document.getElementById('save-status').textContent=`✅ ${saved} score(s) saved!`;
-  setTimeout(()=>{document.getElementById('save-status').textContent='';},3000);
-  updateDebugCount();
-}
-
-// ═══════════════════════════════════════════════════
 // CSV PARSER
 // ═══════════════════════════════════════════════════
 function parseCSV(text){
   const lines=text.trim().split('\n');
   const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
   return lines.slice(1).map(line=>{
-    const vals=[];
-    let cur='',inQ=false;
+    const vals=[];let cur='',inQ=false;
     for(let i=0;i<line.length;i++){
       const c=line[i];
       if(c==='"'){inQ=!inQ;}
@@ -630,8 +516,7 @@ function renderWBCResults(results,dateStr,allRows){
     const vpocList=VPOCS.filter(v=>v.agency===ag).map(v=>v.name.split(' ')[0]).join(', ');
     return `<tr>
       <td><span class="agency-tag ag-${ag.toLowerCase()}">${ag}</span></td>
-      <td>${r.total}</td>
-      <td>${r.slaCount}</td>
+      <td>${r.total}</td><td>${r.slaCount}</td>
       <td><strong>${r.rate}%</strong></td>
       <td><span class="score-badge score-${r.score}">${r.score}</span></td>
       <td style="font-size:11px;color:#888;">${vpocList}</td>
@@ -649,7 +534,17 @@ function renderWBCResults(results,dateStr,allRows){
     }
     const inSLA=parseFloat(days)<=5;
     const badge=closedStr?(inSLA?'<span style="color:#2ecc71;font-size:11px;">✅ In SLA</span>':'<span style="color:#e74c3c;font-size:11px;">❌ Late</span>'):'<span style="color:#aaa;font-size:11px;">Open</span>';
-    return `<tr><td style="font-size:11px;">${r.ID||'—'}</td><td style="font-size:11px;">${r.Name||r.Login||'—'}</td><td>${r.Site||'—'}</td><td><span class="agency-tag ag-${(r.Agency||'').toLowerCase()}">${r.Agency||'—'}</span></td><td style="font-size:11px;">${absentStr}</td><td style="font-size:11px;">${r.Status||'—'}</td><td style="font-size:11px;">${closedStr}</td><td style="text-align:center;">${days}</td><td>${badge}</td></tr>`;
+    return `<tr>
+      <td style="font-size:11px;">${r.ID||'—'}</td>
+      <td style="font-size:11px;">${r.Name||r.Login||'—'}</td>
+      <td>${r.Site||'—'}</td>
+      <td><span class="agency-tag ag-${(r.Agency||'').toLowerCase()}">${r.Agency||'—'}</span></td>
+      <td style="font-size:11px;">${absentStr}</td>
+      <td style="font-size:11px;">${r.Status||'—'}</td>
+      <td style="font-size:11px;">${closedStr}</td>
+      <td style="text-align:center;">${days}</td>
+      <td>${badge}</td>
+    </tr>`;
   }).join('');
 }
 
@@ -669,7 +564,6 @@ function applyWBCScores(){
 // M3 — ATTENDANCE
 // ═══════════════════════════════════════════════════
 function extractDateFromPunchTime(punchTimeStr){
-  // format: "8/9/26, 7:49 AM" or "8/16/26, 7:57 AM"
   const m=punchTimeStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
   if(!m)return null;
   let year=parseInt(m[3]);
@@ -685,7 +579,6 @@ function processM3File(input){
   const reader=new FileReader();
   reader.onload=e=>{
     const rows=parseCSV(e.target.result);
-    // detect date from first punch time
     let detectedDate=getUAEDateStr();
     for(const row of rows){
       const pt=row['Punch Time']||'';
@@ -695,7 +588,6 @@ function processM3File(input){
     dateDiv.style.display='block';
     dateDiv.innerHTML=`<div class="alert alert-success">📅 Date detected from Punch Time column: <strong>${formatDisplayDate(detectedDate)}</strong> (${detectedDate})</div>`;
 
-    // count punches per Employee ID
     const punchMap={};
     rows.forEach(r=>{
       const eid=(r['Employee ID']||'').trim();
@@ -704,7 +596,6 @@ function processM3File(input){
       punchMap[eid]++;
     });
 
-    // evaluate each VPOC
     const vpocResults=VPOCS.map(v=>{
       const punches=punchMap[v.id]||0;
       const score=punches>=4?5:0;
@@ -741,7 +632,7 @@ function renderM3Results(vpocResults,missing,dateStr,totalRows){
       <td><strong style="font-size:13px;">${v.name}</strong><br><span style="font-size:11px;color:#aaa;">${v.amazon}</span></td>
       <td><span class="agency-tag ${agClass}">${v.agency}</span></td>
       <td style="text-align:center;font-size:16px;font-weight:700;">${v.punches}</td>
-      <td style="text-align:center;"><span class="score-badge score-${v.score}">${v.score}</span></td>
+      <td style="text-align:center;"><span class="score-badge score-${v.score===5?5:0}">${v.score}</span></td>
       <td>${result}</td>
     </tr>`;
   }).join('');
@@ -797,7 +688,6 @@ function renderTeam(){
       <td style="font-size:12px;font-family:monospace;">${v.amazon}</td>
       <td><strong>${v.name}</strong></td>
       <td><span class="agency-tag ${agClass}">${v.agency}</span></td>
-      <td style="font-size:11px;color:#aaa;">—</td>
       <td><strong>${total}</strong><span style="color:#aaa;font-size:11px;">/40</span></td>
       <td style="text-align:center;">${m1!==null?`<span class="score-badge score-${m1}">${m1}</span>`:'<span style="color:#ccc;font-size:11px;">—</span>'}</td>
       <td style="text-align:center;">${m3!==null?`<span class="score-badge score-${m3}">${m3}</span>`:'<span style="color:#ccc;font-size:11px;">—</span>'}</td>
@@ -836,3 +726,4 @@ window.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
+
