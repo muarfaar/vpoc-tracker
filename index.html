@@ -7,72 +7,123 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #1a1a2e; }
+
+  /* HEADER */
   .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
   .header h1 { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
   .header .subtitle { font-size: 12px; opacity: 0.7; margin-top: 3px; }
   .header .date-badge { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 13px; }
-  .nav { background: #16213e; display: flex; gap: 0; padding: 0 30px; overflow-x: auto; }
-  .nav-btn { color: rgba(255,255,255,0.6); padding: 14px 18px; cursor: pointer; font-size: 13px; font-weight: 500; border-bottom: 3px solid transparent; transition: all 0.2s; border: none; background: none; white-space: nowrap; }
+
+  /* NAV */
+  .nav { background: #16213e; display: flex; gap: 0; padding: 0 20px; overflow-x: auto; }
+  .nav-btn { color: rgba(255,255,255,0.6); padding: 13px 15px; cursor: pointer; font-size: 12px; font-weight: 500; border-bottom: 3px solid transparent; transition: all 0.2s; border: none; background: none; white-space: nowrap; }
   .nav-btn:hover, .nav-btn.active { color: #e94560; border-bottom-color: #e94560; }
+
+  /* MAIN */
   .main { padding: 25px 30px; }
+
+  /* STATS ROW */
   .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 25px; }
   .stat-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); border-left: 4px solid; }
   .stat-card.blue{border-color:#3498db} .stat-card.green{border-color:#2ecc71} .stat-card.orange{border-color:#f39c12} .stat-card.red{border-color:#e74c3c}
   .stat-card .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
   .stat-card .value { font-size: 28px; font-weight: 700; }
   .stat-card .sub { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+  /* SECTION */
   .section { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 20px; overflow: hidden; }
   .section-header { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   .section-header h2 { font-size: 15px; font-weight: 600; }
-  .badge { background: #e94560; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
-  .badge-green { background: #2ecc71; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
+
+  /* TABLE */
   table { width: 100%; border-collapse: collapse; }
   th { background: #f8f9fa; padding: 10px 12px; text-align: left; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-  td { padding: 11px 12px; border-bottom: 1px solid #f5f5f5; font-size: 13px; }
+  td { padding: 10px 12px; border-bottom: 1px solid #f5f5f5; font-size: 13px; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbff; }
-  .score-badge { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-weight: 700; font-size: 12px; }
-  .score-5{background:#d4edda;color:#155724} .score-4{background:#cce5ff;color:#004085} .score-3{background:#fff3cd;color:#856404} .score-2{background:#ffe0b2;color:#e65100} .score-1{background:#fde;color:#721c24} .score-0{background:#f8d7da;color:#721c24}
+
+  /* SCORE BADGES */
+  .score-badge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; font-weight: 700; font-size: 12px; }
+  .score-5{background:#d4edda;color:#155724} .score-4{background:#cce5ff;color:#004085} .score-3{background:#fff3cd;color:#856404} .score-2{background:#ffe0b2;color:#e65100} .score-1{background:#fde8e8;color:#721c24} .score-0{background:#f0f0f0;color:#999} .score-nd{background:#f0f0f0;color:#bbb;font-size:9px;width:36px;border-radius:10px;}
+
+  /* PROGRESS */
   .progress-wrap { background: #f0f0f0; border-radius: 10px; height: 7px; overflow: hidden; min-width: 80px; }
   .progress-bar { height: 100%; border-radius: 10px; }
-  .bar-green{background:linear-gradient(90deg,#2ecc71,#27ae60)} .bar-orange{background:linear-gradient(90deg,#f39c12,#e67e22)} .bar-red{background:linear-gradient(90deg,#e74c3c,#c0392b)}
-  .vpoc-avatar { width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; color: white; margin-right: 7px; flex-shrink: 0; }
-  .vpoc-name { display: flex; align-items: center; }
-  .agency-tag { padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 600; white-space: nowrap; }
+  .bar-green{background:linear-gradient(90deg,#2ecc71,#27ae60)} .bar-orange{background:linear-gradient(90deg,#f39c12,#e67e22)} .bar-red{background:linear-gradient(90deg,#e74c3c,#c0392b)} .bar-grey{background:#ddd;}
+
+  /* AGENCY TAGS */
+  .agency-tag { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; white-space: nowrap; }
   .ag-dulsco{background:#e3f2fd;color:#1565c0} .ag-fastlink{background:#f3e5f5;color:#6a1b9a} .ag-adecco{background:#e8f5e9;color:#2e7d32} .ag-efs{background:#fff8e1;color:#f57f17}
+
+  /* VPOC NAME */
+  .vpoc-avatar { width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10px; color: white; margin-right: 7px; flex-shrink: 0; }
+  .vpoc-name { display: flex; align-items: center; }
+
+  /* PAGES */
   .page { display: none; } .page.active { display: block; }
+
+  /* BUTTONS */
   .btn { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
   .btn-primary{background:#e94560;color:white} .btn-primary:hover{background:#c0392b}
   .btn-secondary{background:#f0f2f5;color:#333} .btn-secondary:hover{background:#dde}
   .btn-green{background:#2ecc71;color:white} .btn-green:hover{background:#27ae60}
   .btn-orange{background:#f39c12;color:white} .btn-orange:hover{background:#e67e22}
+
+  /* UPLOAD ZONE */
+  .upload-zone { border: 2px dashed #ddd; border-radius: 12px; padding: 40px; text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 16px; }
+  .upload-zone:hover { border-color: #e94560; background: #fff5f7; }
+  .upload-icon { font-size: 36px; margin-bottom: 10px; }
+
+  /* ALERTS */
+  .alert { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; line-height: 1.6; }
+  .alert-info { background: #e3f2fd; color: #1565c0; border-left: 4px solid #1565c0; }
+  .alert-success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #2ecc71; }
+  .alert-warning { background: #fff8e1; color: #f57f17; border-left: 4px solid #f39c12; }
+  .alert-error { background: #fdecea; color: #c62828; border-left: 4px solid #e74c3c; }
+
+  /* BADGES */
+  .badge { background: #e94560; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
+  .badge-green { background: #2ecc71; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
+  .badge-blue { background: #3498db; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
+  .badge-grey { background: #999; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
+
+  /* COMING SOON PAGE */
+  .coming-soon { text-align: center; padding: 80px 40px; }
+  .coming-soon .cs-icon { font-size: 60px; margin-bottom: 20px; }
+  .coming-soon h2 { font-size: 22px; font-weight: 700; margin-bottom: 10px; color: #1a1a2e; }
+  .coming-soon p { font-size: 14px; color: #888; max-width: 400px; margin: 0 auto 20px; line-height: 1.7; }
+  .coming-soon .cs-badge { display: inline-block; background: #fff3cd; color: #856404; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+
+  /* METRIC CARDS */
   .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 20px; }
   .metric-card { border: 1px solid #e8e8e8; border-radius: 10px; padding: 16px; }
   .metric-card .m-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
   .metric-card .m-desc { font-size: 11px; color: #888; margin-bottom: 8px; line-height: 1.5; }
   .metric-card .m-target { font-size: 11px; color: #e94560; font-weight: 600; }
-  .m-type { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin-bottom: 8px; }
+  .m-type { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin-bottom: 6px; }
   .type-daily{background:#e3f2fd;color:#1565c0} .type-weekly{background:#f3e5f5;color:#6a1b9a}
-  .alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; }
-  .alert-info{background:#e3f2fd;color:#1565c0;border-left:4px solid #2196f3}
-  .alert-warn{background:#fff3cd;color:#856404;border-left:4px solid #f39c12}
-  .alert-success{background:#d4edda;color:#155724;border-left:4px solid #2ecc71}
-  .upload-zone { border: 2px dashed #ddd; border-radius: 10px; padding: 28px; text-align: center; color: #aaa; cursor: pointer; transition: all 0.2s; margin: 10px 0; }
-  .upload-zone:hover { border-color:#3498db; color:#3498db; }
-  .upload-zone.loaded { border-color:#2ecc71; background:#f0fff4; color:#155724; }
-  .upload-icon { font-size: 28px; margin-bottom: 8px; }
-  .wbc-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 16px 0; }
-  .agency-card { border-radius: 10px; padding: 14px; border: 1px solid #e8e8e8; }
-  .agency-card .ag-name { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-  .agency-card .ag-stats { font-size: 11px; color: #666; line-height: 1.8; }
-  .agency-card .ag-score { font-size: 24px; font-weight: 700; margin-top: 8px; }
-  .footer { text-align: center; padding: 20px; color: #aaa; font-size: 11px; }
-  #debug-bar { background:#1a1a2e; color:#7fff7f; font-family:monospace; font-size:11px; padding:6px 16px; display:flex; gap:20px; flex-wrap:wrap; }
-  @media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}.metric-grid{grid-template-columns:1fr}.main{padding:15px}.wbc-summary{grid-template-columns:repeat(2,1fr)}}
+  .m-status-live { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:600; background:#e8f5e9; color:#2e7d32; margin-left:6px; }
+  .m-status-wip { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:600; background:#fff3cd; color:#856404; margin-left:6px; }
+
+  /* WBC SUMMARY CARDS */
+  .wbc-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
+  .wbc-card { border-radius: 10px; padding: 14px; text-align: center; }
+  .wbc-card .wbc-agency { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+  .wbc-card .wbc-score { font-size: 28px; font-weight: 800; }
+  .wbc-card .wbc-rate { font-size: 11px; margin-top: 4px; opacity: 0.8; }
+
+  /* DEBUG BAR */
+  #debug-bar { background: #1a1a2e; color: #7fba00; font-size: 11px; padding: 4px 20px; display: flex; gap: 20px; font-family: monospace; }
+
+  /* TEAM PAGE */
+  .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; padding: 20px; }
+  .team-card { border: 1px solid #e8e8e8; border-radius: 10px; padding: 14px; text-align: center; }
+  .team-card .tc-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: white; margin: 0 auto 10px; }
+  .team-card .tc-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .team-card .tc-id { font-size: 10px; color: #aaa; margin-bottom: 6px; }
 </style>
 </head>
 <body>
-
 <div id="debug-bar">
   <span>🕐 UAE Date: <strong id="dbg-date">—</strong></span>
   <span>💾 Entries stored: <strong id="dbg-count">—</strong></span>
@@ -91,30 +142,38 @@
   <button class="nav-btn active" onclick="showPage('dashboard',this)">📊 Dashboard</button>
   <button class="nav-btn" onclick="showPage('wbc',this)">📋 WBC — M1</button>
   <button class="nav-btn" onclick="showPage('m3',this)">🕐 Attendance — M3</button>
+  <button class="nav-btn" onclick="showPage('m4',this)">📧 Bridging — M4</button>
+  <button class="nav-btn" onclick="showPage('m8',this)">📝 Adapt — M8</button>
+  <button class="nav-btn" onclick="showPage('m2',this)">🚧 HR Gemba — M2</button>
+  <button class="nav-btn" onclick="showPage('m5',this)">🚧 SOS — M5</button>
+  <button class="nav-btn" onclick="showPage('m6',this)">🚧 Engagement — M6</button>
+  <button class="nav-btn" onclick="showPage('m7',this)">🚧 Punch Analysis — M7</button>
   <button class="nav-btn" onclick="showPage('metrics',this)">📐 Metrics</button>
   <button class="nav-btn" onclick="showPage('team',this)">👥 Team</button>
 </div>
 
 <div class="main">
 
-<!-- ═══════════════════════════════════════════════════════════ DASHBOARD -->
+<!-- ═══════════════════════════════════════ DASHBOARD -->
 <div id="page-dashboard" class="page active">
   <div class="alert alert-info">
     📌 <strong>Workflow:</strong>
-    Upload WBC CSV → <strong>WBC tab</strong> (scores M1, date auto-detected from filename) &nbsp;|&nbsp;
-    Upload punch CSV → <strong>Attendance tab</strong> (scores M3, date auto-detected from Punch Time column)
+    Upload WBC CSV → <strong>WBC tab</strong> &nbsp;|&nbsp;
+    Upload punch CSV → <strong>Attendance tab</strong> &nbsp;|&nbsp;
+    More metrics coming soon
   </div>
   <div class="stats-row">
     <div class="stat-card blue"><div class="label">Total VPOCs</div><div class="value">16</div><div class="sub">DXB5 Based</div></div>
-    <div class="stat-card green"><div class="label">Avg Team Score</div><div class="value" id="stat-avg">—</div><div class="sub">Out of 40</div></div>
-    <div class="stat-card orange"><div class="label">Compliance Rate</div><div class="value" id="stat-compliance">—</div><div class="sub">Team average</div></div>
-    <div class="stat-card red"><div class="label">Needs Attention</div><div class="value" id="stat-attention">—</div><div class="sub">Score below 70%</div></div>
+    <div class="stat-card green"><div class="label">Avg Weighted Score</div><div class="value" id="stat-avg">—</div><div class="sub">Operational metrics</div></div>
+    <div class="stat-card orange"><div class="label">Top Performer</div><div class="value" id="stat-top" style="font-size:15px;margin-top:4px;">—</div><div class="sub">Highest score today</div></div>
+    <div class="stat-card red"><div class="label">Needs Attention</div><div class="value" id="stat-attention">—</div><div class="sub">Score below 60%</div></div>
   </div>
+
   <div class="section">
     <div class="section-header">
       <h2>🏆 VPOC Leaderboard</h2>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <span class="badge" id="lb-date">—</span>
+        <span class="badge" id="lb-date">Today</span>
         <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;" onclick="renderLeaderboard()">🔄 Refresh</button>
         <button class="btn btn-orange" style="font-size:11px;padding:5px 10px;" onclick="loadTestScores()">🧪 Test Data</button>
         <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;color:#e74c3c;" onclick="clearAllData()">🗑 Clear All</button>
@@ -124,16 +183,19 @@
       <table>
         <thead>
           <tr>
-            <th>#</th><th>VPOC</th><th>Agency</th>
-            <th style="text-align:center;">M1<br><span style="font-size:9px;font-weight:400;color:#999">WBC</span></th>
-            <th style="text-align:center;">M2<br><span style="font-size:9px;font-weight:400;color:#999">Gemba</span></th>
-            <th style="text-align:center;">M3<br><span style="font-size:9px;font-weight:400;color:#999">Attend</span></th>
-            <th style="text-align:center;">M4<br><span style="font-size:9px;font-weight:400;color:#999">Bridge</span></th>
-            <th style="text-align:center;">M5<br><span style="font-size:9px;font-weight:400;color:#999">SOS</span></th>
-            <th style="text-align:center;">M6<br><span style="font-size:9px;font-weight:400;color:#999">Engage</span></th>
-            <th style="text-align:center;">M7<br><span style="font-size:9px;font-weight:400;color:#999">Punch</span></th>
-            <th style="text-align:center;">M8<br><span style="font-size:9px;font-weight:400;color:#999">Adapt</span></th>
-            <th>Total /40</th><th>Progress</th>
+            <th>#</th>
+            <th>VPOC</th>
+            <th>Agency</th>
+            <th style="text-align:center;">M1<br><span style="font-size:9px;font-weight:400;color:#999;">WBC</span></th>
+            <th style="text-align:center;">M2<br><span style="font-size:9px;font-weight:400;color:#999;">Gemba</span></th>
+            <th style="text-align:center;">M3<br><span style="font-size:9px;font-weight:400;color:#999;">Attend</span></th>
+            <th style="text-align:center;">M4<br><span style="font-size:9px;font-weight:400;color:#999;">Bridge</span></th>
+            <th style="text-align:center;">M5<br><span style="font-size:9px;font-weight:400;color:#999;">SOS</span></th>
+            <th style="text-align:center;">M6<br><span style="font-size:9px;font-weight:400;color:#999;">Engage</span></th>
+            <th style="text-align:center;">M7<br><span style="font-size:9px;font-weight:400;color:#999;">Punch</span></th>
+            <th style="text-align:center;">M8<br><span style="font-size:9px;font-weight:400;color:#999;">Adapt</span></th>
+            <th>Weighted Score</th>
+            <th>Progress</th>
           </tr>
         </thead>
         <tbody id="leaderboard-body"></tbody>
@@ -142,144 +204,176 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════ WBC — M1 -->
+<!-- ═══════════════════════════════════════ WBC M1 -->
 <div id="page-wbc" class="page">
   <div class="section">
     <div class="section-header">
-      <h2>📋 WBC Closure — M1 Auto Scoring</h2>
-      <div style="font-size:12px;color:#888;">SLA: 5 days · Sites: DXB5·DXB8·DWC3·DDB1 · Date auto-detected from filename</div>
+      <h2>📋 WBC Closure — M1</h2>
+      <div style="font-size:12px;color:#888;">Per Agency · 5-day SLA · Sites: DXB5·DXB8·DWC3·DDB1 · Date from filename</div>
     </div>
     <div style="padding:20px;">
       <div class="alert alert-info">
-        📌 Filename format: <code>wbc_cases_YYYY-MM-DD.csv</code> — date is read automatically. Score is saved to that date.
+        📌 Filename must include date: <code>wbc_cases_YYYY-MM-DD.csv</code> — score saved to that date automatically.
       </div>
-      <div id="wbc-upload-zone" class="upload-zone" onclick="document.getElementById('wbc-file-input').click()">
+      <div class="upload-zone" onclick="document.getElementById('wbc-file').click()">
         <div class="upload-icon">📁</div>
         <div style="font-weight:600;font-size:14px;">Click to upload WBC CSV</div>
-        <div style="font-size:11px;margin-top:6px;">Columns: ID, Login, Name, EmpID, Site, Agency, Absent, Status, Closed</div>
+        <div style="font-size:11px;color:#888;margin-top:6px;">Columns: ID, Login, Name, EmpID, Site, Agency, Absent, Status, Outcome, Escalation, Closed, Source</div>
       </div>
-      <input type="file" id="wbc-file-input" accept=".csv" style="display:none" onchange="processWBCFile(this)">
-      <div id="wbc-date-detected" style="display:none;margin:10px 0;"></div>
+      <input type="file" id="wbc-file" accept=".csv" style="display:none" onchange="processWBC(this)">
+      <div id="wbc-date-info" style="display:none;margin-bottom:12px;"></div>
       <div id="wbc-results" style="display:none;">
-        <h3 style="font-size:14px;font-weight:600;margin:16px 0 10px;">📊 Agency Breakdown</h3>
-        <div class="wbc-summary" id="wbc-agency-cards"></div>
-        <table style="margin-top:8px;">
-          <thead><tr><th>Agency</th><th>Total</th><th>Closed in SLA</th><th>Rate</th><th>Score /5</th><th>VPOCs</th></tr></thead>
-          <tbody id="wbc-score-table"></tbody>
-        </table>
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📊 Agency Breakdown</h3>
+        <div class="wbc-summary" id="wbc-cards"></div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead><tr><th>Agency</th><th>Total Cases</th><th>Closed in SLA</th><th>Rate</th><th>Score /5</th><th>Weight</th><th>VPOCs</th></tr></thead>
+            <tbody id="wbc-table"></tbody>
+          </table>
+        </div>
         <div style="text-align:right;margin-top:16px;">
-          <button class="btn btn-green" onclick="applyWBCScores()">✅ Apply M1 Scores to Dashboard</button>
-        </div>
-        <div style="margin-top:20px;">
-          <h3 style="font-size:14px;font-weight:600;margin-bottom:10px;">📝 Case Details (first 100)</h3>
-          <div style="overflow-x:auto;">
-            <table>
-              <thead><tr><th>Case ID</th><th>Name</th><th>Site</th><th>Agency</th><th>Absent</th><th>Status</th><th>Closed</th><th>Days</th><th>SLA</th></tr></thead>
-              <tbody id="wbc-case-table"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top:20px;background:#f8f9fa;border-radius:10px;padding:16px;">
-        <h3 style="font-size:13px;font-weight:600;margin-bottom:10px;color:#666;">📐 WBC Scoring Criteria</h3>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center;">
-          <div style="padding:10px;background:#d4edda;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#155724;">5</div><div style="font-size:11px;color:#155724;">100%</div></div>
-          <div style="padding:10px;background:#cce5ff;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#004085;">4</div><div style="font-size:11px;color:#004085;">80–99%</div></div>
-          <div style="padding:10px;background:#fff3cd;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#856404;">3</div><div style="font-size:11px;color:#856404;">60–79%</div></div>
-          <div style="padding:10px;background:#fde;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#721c24;">2</div><div style="font-size:11px;color:#721c24;">40–59%</div></div>
-          <div style="padding:10px;background:#f8d7da;border-radius:8px;"><div style="font-size:18px;font-weight:700;color:#721c24;">1</div><div style="font-size:11px;color:#721c24;">&lt;40%</div></div>
+          <button class="btn btn-green" onclick="applyWBC()">✅ Save M1 Scores to Dashboard</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════ ATTENDANCE — M3 -->
+<!-- ═══════════════════════════════════════ ATTENDANCE M3 -->
 <div id="page-m3" class="page">
   <div class="section">
     <div class="section-header">
-      <h2>🕐 Attendance — M3 Auto Scoring</h2>
-      <div style="font-size:12px;color:#888;">Rule: 4+ punches = 5pts · Less than 4 = 0pts · Per VPOC · Date from Punch Time column</div>
+      <h2>🕐 VPOC Attendance — M3</h2>
+      <div style="font-size:12px;color:#888;">Per VPOC · 4 punches = Pass · Date from Punch Time column</div>
     </div>
     <div style="padding:20px;">
       <div class="alert alert-info">
-        📌 Upload the completed shift CSV (after shift ends — must contain In <strong>and</strong> Out punches). Date is read automatically from the <code>Punch Time</code> column.
+        📌 Upload the daily punch clock CSV. Date is auto-detected from the <strong>Punch Time</strong> column. Score: 4+ punches = 5pts, fewer = 0pts.
       </div>
-      <div id="m3-upload-zone" class="upload-zone" onclick="document.getElementById('m3-file-input').click()">
+      <div class="upload-zone" onclick="document.getElementById('m3-file').click()">
         <div class="upload-icon">📁</div>
-        <div style="font-weight:600;font-size:14px;">Click to upload Punch Clock CSV</div>
-        <div style="font-size:11px;margin-top:6px;">Columns: Employee ID, Employee Name, Shift, Punch Type, Punch Time</div>
+        <div style="font-weight:600;font-size:14px;">Click to upload Attendance CSV</div>
+        <div style="font-size:11px;color:#888;margin-top:6px;">Columns: Employee ID, Employee Name, Manager, Shift, Punch Type, Punch Time</div>
       </div>
-      <input type="file" id="m3-file-input" accept=".csv" style="display:none" onchange="processM3File(this)">
-      <div id="m3-date-detected" style="display:none;margin:10px 0;"></div>
+      <input type="file" id="m3-file" accept=".csv" style="display:none" onchange="processM3(this)">
+      <div id="m3-date-info" style="display:none;margin-bottom:12px;"></div>
       <div id="m3-results" style="display:none;">
-        <div id="m3-summary-bar" style="margin-bottom:12px;padding:12px 14px;background:#f0fff4;border-radius:8px;font-size:13px;"></div>
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📊 VPOC Punch Results</h3>
         <div style="overflow-x:auto;">
           <table>
-            <thead>
-              <tr>
-                <th>Psoft ID</th><th>Name</th><th>Agency</th>
-                <th style="text-align:center;">Punches</th>
-                <th style="text-align:center;">Score /5</th>
-                <th>Result</th>
-              </tr>
-            </thead>
-            <tbody id="m3-vpoc-table"></tbody>
+            <thead><tr><th>VPOC</th><th>Agency</th><th>Psoft ID</th><th>Punches Found</th><th>Status</th><th>Score /5</th></tr></thead>
+            <tbody id="m3-table"></tbody>
           </table>
         </div>
-        <div id="m3-missing-alert" style="display:none;margin-top:10px;" class="alert alert-warn"></div>
+        <div id="m3-missing" style="margin-top:12px;display:none;"></div>
         <div style="text-align:right;margin-top:16px;">
-          <button class="btn btn-green" onclick="applyM3Scores()">✅ Apply M3 Scores to Dashboard</button>
-        </div>
-      </div>
-      <div style="margin-top:20px;background:#f8f9fa;border-radius:10px;padding:16px;">
-        <h3 style="font-size:13px;font-weight:600;margin-bottom:10px;color:#666;">📐 M3 Scoring Rule</h3>
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;text-align:center;max-width:280px;">
-          <div style="padding:14px;background:#d4edda;border-radius:8px;">
-            <div style="font-size:22px;font-weight:700;color:#155724;">5</div>
-            <div style="font-size:12px;color:#155724;margin-top:4px;">4+ punches ✅</div>
-          </div>
-          <div style="padding:14px;background:#f8d7da;border-radius:8px;">
-            <div style="font-size:22px;font-weight:700;color:#721c24;">0</div>
-            <div style="font-size:12px;color:#721c24;margin-top:4px;">Less than 4 ❌</div>
-          </div>
+          <button class="btn btn-green" onclick="applyM3()">✅ Save M3 Scores to Dashboard</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════ METRICS -->
+<!-- ═══════════════════════════════════════ BRIDGING M4 -->
+<div id="page-m4" class="page">
+  <div class="section">
+    <div class="section-header"><h2>📧 Daily Bridging — M4</h2></div>
+    <div class="coming-soon">
+      <div class="cs-icon">🔨</div>
+      <h2>Working on it</h2>
+      <p>M4 Daily Attendance & Bridging will be scored automatically once the standard email format is set up. VPOCs will send bridging submissions to a dedicated inbox and the app will parse them.</p>
+      <span class="cs-badge">🔜 Coming Soon</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ ADAPT M8 -->
+<div id="page-m8" class="page">
+  <div class="section">
+    <div class="section-header"><h2>📝 Adapt Feedback Closure — M8</h2></div>
+    <div class="coming-soon">
+      <div class="cs-icon">🔨</div>
+      <h2>Working on it</h2>
+      <p>M8 Adapt Feedback Closure will be scored from a Quip export. Once the export format is confirmed, upload will be enabled here.</p>
+      <span class="cs-badge">🔜 Coming Soon</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ HR GEMBA M2 -->
+<div id="page-m2" class="page">
+  <div class="section">
+    <div class="section-header"><h2>🚧 HR Gemba — M2</h2></div>
+    <div class="coming-soon">
+      <div class="cs-icon">🚧</div>
+      <h2>Working on it</h2>
+      <p>M2 HR Gemba scoring will be automated once the daily Gemba survey is built. Completion responses will feed directly into this tracker.</p>
+      <span class="cs-badge">⏳ In Planning</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ SOS M5 -->
+<div id="page-m5" class="page">
+  <div class="section">
+    <div class="section-header"><h2>🚧 SOS Meeting Attendance — M5</h2></div>
+    <div class="coming-soon">
+      <div class="cs-icon">🚧</div>
+      <h2>Working on it</h2>
+      <p>M5 SOS Meeting Attendance tracking method is being finalized. Once confirmed, scoring will be automated here.</p>
+      <span class="cs-badge">⏳ In Planning</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ ENGAGEMENT M6 -->
+<div id="page-m6" class="page">
+  <div class="section">
+    <div class="section-header"><h2>🚧 Engagement Activity — M6</h2></div>
+    <div class="coming-soon">
+      <div class="cs-icon">🚧</div>
+      <h2>Working on it</h2>
+      <p>M6 Engagement Activity Management will be tracked once the quarterly engagement calendar and tracker are standardized across sites.</p>
+      <span class="cs-badge">⏳ In Planning</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PUNCH ANALYSIS M7 -->
+<div id="page-m7" class="page">
+  <div class="section">
+    <div class="section-header"><h2>🚧 Punch Analysis & Pay Defect — M7</h2></div>
+    <div class="coming-soon">
+      <div class="cs-icon">🚧</div>
+      <h2>Working on it</h2>
+      <p>M7 Punch Analysis & Pay Defect Management will be scored from the compliance dashboard export once the weekly export format is confirmed.</p>
+      <span class="cs-badge">⏳ In Planning</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ METRICS INFO -->
 <div id="page-metrics" class="page">
   <div class="section">
-    <div class="section-header"><h2>📐 Metrics & Scoring Criteria</h2></div>
-    <div class="metric-grid" id="metrics-grid"></div>
+    <div class="section-header"><h2>📐 Metrics Overview</h2><span class="badge-blue badge">8 Metrics · Weighted Score</span></div>
+    <div style="padding:16px 20px;">
+      <div class="alert alert-info">
+        📌 <strong>Scoring Formula:</strong> Weighted Average — High Priority metrics (M1, M2, M3, M7, M8) count <strong>1.5x</strong>, Medium Priority (M4, M5, M6) count <strong>1.0x</strong>. Monthly score = average of all daily/weekly entries.
+      </div>
+    </div>
+    <div class="metric-grid" id="metric-grid"></div>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════════════════════ TEAM -->
+<!-- ═══════════════════════════════════════ TEAM -->
 <div id="page-team" class="page">
   <div class="section">
-    <div class="section-header">
-      <h2>👥 VPOC Team — DXB5</h2>
-      <select id="filter-agency" onchange="renderTeam()" style="padding:6px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;">
-        <option value="">All Agencies</option>
-        <option>Dulsco</option><option>Fastlink</option><option>Adecco</option><option>EFS</option>
-      </select>
-    </div>
-    <div style="overflow-x:auto;">
-      <table>
-        <thead>
-          <tr><th>Psoft ID</th><th>Amazon ID</th><th>Name</th><th>Agency</th><th>Total /40</th><th>M1 WBC</th><th>M3 Attend</th><th>Status</th></tr>
-        </thead>
-        <tbody id="team-body"></tbody>
-      </table>
-    </div>
+    <div class="section-header"><h2>👥 VPOC Team — DXB5</h2><span class="badge">16 VPOCs · 4 Agencies</span></div>
+    <div class="team-grid" id="team-grid"></div>
   </div>
 </div>
 
 </div><!-- end .main -->
-<div class="footer">VPOC Activity Tracker v1.6 — DXB5·DXB8·DWC3·DDB1 | M1 + M3 Auto-Scoring | No manual entry</div>
 <script>
 // ═══════════════════════════════════════════════════
 // DATA
@@ -304,23 +398,23 @@ const VPOCS = [
 ];
 
 const METRICS = [
-  {id:'M1',name:'WBC Closure',type:'Daily',desc:'Welcome Back Conversation case closure within SLA.',target:'5-day SLA closure rate per agency',auto:true},
-  {id:'M2',name:'HR Gemba',type:'Daily',desc:'Daily HR Gemba attendance and engagement.',target:'Full attendance = 5pts',auto:false},
-  {id:'M3',name:'VPOC Attendance',type:'Daily',desc:'Punch clock compliance — 4 punches per shift required.',target:'4+ punches = 5pts | <4 = 0pts',auto:true},
-  {id:'M4',name:'Daily Bridging',type:'Daily',desc:'Daily bridging submissions completed on time.',target:'TBD',auto:false},
-  {id:'M5',name:'SOS Meeting',type:'Daily',desc:'SOS meeting participation and action tracking.',target:'TBD',auto:false},
-  {id:'M6',name:'Engagement Activity',type:'Weekly',desc:'Weekly engagement activities completed.',target:'TBD',auto:false},
-  {id:'M7',name:'Punch Analysis & Pay Defect',type:'Weekly',desc:'Weekly punch analysis and pay defect resolution.',target:'TBD',auto:false},
-  {id:'M8',name:'Adapt Feedback Closure',type:'Weekly',desc:'Adapt feedback items closed within the week.',target:'TBD',auto:false}
+  {id:'M1',name:'WBC Closure',type:'Daily',priority:'High',weight:1.5,desc:'Welcome Back Conversation closure within SLA.',target:'5-day SLA · 100% closure',auto:true,perAgency:true},
+  {id:'M2',name:'HR Gemba',type:'Daily',priority:'High',weight:1.5,desc:'Scheduled Gemba walks completed and documented.',target:'100% compliance · 1 walk/day',auto:false,perAgency:false},
+  {id:'M3',name:'VPOC Attendance',type:'Daily',priority:'High',weight:1.5,desc:'Personal attendance — 4 punches per shift required.',target:'4+ punches = 5pts | <4 = 0pts',auto:true,perAgency:false},
+  {id:'M4',name:'Daily Bridging',type:'Daily',priority:'Medium',weight:1.0,desc:'Bridging submitted within 2 hours from SOS.',target:'Daily within 2 hours from SOS',auto:false,perAgency:false},
+  {id:'M5',name:'SOS Meeting',type:'Daily',priority:'Medium',weight:1.0,desc:'SOS briefing attendance with PXT updates.',target:'100% attendance',auto:false,perAgency:false},
+  {id:'M6',name:'Engagement Activity',type:'Weekly',priority:'Medium',weight:1.0,desc:'Planned engagement activities executed per calendar.',target:'100% execution · 6/quarter',auto:false,perAgency:false},
+  {id:'M7',name:'Punch Analysis & Pay Defect',type:'Weekly',priority:'High',weight:1.5,desc:'Mispunch tracked weekly; pay defect audit and correction.',target:'Mispunch 0% · Pay Defect 0%',auto:false,perAgency:false},
+  {id:'M8',name:'Adapt Feedback Closure',type:'Weekly',priority:'High',weight:1.5,desc:'Warning letters issued within SLA; Bravo pin distribution.',target:'WL ≤48h · Zero pending',auto:false,perAgency:false}
 ];
 
 const AGENCY_COLORS = {Dulsco:'#1565c0',Fastlink:'#6a1b9a',Adecco:'#2e7d32',EFS:'#f57f17'};
-const AGENCY_BG = {Dulsco:'#e3f2fd',Fastlink:'#f3e5f5',Adecco:'#e8f5e9',EFS:'#fff8e1'};
+const AGENCY_BG    = {Dulsco:'#e3f2fd',Fastlink:'#f3e5f5',Adecco:'#e8f5e9',EFS:'#fff8e1'};
 const AVATAR_COLORS = ['#e94560','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e74c3c'];
 const STORAGE_KEY = 'vpoc_scores_v2';
 
-let pendingWBCScores = null;
-let pendingM3Scores = null;
+let pendingWBC = null;
+let pendingM3  = null;
 
 // ═══════════════════════════════════════════════════
 // STORAGE
@@ -328,18 +422,76 @@ let pendingM3Scores = null;
 function loadData(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch(e){return {};}}
 function saveData(d){localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}
 function getScore(psoftId,dateStr,metric){const d=loadData();return d[psoftId]?.[dateStr]?.[metric]??null;}
-function setScore(psoftId,dateStr,metric,val){const d=loadData();if(!d[psoftId])d[psoftId]={};if(!d[psoftId][dateStr])d[psoftId][dateStr]={};d[psoftId][dateStr][metric]=val;saveData(d);}
-function getTotalScore(psoftId,dateStr){const d=loadData();if(!d[psoftId]||!d[psoftId][dateStr])return 0;return METRICS.reduce((s,m)=>s+(d[psoftId][dateStr][m.id]||0),0);}
+function setScore(psoftId,dateStr,metric,val){
+  const d=loadData();
+  if(!d[psoftId])d[psoftId]={};
+  if(!d[psoftId][dateStr])d[psoftId][dateStr]={};
+  d[psoftId][dateStr][metric]=val;
+  saveData(d);
+}
 
 // ═══════════════════════════════════════════════════
-// DATE HELPERS (UAE)
+// WEIGHTED SCORE
+// ═══════════════════════════════════════════════════
+function getWeightedScore(psoftId, dateStr){
+  const d = loadData();
+  if(!d[psoftId]||!d[psoftId][dateStr]) return {score:0, available:0, total:0};
+  const day = d[psoftId][dateStr];
+  let weightedSum = 0, weightAvail = 0, weightTotal = 0;
+  METRICS.forEach(m => {
+    weightTotal += m.weight;
+    if(day[m.id] !== undefined && day[m.id] !== null){
+      weightedSum += (day[m.id] / 5) * m.weight;
+      weightAvail += m.weight;
+    }
+  });
+  const maxPossible = weightTotal * 1; // each metric max = 1.0 when normalized
+  const score = weightAvail > 0 ? (weightedSum / weightAvail) * 5 : 0;
+  return {score: Math.round(score*10)/10, available: weightAvail, total: weightTotal};
+}
+
+// ═══════════════════════════════════════════════════
+// DATE HELPERS
 // ═══════════════════════════════════════════════════
 function getUAEDateStr(){return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Dubai'});}
-function formatDisplayDate(dateStr){
-  if(!dateStr)return '—';
-  const [y,m,d]=dateStr.split('-');
-  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
+function formatDisplayDate(s){
+  if(!s)return '—';
+  const [y,m,d]=s.split('-');
+  const mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${parseInt(d)} ${mn[parseInt(m)-1]} ${y}`;
+}
+function parsePunchDate(str){
+  // "8/9/26, 7:49 AM" or "8/16/26, 7:57 AM"
+  try{
+    const part = str.split(',')[0].trim();
+    const [mo,da,yr] = part.split('/');
+    const fullYear = parseInt(yr) < 100 ? 2000+parseInt(yr) : parseInt(yr);
+    return `${fullYear}-${String(mo).padStart(2,'0')}-${String(da).padStart(2,'0')}`;
+  }catch(e){return null;}
+}
+function extractWBCDate(filename){
+  const m = filename.match(/(\d{4}-\d{2}-\d{2})/);
+  return m ? m[1] : getUAEDateStr();
+}
+
+// ═══════════════════════════════════════════════════
+// CSV PARSER
+// ═══════════════════════════════════════════════════
+function parseCSV(text){
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h=>h.replace(/"/g,'').trim());
+  return lines.slice(1).map(line=>{
+    const vals=[]; let cur='', inQ=false;
+    for(let i=0;i<line.length;i++){
+      if(line[i]==='"'){inQ=!inQ;}
+      else if(line[i]===','&&!inQ){vals.push(cur.trim());cur='';}
+      else cur+=line[i];
+    }
+    vals.push(cur.trim());
+    const obj={};
+    headers.forEach((h,i)=>obj[h]=vals[i]||'');
+    return obj;
+  }).filter(r=>Object.values(r).some(v=>v!==''));
 }
 
 // ═══════════════════════════════════════════════════
@@ -359,14 +511,13 @@ function showPage(name,btn){
 // INIT
 // ═══════════════════════════════════════════════════
 function init(){
-  const uae=getUAEDateStr();
-  document.getElementById('dateDisplay').textContent='📅 '+formatDisplayDate(uae);
-  document.getElementById('dbg-date').textContent=uae;
+  const uae = getUAEDateStr();
+  document.getElementById('dateDisplay').textContent = '📅 '+formatDisplayDate(uae);
+  document.getElementById('dbg-date').textContent = uae;
   updateDebugCount();
   renderLeaderboard();
   renderMetrics();
   renderTeam();
-  // ensure dashboard is active on load
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-dashboard').classList.add('active');
@@ -374,356 +525,323 @@ function init(){
 }
 
 function updateDebugCount(){
-  const d=loadData();
-  let count=0;
-  Object.values(d).forEach(vpoc=>Object.values(vpoc).forEach(day=>count+=Object.keys(day).length));
-  document.getElementById('dbg-count').textContent=count;
+  const d=loadData(); let c=0;
+  Object.values(d).forEach(v=>Object.values(v).forEach(day=>c+=Object.keys(day).length));
+  document.getElementById('dbg-count').textContent=c;
 }
 
 // ═══════════════════════════════════════════════════
 // LEADERBOARD
 // ═══════════════════════════════════════════════════
 function renderLeaderboard(){
-  const today=getUAEDateStr();
-  document.getElementById('lb-date').textContent=formatDisplayDate(today);
-  const tbody=document.getElementById('leaderboard-body');
-  const rows=VPOCS.map(v=>{
-    const total=getTotalScore(v.id,today);
-    return {...v,total,scores:METRICS.map(m=>getScore(v.id,today,m.id))};
-  }).sort((a,b)=>b.total-a.total);
+  const today = getUAEDateStr();
+  document.getElementById('lb-date').textContent = formatDisplayDate(today);
+  const tbody = document.getElementById('leaderboard-body');
 
-  tbody.innerHTML=rows.map((v,i)=>{
-    const pct=Math.round((v.total/40)*100);
-    const barClass=pct>=80?'bar-green':pct>=50?'bar-orange':'bar-red';
-    const avatarColor=AVATAR_COLORS[i%AVATAR_COLORS.length];
-    const initials=v.name.split(' ').map(x=>x[0]).join('').substring(0,2).toUpperCase();
-    const agClass='ag-'+v.agency.toLowerCase();
-    const scoreCells=v.scores.map(s=>{
-      if(s===null)return `<td style="text-align:center;"><span style="color:#ccc;font-size:11px;">—</span></td>`;
-      const cls='score-'+(s>=5?5:s>=4?4:s>=3?3:s>=2?2:s>=1?1:0);
-      return `<td style="text-align:center;"><span class="score-badge ${cls}">${s}</span></td>`;
+  const rows = VPOCS.map(v=>{
+    const scores = {};
+    METRICS.forEach(m=>{ scores[m.id] = getScore(v.id, today, m.id); });
+    const ws = getWeightedScore(v.id, today);
+    return {v, scores, ws};
+  }).sort((a,b)=>b.ws.score - a.ws.score);
+
+  let sumScore=0, attentionCount=0, topName='—';
+  rows.forEach((r,i)=>{
+    sumScore += r.ws.score;
+    if(r.ws.available>0 && r.ws.score < 3) attentionCount++;
+    if(i===0 && r.ws.available>0) topName = r.v.name.split(' ')[0];
+  });
+
+  document.getElementById('stat-avg').textContent = rows.length ? (sumScore/rows.length).toFixed(1) : '—';
+  document.getElementById('stat-top').textContent = topName;
+  document.getElementById('stat-attention').textContent = attentionCount;
+
+  tbody.innerHTML = rows.map((r,i)=>{
+    const av = AVATAR_COLORS[i % AVATAR_COLORS.length];
+    const initials = r.v.name.split(' ').slice(0,2).map(n=>n[0]).join('');
+    const agClass = 'ag-'+r.v.agency.toLowerCase();
+    const metricCells = METRICS.map(m=>{
+      const s = r.scores[m.id];
+      if(s===null||s===undefined) return `<td style="text-align:center;"><span class="score-badge score-nd">N/D</span></td>`;
+      return `<td style="text-align:center;"><span class="score-badge score-${s}">${s}</span></td>`;
     }).join('');
+    const pct = r.ws.available>0 ? Math.round((r.ws.score/5)*100) : 0;
+    const barClass = pct>=80?'bar-green':pct>=50?'bar-orange':'bar-red';
+    const wsDisplay = r.ws.available>0 ? r.ws.score.toFixed(1)+'/5' : '—';
     return `<tr>
-      <td style="font-weight:700;color:#aaa;font-size:13px;">${i+1}</td>
-      <td><div class="vpoc-name"><span class="vpoc-avatar" style="background:${avatarColor}">${initials}</span><div><div style="font-weight:600;font-size:13px;">${v.name}</div><div style="font-size:11px;color:#888;">${v.amazon}</div></div></div></td>
-      <td><span class="agency-tag ${agClass}">${v.agency}</span></td>
-      ${scoreCells}
-      <td><strong style="font-size:14px;">${v.total}</strong><span style="color:#aaa;font-size:11px;">/40</span></td>
-      <td style="min-width:100px;"><div style="display:flex;align-items:center;gap:6px;"><div class="progress-wrap" style="flex:1"><div class="progress-bar ${barClass}" style="width:${pct}%"></div></div><span style="font-size:11px;color:#888;width:32px;">${pct}%</span></div></td>
+      <td style="font-weight:700;color:#888;">${i+1}</td>
+      <td><div class="vpoc-name"><div class="vpoc-avatar" style="background:${av}">${initials}</div><div><div style="font-weight:600;">${r.v.name}</div><div style="font-size:10px;color:#aaa;">${r.v.amazon}</div></div></div></td>
+      <td><span class="agency-tag ${agClass}">${r.v.agency}</span></td>
+      ${metricCells}
+      <td style="font-weight:700;">${wsDisplay}</td>
+      <td style="min-width:100px;">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div class="progress-wrap" style="flex:1;"><div class="progress-bar ${barClass}" style="width:${pct}%"></div></div>
+          <span style="font-size:11px;color:#888;">${pct}%</span>
+        </div>
+      </td>
     </tr>`;
   }).join('');
-
-  const totals=rows.map(r=>r.total);
-  const avg=(totals.reduce((a,b)=>a+b,0)/totals.length).toFixed(1);
-  const compliance=Math.round((parseFloat(avg)/40)*100)+'%';
-  const attention=totals.filter(t=>(t/40)<0.7).length;
-  document.getElementById('stat-avg').textContent=avg;
-  document.getElementById('stat-compliance').textContent=compliance;
-  document.getElementById('stat-attention').textContent=attention;
-  updateDebugCount();
-}
-
-// ═══════════════════════════════════════════════════
-// CSV PARSER
-// ═══════════════════════════════════════════════════
-function parseCSV(text){
-  const lines=text.trim().split('\n');
-  const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
-  return lines.slice(1).map(line=>{
-    const vals=[];let cur='',inQ=false;
-    for(let i=0;i<line.length;i++){
-      const c=line[i];
-      if(c==='"'){inQ=!inQ;}
-      else if(c===','&&!inQ){vals.push(cur.trim());cur='';}
-      else{cur+=c;}
-    }
-    vals.push(cur.trim());
-    const row={};
-    headers.forEach((h,i)=>row[h]=vals[i]||'');
-    return row;
-  }).filter(r=>Object.values(r).some(v=>v));
 }
 
 // ═══════════════════════════════════════════════════
 // WBC — M1
 // ═══════════════════════════════════════════════════
-const WBC_SITES=['DXB5','DXB8','DWC3','DDB1'];
+function processWBC(input){
+  const file = input.files[0];
+  if(!file) return;
+  const dateStr = extractWBCDate(file.name);
+  document.getElementById('wbc-date-info').style.display='block';
+  document.getElementById('wbc-date-info').innerHTML=`<div class="alert alert-success">📅 Date detected from filename: <strong>${formatDisplayDate(dateStr)}</strong> — scores will be saved to this date.</div>`;
 
-function extractDateFromWBCFilename(filename){
-  const m=filename.match(/(\d{4}-\d{2}-\d{2})/);
-  return m?m[1]:null;
-}
-
-function processWBCFile(input){
-  const file=input.files[0];
-  if(!file)return;
-  const detectedDate=extractDateFromWBCFilename(file.name)||getUAEDateStr();
-  const dateDiv=document.getElementById('wbc-date-detected');
-  dateDiv.style.display='block';
-  dateDiv.innerHTML=`<div class="alert alert-success">📅 Date detected from filename: <strong>${formatDisplayDate(detectedDate)}</strong> (${detectedDate})</div>`;
-
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const rows=parseCSV(e.target.result);
-    const siteRows=rows.filter(r=>WBC_SITES.includes((r.Site||'').trim().toUpperCase()));
-    const agencies=['Dulsco','Fastlink','Adecco','EFS'];
-    const results={};
-    agencies.forEach(ag=>{
-      const agRows=siteRows.filter(r=>(r.Agency||'').trim()===ag);
-      const closed=agRows.filter(r=>{
-        const status=(r.Status||'').toLowerCase();
-        const outcome=(r.Outcome||'').toLowerCase();
-        const absentStr=r.Absent||'';
-        const closedStr=r.Closed||'';
-        if(!closedStr||(!status.includes('close')&&!outcome.includes('close')))return false;
-        if(!absentStr)return true;
-        const absentDate=new Date(absentStr);
-        const closedDate=new Date(closedStr);
-        if(isNaN(absentDate)||isNaN(closedDate))return true;
-        return(closedDate-absentDate)/(1000*60*60*24)<=5;
-      });
-      const total=agRows.length;
-      const slaCount=closed.length;
-      const rate=total>0?Math.round((slaCount/total)*100):0;
-      const score=rate===100?5:rate>=80?4:rate>=60?3:rate>=40?2:1;
-      results[ag]={total,slaCount,rate,score,rows:agRows};
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const rows = parseCSV(e.target.result);
+    const SITES = ['DXB5','DXB8','DWC3','DDB1'];
+    const filtered = rows.filter(r=>{
+      const site = (r['Site']||r['site']||'').toUpperCase().trim();
+      return SITES.includes(site);
     });
-    pendingWBCScores={date:detectedDate,results};
-    renderWBCResults(results,detectedDate,siteRows);
-    const zone=document.getElementById('wbc-upload-zone');
-    zone.classList.add('loaded');
-    zone.innerHTML=`<div class="upload-icon">✅</div><div style="font-weight:600;">${file.name}</div><div style="font-size:11px;margin-top:4px;">${rows.length} rows loaded · ${siteRows.length} matching sites</div>`;
+
+    // Group by agency
+    const agencies = {};
+    filtered.forEach(r=>{
+      let ag = (r['Agency']||r['agency']||'').toLowerCase().trim();
+      if(ag.includes('dulsco')) ag='Dulsco';
+      else if(ag.includes('fastlink')) ag='Fastlink';
+      else if(ag.includes('adecco')) ag='Adecco';
+      else if(ag.includes('efs')||ag.includes('e.f.s')) ag='EFS';
+      else return;
+
+      if(!agencies[ag]) agencies[ag]={total:0,closed:0};
+      agencies[ag].total++;
+
+      const absentRaw = r['Absent']||r['absent']||'';
+      const closedRaw = r['Closed']||r['closed']||'';
+      const status = (r['Status']||r['status']||'').toLowerCase();
+
+      if(status==='closed'&&absentRaw&&closedRaw){
+        const abDate = new Date(absentRaw);
+        const clDate = new Date(closedRaw);
+        const diff = (clDate-abDate)/(1000*60*60*24);
+        if(diff<=5) agencies[ag].closed++;
+      }
+    });
+
+    // Calculate scores
+    const results = {};
+    Object.entries(agencies).forEach(([ag,data])=>{
+      const rate = data.total>0 ? (data.closed/data.total)*100 : 0;
+      let score = 0;
+      if(data.total===0) score=0;
+      else if(rate===100) score=5;
+      else if(rate>=80) score=4;
+      else if(rate>=60) score=3;
+      else if(rate>=40) score=2;
+      else score=1;
+      results[ag]={...data, rate: Math.round(rate), score};
+    });
+
+    pendingWBC = {results, dateStr};
+
+    // Render agency cards
+    const agencyOrder = ['Dulsco','Fastlink','Adecco','EFS'];
+    document.getElementById('wbc-cards').innerHTML = agencyOrder.map(ag=>{
+      const r = results[ag]||{total:0,closed:0,rate:0,score:0};
+      const bg = AGENCY_BG[ag]||'#f0f0f0';
+      const col = AGENCY_COLORS[ag]||'#333';
+      return `<div class="wbc-card" style="background:${bg};">
+        <div class="wbc-agency" style="color:${col};">${ag}</div>
+        <div class="wbc-score" style="color:${col};">${r.score}<span style="font-size:14px;">/5</span></div>
+        <div class="wbc-rate" style="color:${col};">${r.rate}% · ${r.closed}/${r.total} cases</div>
+      </div>`;
+    }).join('');
+
+    // Render table
+    document.getElementById('wbc-table').innerHTML = agencyOrder.map(ag=>{
+      const r = results[ag]||{total:0,closed:0,rate:0,score:0};
+      const vpocNames = VPOCS.filter(v=>v.agency===ag).map(v=>v.name.split(' ')[0]).join(', ');
+      return `<tr>
+        <td><span class="agency-tag ag-${ag.toLowerCase()}">${ag}</span></td>
+        <td>${r.total}</td>
+        <td>${r.closed}</td>
+        <td>${r.rate}%</td>
+        <td><span class="score-badge score-${r.score}">${r.score}</span></td>
+        <td><span style="font-size:11px;color:#888;">1.5x (High)</span></td>
+        <td style="font-size:11px;color:#666;">${vpocNames}</td>
+      </tr>`;
+    }).join('');
+
+    document.getElementById('wbc-results').style.display='block';
   };
   reader.readAsText(file);
 }
 
-function renderWBCResults(results,dateStr,allRows){
-  document.getElementById('wbc-results').style.display='block';
-  const agencies=Object.keys(results);
-  document.getElementById('wbc-agency-cards').innerHTML=agencies.map(ag=>{
-    const r=results[ag];
-    const clr=AGENCY_COLORS[ag]||'#333';
-    const bg=AGENCY_BG[ag]||'#f5f5f5';
-    return `<div class="agency-card" style="border-color:${clr};background:${bg};">
-      <div class="ag-name" style="color:${clr};">${ag}</div>
-      <div class="ag-stats">${r.total} total cases<br>${r.slaCount} closed in SLA<br>Rate: ${r.rate}%</div>
-      <div class="ag-score" style="color:${clr};">${r.score}<span style="font-size:13px;font-weight:400;">/5</span></div>
-    </div>`;
-  }).join('');
-
-  document.getElementById('wbc-score-table').innerHTML=agencies.map(ag=>{
-    const r=results[ag];
-    const vpocList=VPOCS.filter(v=>v.agency===ag).map(v=>v.name.split(' ')[0]).join(', ');
-    return `<tr>
-      <td><span class="agency-tag ag-${ag.toLowerCase()}">${ag}</span></td>
-      <td>${r.total}</td><td>${r.slaCount}</td>
-      <td><strong>${r.rate}%</strong></td>
-      <td><span class="score-badge score-${r.score}">${r.score}</span></td>
-      <td style="font-size:11px;color:#888;">${vpocList}</td>
-    </tr>`;
-  }).join('');
-
-  const sample=allRows.slice(0,100);
-  document.getElementById('wbc-case-table').innerHTML=sample.map(r=>{
-    const absentStr=r.Absent||'';
-    const closedStr=r.Closed||'';
-    let days='—';
-    if(absentStr&&closedStr){
-      const diff=(new Date(closedStr)-new Date(absentStr))/(1000*60*60*24);
-      if(!isNaN(diff))days=diff.toFixed(1);
-    }
-    const inSLA=parseFloat(days)<=5;
-    const badge=closedStr?(inSLA?'<span style="color:#2ecc71;font-size:11px;">✅ In SLA</span>':'<span style="color:#e74c3c;font-size:11px;">❌ Late</span>'):'<span style="color:#aaa;font-size:11px;">Open</span>';
-    return `<tr>
-      <td style="font-size:11px;">${r.ID||'—'}</td>
-      <td style="font-size:11px;">${r.Name||r.Login||'—'}</td>
-      <td>${r.Site||'—'}</td>
-      <td><span class="agency-tag ag-${(r.Agency||'').toLowerCase()}">${r.Agency||'—'}</span></td>
-      <td style="font-size:11px;">${absentStr}</td>
-      <td style="font-size:11px;">${r.Status||'—'}</td>
-      <td style="font-size:11px;">${closedStr}</td>
-      <td style="text-align:center;">${days}</td>
-      <td>${badge}</td>
-    </tr>`;
-  }).join('');
-}
-
-function applyWBCScores(){
-  if(!pendingWBCScores){alert('No WBC data loaded.');return;}
-  const {date,results}=pendingWBCScores;
-  let count=0;
+function applyWBC(){
+  if(!pendingWBC) return;
+  const {results, dateStr} = pendingWBC;
   VPOCS.forEach(v=>{
-    const r=results[v.agency];
-    if(r){setScore(v.id,date,'M1',r.score);count++;}
+    const score = results[v.agency]?.score ?? 0;
+    setScore(v.id, dateStr, 'M1', score);
   });
-  alert(`✅ M1 scores applied to ${count} VPOCs for ${formatDisplayDate(date)}`);
   updateDebugCount();
+  alert(`✅ M1 WBC scores saved for ${formatDisplayDate(dateStr)}!\n\nGo to Dashboard to see the leaderboard.`);
+  pendingWBC = null;
 }
 
 // ═══════════════════════════════════════════════════
-// M3 — ATTENDANCE
+// ATTENDANCE — M3
 // ═══════════════════════════════════════════════════
-function extractDateFromPunchTime(punchTimeStr){
-  const m=punchTimeStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
-  if(!m)return null;
-  let year=parseInt(m[3]);
-  if(year<100)year+=2000;
-  const month=String(m[1]).padStart(2,'0');
-  const day=String(m[2]).padStart(2,'0');
-  return `${year}-${month}-${day}`;
-}
+function processM3(input){
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const rows = parseCSV(e.target.result);
+    if(!rows.length){alert('No data found in CSV.');return;}
 
-function processM3File(input){
-  const file=input.files[0];
-  if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const rows=parseCSV(e.target.result);
-    let detectedDate=getUAEDateStr();
-    for(const row of rows){
-      const pt=row['Punch Time']||'';
-      if(pt){const d=extractDateFromPunchTime(pt);if(d){detectedDate=d;break;}}
-    }
-    const dateDiv=document.getElementById('m3-date-detected');
-    dateDiv.style.display='block';
-    dateDiv.innerHTML=`<div class="alert alert-success">📅 Date detected from Punch Time column: <strong>${formatDisplayDate(detectedDate)}</strong> (${detectedDate})</div>`;
+    // Detect date from first Punch Time
+    const firstPunch = rows[0]['Punch Time']||rows[0]['punch time']||'';
+    const dateStr = parsePunchDate(firstPunch) || getUAEDateStr();
 
-    const punchMap={};
+    document.getElementById('m3-date-info').style.display='block';
+    document.getElementById('m3-date-info').innerHTML=`<div class="alert alert-success">📅 Date detected from Punch Time: <strong>${formatDisplayDate(dateStr)}</strong> — scores will be saved to this date.</div>`;
+
+    // Count punches per Employee ID
+    const punchCount = {};
     rows.forEach(r=>{
-      const eid=(r['Employee ID']||'').trim();
-      if(!eid)return;
-      if(!punchMap[eid])punchMap[eid]=0;
-      punchMap[eid]++;
+      const eid = (r['Employee ID']||r['employee id']||'').trim();
+      if(!eid) return;
+      if(!punchCount[eid]) punchCount[eid]=0;
+      punchCount[eid]++;
     });
 
-    const vpocResults=VPOCS.map(v=>{
-      const punches=punchMap[v.id]||0;
-      const score=punches>=4?5:0;
-      return {...v,punches,score};
+    // Match VPOCs
+    const vpocResults = VPOCS.map(v=>{
+      const count = punchCount[v.id] || 0;
+      const score = count >= 4 ? 5 : 0;
+      const found = v.id in punchCount;
+      return {...v, count, score, found};
     });
 
-    const missing=VPOCS.filter(v=>!punchMap[v.id]);
-    pendingM3Scores={date:detectedDate,vpocResults};
-    renderM3Results(vpocResults,missing,detectedDate,rows.length);
+    pendingM3 = {vpocResults, dateStr};
 
-    const zone=document.getElementById('m3-upload-zone');
-    zone.classList.add('loaded');
-    zone.innerHTML=`<div class="upload-icon">✅</div><div style="font-weight:600;">${file.name}</div><div style="font-size:11px;margin-top:4px;">${rows.length} rows loaded · Date: ${detectedDate}</div>`;
+    // Render table
+    document.getElementById('m3-table').innerHTML = vpocResults.map(r=>{
+      const agClass = 'ag-'+r.agency.toLowerCase();
+      const statusIcon = !r.found ? '⚠️ Not in CSV' : r.count>=4 ? '✅ Pass' : '❌ Fail';
+      const rowStyle = !r.found ? 'background:#fffbf0;' : '';
+      return `<tr style="${rowStyle}">
+        <td style="font-weight:600;">${r.name}</td>
+        <td><span class="agency-tag ${agClass}">${r.agency}</span></td>
+        <td style="font-size:11px;color:#aaa;">${r.id}</td>
+        <td style="text-align:center;font-weight:700;">${r.found ? r.count : '—'}</td>
+        <td>${statusIcon}</td>
+        <td style="text-align:center;"><span class="score-badge score-${r.score}">${r.score}</span></td>
+      </tr>`;
+    }).join('');
+
+    // Missing VPOCs warning
+    const missing = vpocResults.filter(r=>!r.found);
+    const missingEl = document.getElementById('m3-missing');
+    if(missing.length>0){
+      missingEl.style.display='block';
+      missingEl.innerHTML=`<div class="alert alert-warning">⚠️ <strong>${missing.length} VPOC(s) not found in CSV</strong> — they will receive 0pts for M3: ${missing.map(r=>r.name).join(', ')}</div>`;
+    } else {
+      missingEl.style.display='none';
+    }
+
+    document.getElementById('m3-results').style.display='block';
   };
   reader.readAsText(file);
 }
 
-function renderM3Results(vpocResults,missing,dateStr,totalRows){
-  document.getElementById('m3-results').style.display='block';
-  const passed=vpocResults.filter(v=>v.score===5).length;
-  const failed=vpocResults.filter(v=>v.score===0).length;
-  document.getElementById('m3-summary-bar').innerHTML=
-    `📊 <strong>${totalRows}</strong> total punch rows · VPOCs: <strong style="color:#2ecc71;">${passed} passed</strong> (4+ punches) · <strong style="color:#e74c3c;">${failed} failed/absent</strong> · Date: <strong>${formatDisplayDate(dateStr)}</strong>`;
-
-  document.getElementById('m3-vpoc-table').innerHTML=vpocResults.map(v=>{
-    const agClass='ag-'+v.agency.toLowerCase();
-    const result=v.score===5
-      ?`<span style="color:#2ecc71;font-weight:600;">✅ Present (${v.punches} punches)</span>`
-      :v.punches>0
-        ?`<span style="color:#e67e22;font-weight:600;">⚠️ Incomplete (${v.punches} punches)</span>`
-        :`<span style="color:#e74c3c;font-weight:600;">❌ Absent / Not found</span>`;
-    return `<tr>
-      <td style="font-size:12px;color:#888;">${v.id}</td>
-      <td><strong style="font-size:13px;">${v.name}</strong><br><span style="font-size:11px;color:#aaa;">${v.amazon}</span></td>
-      <td><span class="agency-tag ${agClass}">${v.agency}</span></td>
-      <td style="text-align:center;font-size:16px;font-weight:700;">${v.punches}</td>
-      <td style="text-align:center;"><span class="score-badge score-${v.score===5?5:0}">${v.score}</span></td>
-      <td>${result}</td>
-    </tr>`;
-  }).join('');
-
-  const missingDiv=document.getElementById('m3-missing-alert');
-  if(missing.length>0){
-    missingDiv.style.display='block';
-    missingDiv.innerHTML=`⚠️ <strong>${missing.length} VPOC(s) not found in CSV</strong> (scored 0): ${missing.map(v=>v.name).join(', ')}`;
-  } else {
-    missingDiv.style.display='none';
-  }
-}
-
-function applyM3Scores(){
-  if(!pendingM3Scores){alert('No M3 data loaded.');return;}
-  const {date,vpocResults}=pendingM3Scores;
-  vpocResults.forEach(v=>setScore(v.id,date,'M3',v.score));
-  alert(`✅ M3 scores applied to ${vpocResults.length} VPOCs for ${formatDisplayDate(date)}`);
+function applyM3(){
+  if(!pendingM3) return;
+  const {vpocResults, dateStr} = pendingM3;
+  vpocResults.forEach(r=>{
+    setScore(r.id, dateStr, 'M3', r.score);
+  });
   updateDebugCount();
+  alert(`✅ M3 Attendance scores saved for ${formatDisplayDate(dateStr)}!\n\nGo to Dashboard to see the leaderboard.`);
+  pendingM3 = null;
 }
 
 // ═══════════════════════════════════════════════════
 // METRICS PAGE
 // ═══════════════════════════════════════════════════
 function renderMetrics(){
-  document.getElementById('metrics-grid').innerHTML=METRICS.map(m=>`
-    <div class="metric-card">
-      <span class="m-type type-${m.type.toLowerCase()}">${m.type}</span>
-      ${m.auto?'<span class="badge-green" style="margin-left:6px;font-size:10px;">Auto CSV</span>':''}
-      <div class="m-title">${m.id} — ${m.name}</div>
+  document.getElementById('metric-grid').innerHTML = METRICS.map(m=>{
+    const typeClass = m.type==='Daily'?'type-daily':'type-weekly';
+    const statusBadge = m.auto
+      ? `<span class="m-status-live">✅ Live — CSV Upload</span>`
+      : `<span class="m-status-wip">🔨 Working on it</span>`;
+    const perTag = m.perAgency
+      ? `<span style="font-size:10px;background:#fff3cd;color:#856404;padding:2px 7px;border-radius:10px;font-weight:600;">Per Agency</span>`
+      : `<span style="font-size:10px;background:#e8f5e9;color:#2e7d32;padding:2px 7px;border-radius:10px;font-weight:600;">Per VPOC</span>`;
+    return `<div class="metric-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:12px;font-weight:800;color:#e94560;">${m.id}</span>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <span class="m-type ${typeClass}">${m.type}</span>
+          <span style="font-size:10px;background:#f0f0f0;color:#555;padding:2px 7px;border-radius:10px;font-weight:600;">${m.priority} · ${m.weight}x</span>
+          ${perTag}
+        </div>
+      </div>
+      <div class="m-title">${m.name} ${statusBadge}</div>
       <div class="m-desc">${m.desc}</div>
       <div class="m-target">🎯 ${m.target}</div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 // ═══════════════════════════════════════════════════
 // TEAM PAGE
 // ═══════════════════════════════════════════════════
 function renderTeam(){
-  const filter=document.getElementById('filter-agency').value;
-  const today=getUAEDateStr();
-  const list=filter?VPOCS.filter(v=>v.agency===filter):VPOCS;
-  document.getElementById('team-body').innerHTML=list.map(v=>{
-    const total=getTotalScore(v.id,today);
-    const m1=getScore(v.id,today,'M1');
-    const m3=getScore(v.id,today,'M3');
-    const pct=Math.round((total/40)*100);
-    const statusColor=pct>=80?'#2ecc71':pct>=50?'#f39c12':'#e74c3c';
-    const statusTxt=pct>=80?'On Track':pct>=50?'Needs Effort':'Below Target';
-    const agClass='ag-'+v.agency.toLowerCase();
-    return `<tr>
-      <td style="font-size:12px;color:#888;">${v.id}</td>
-      <td style="font-size:12px;font-family:monospace;">${v.amazon}</td>
-      <td><strong>${v.name}</strong></td>
-      <td><span class="agency-tag ${agClass}">${v.agency}</span></td>
-      <td><strong>${total}</strong><span style="color:#aaa;font-size:11px;">/40</span></td>
-      <td style="text-align:center;">${m1!==null?`<span class="score-badge score-${m1}">${m1}</span>`:'<span style="color:#ccc;font-size:11px;">—</span>'}</td>
-      <td style="text-align:center;">${m3!==null?`<span class="score-badge score-${m3}">${m3}</span>`:'<span style="color:#ccc;font-size:11px;">—</span>'}</td>
-      <td><span style="color:${statusColor};font-size:12px;font-weight:600;">${statusTxt}</span></td>
-    </tr>`;
+  document.getElementById('team-grid').innerHTML = VPOCS.map((v,i)=>{
+    const col = AVATAR_COLORS[i % AVATAR_COLORS.length];
+    const initials = v.name.split(' ').slice(0,2).map(n=>n[0]).join('');
+    const agClass = 'ag-'+v.agency.toLowerCase();
+    return `<div class="team-card">
+      <div class="tc-avatar" style="background:${col};">${initials}</div>
+      <div class="tc-name">${v.name}</div>
+      <div class="tc-id">${v.amazon} · ${v.id}</div>
+      <span class="agency-tag ${agClass}">${v.agency}</span>
+    </div>`;
   }).join('');
 }
 
 // ═══════════════════════════════════════════════════
-// TEST DATA + CLEAR
+// TEST DATA
 // ═══════════════════════════════════════════════════
 function loadTestScores(){
-  if(!confirm('Load test scores for today? This will overwrite today\'s data.'))return;
-  const today=getUAEDateStr();
+  if(!confirm('Load test scores for today? This will overwrite any existing scores for today.')) return;
+  const today = getUAEDateStr();
   VPOCS.forEach(v=>{
-    METRICS.forEach(m=>{
-      setScore(v.id,today,m.id,Math.floor(Math.random()*4)+2);
-    });
+    setScore(v.id, today, 'M1', [3,4,5,4,5,3][Math.floor(Math.random()*6)]);
+    setScore(v.id, today, 'M3', Math.random()>0.2 ? 5 : 0);
   });
+  updateDebugCount();
   renderLeaderboard();
-  alert('✅ Test data loaded for '+formatDisplayDate(today));
+  alert('🧪 Test scores loaded for today!');
 }
 
+// ═══════════════════════════════════════════════════
+// CLEAR ALL
+// ═══════════════════════════════════════════════════
 function clearAllData(){
-  if(!confirm('Clear ALL stored scores? This cannot be undone.'))return;
+  if(!confirm('⚠️ Clear ALL stored scores? This cannot be undone.')) return;
   localStorage.removeItem(STORAGE_KEY);
-  renderLeaderboard();
   updateDebugCount();
-  alert('🗑 All data cleared.');
+  renderLeaderboard();
+  alert('🗑 All scores cleared.');
 }
 
 // ═══════════════════════════════════════════════════
 // START
 // ═══════════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded', init);
+window.onload = init;
 </script>
 </body>
 </html>
-
