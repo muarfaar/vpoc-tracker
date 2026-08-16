@@ -175,6 +175,7 @@
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <span class="badge" id="lb-date">Today</span>
         <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;" onclick="renderLeaderboard()">🔄 Refresh</button>
+        <button class="btn btn-primary" style="font-size:11px;padding:5px 10px;" onclick="downloadMonthlyPDF()">📄 Monthly Report</button>
         <button class="btn btn-orange" style="font-size:11px;padding:5px 10px;" onclick="loadTestScores()">🧪 Test Data</button>
         <button class="btn btn-secondary" style="font-size:11px;padding:5px 10px;color:#e74c3c;" onclick="clearAllData()">🗑 Clear All</button>
       </div>
@@ -248,7 +249,7 @@
     </div>
     <div style="padding:20px;">
       <div class="alert alert-info">
-        📌 Upload the daily punch clock CSV. Date is auto-detected from the <strong>Punch Time</strong> column. Score: 4+ punches = 5pts, fewer = 0pts.
+        📌 Upload the daily punch clock CSV. Date is auto-detected from the <strong>Punch Time</strong> column. Score: <strong>Present</strong> (any punch recorded) = 5pts · <strong>Absent</strong> (0 punches) = 0pts. Monthly target: <strong>≥98% attendance</strong>.
       </div>
       <div class="upload-zone" onclick="document.getElementById('m3-file').click()">
         <div class="upload-icon">📁</div>
@@ -261,7 +262,7 @@
         <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📊 VPOC Punch Results</h3>
         <div style="overflow-x:auto;">
           <table>
-            <thead><tr><th>VPOC</th><th>Agency</th><th>Psoft ID</th><th>Punches Found</th><th>Status</th><th>Score /5</th></tr></thead>
+            <thead><tr><th>VPOC</th><th>Agency</th><th>Psoft ID</th><th>Punches Found</th><th>Status</th><th>Score /5</th><th>Month Att%</th></tr></thead>
             <tbody id="m3-table"></tbody>
           </table>
         </div>
@@ -400,7 +401,7 @@ const VPOCS = [
 const METRICS = [
   {id:'M1',name:'WBC Closure',type:'Daily',priority:'High',weight:1.5,desc:'Welcome Back Conversation closure within SLA.',target:'5-day SLA · 100% closure',auto:true,perAgency:true},
   {id:'M2',name:'HR Gemba',type:'Daily',priority:'High',weight:1.5,desc:'Scheduled Gemba walks completed and documented.',target:'100% compliance · 1 walk/day',auto:false,perAgency:false},
-  {id:'M3',name:'VPOC Attendance',type:'Daily',priority:'High',weight:1.5,desc:'Personal attendance — 4 punches per shift required.',target:'4+ punches = 5pts | <4 = 0pts',auto:true,perAgency:false},
+  {id:'M3',name:'VPOC Attendance',type:'Daily',priority:'High',weight:1.5,desc:'Personal attendance, punctuality, and adherence to site schedule.',target:'≥98% monthly attendance · Present = 5pts | Absent = 0pts',auto:true,perAgency:false},
   {id:'M4',name:'Daily Bridging',type:'Daily',priority:'Medium',weight:1.0,desc:'Bridging submitted within 2 hours from SOS.',target:'Daily within 2 hours from SOS',auto:false,perAgency:false},
   {id:'M5',name:'SOS Meeting',type:'Daily',priority:'Medium',weight:1.0,desc:'SOS briefing attendance with PXT updates.',target:'100% attendance',auto:false,perAgency:false},
   {id:'M6',name:'Engagement Activity',type:'Weekly',priority:'Medium',weight:1.0,desc:'Planned engagement activities executed per calendar.',target:'100% execution · 6/quarter',auto:false,perAgency:false},
@@ -448,6 +449,19 @@ function getWeightedScore(psoftId, dateStr){
   const maxPossible = weightTotal * 1; // each metric max = 1.0 when normalized
   const score = weightAvail > 0 ? (weightedSum / weightAvail) * 5 : 0;
   return {score: Math.round(score*10)/10, available: weightAvail, total: weightTotal};
+}
+
+// ── Monthly attendance % for a VPOC (M3 days in current calendar month) ──
+function getMonthlyAttendancePct(psoftId){
+  const d = loadData();
+  if(!d[psoftId]) return null;
+  const uae = getUAEDateStr();
+  const [y,m] = uae.split('-');
+  const prefix = y+'-'+m;
+  const days = Object.keys(d[psoftId]).filter(k=>k.startsWith(prefix));
+  if(!days.length) return null;
+  const present = days.filter(day=>d[psoftId][day]['M3']===5).length;
+  return (present/days.length)*100;
 }
 
 // ═══════════════════════════════════════════════════
@@ -719,7 +733,7 @@ function processM3(input){
     // Match VPOCs
     const vpocResults = VPOCS.map(v=>{
       const count = punchCount[v.id] || 0;
-      const score = count >= 4 ? 5 : 0;
+      const score = count >= 1 ? 5 : 0;
       const found = v.id in punchCount;
       return {...v, count, score, found};
     });
@@ -729,7 +743,7 @@ function processM3(input){
     // Render table
     document.getElementById('m3-table').innerHTML = vpocResults.map(r=>{
       const agClass = 'ag-'+r.agency.toLowerCase();
-      const statusIcon = !r.found ? '⚠️ Not in CSV' : r.count>=4 ? '✅ Pass' : '❌ Fail';
+      const statusIcon = !r.found ? '⚠️ Not in CSV' : r.count>=1 ? '✅ Present' : '❌ Absent';
       const rowStyle = !r.found ? 'background:#fffbf0;' : '';
       return `<tr style="${rowStyle}">
         <td style="font-weight:600;">${r.name}</td>
@@ -836,6 +850,152 @@ function clearAllData(){
   updateDebugCount();
   renderLeaderboard();
   alert('🗑 All scores cleared.');
+}
+
+// ═══════════════════════════════════════════════════
+// MONTHLY PDF REPORT
+// ═══════════════════════════════════════════════════
+function downloadMonthlyPDF(){
+  const uae = getUAEDateStr();
+  const [y,m] = uae.split('-');
+  const prefix = y+'-'+m;
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const monthLabel = monthNames[parseInt(m)-1]+' '+y;
+  const d = loadData();
+
+  // Collect all days in this month that have any data
+  const allDays = new Set();
+  VPOCS.forEach(v=>{ if(d[v.id]) Object.keys(d[v.id]).filter(k=>k.startsWith(prefix)).forEach(day=>allDays.add(day)); });
+  const days = [...allDays].sort();
+
+  // Build per-VPOC monthly averages
+  const rows = VPOCS.map(v=>{
+    const metricAvgs = {};
+    METRICS.forEach(met=>{
+      const vals = days.map(day=>d[v.id]?.[day]?.[met.id]).filter(x=>x!==undefined&&x!==null);
+      metricAvgs[met.id] = vals.length ? (vals.reduce((a,b)=>a+b,0)/vals.length) : null;
+    });
+    let wSum=0,wAvail=0;
+    METRICS.forEach(met=>{ if(metricAvgs[met.id]!==null){ wSum+=(metricAvgs[met.id]/5)*met.weight; wAvail+=met.weight; } });
+    const monthlyScore = wAvail>0 ? (wSum/wAvail)*5 : null;
+    // M3 attendance %
+    const m3days = days.filter(day=>d[v.id]?.[day]?.['M3']!==undefined);
+    const m3present = m3days.filter(day=>d[v.id]?.[day]?.['M3']===5).length;
+    const attPct = m3days.length ? ((m3present/m3days.length)*100).toFixed(1)+'%' : '—';
+    return {v, metricAvgs, monthlyScore, attPct};
+  }).sort((a,b)=>(b.monthlyScore||0)-(a.monthlyScore||0));
+
+  const agencyOrder = ['Dulsco','Fastlink','Adecco','EFS'];
+  const agColors = {Dulsco:'#1565c0',Fastlink:'#6a1b9a',Adecco:'#2e7d32',EFS:'#e65100'};
+  const agBg = {Dulsco:'#e3f2fd',Fastlink:'#f3e5f5',Adecco:'#e8f5e9',EFS:'#fff8e1'};
+
+  // Agency average scores
+  const agSummary = {};
+  agencyOrder.forEach(ag=>{
+    const sc = rows.filter(r=>r.v.agency===ag).map(r=>r.monthlyScore).filter(x=>x!==null);
+    agSummary[ag] = sc.length ? (sc.reduce((a,b)=>a+b,0)/sc.length) : null;
+  });
+
+  const metHeaders = METRICS.map(met=>`<th style="padding:6px 8px;font-size:9px;color:#666;text-transform:uppercase;text-align:center;border-bottom:2px solid #e0e0e0;">${met.id}<br><span style="font-weight:400;">${met.weight}x</span></th>`).join('');
+
+  const tableRows = rows.map((r,i)=>{
+    const pct = r.monthlyScore!==null ? Math.round((r.monthlyScore/5)*100) : 0;
+    const sColor = pct>=80?'#2e7d32':pct>=50?'#e65100':'#c62828';
+    const aBg = agBg[r.v.agency]||'#f5f5f5';
+    const aCol = agColors[r.v.agency]||'#333';
+    const metCells = METRICS.map(met=>{
+      const val = r.metricAvgs[met.id];
+      if(val===null) return '<td style="text-align:center;color:#ccc;font-size:10px;padding:6px 8px;">—</td>';
+      const bg = val>=4.5?'#d4edda':val>=3?'#fff3cd':'#fde8e8';
+      const fc = val>=4.5?'#155724':val>=3?'#856404':'#721c24';
+      return `<td style="text-align:center;padding:6px 4px;"><span style="background:${bg};color:${fc};font-weight:700;font-size:10px;border-radius:4px;padding:2px 5px;">${val.toFixed(1)}</span></td>`;
+    }).join('');
+    const rowBg = i%2===0?'white':'#fafbff';
+    const attColor = r.attPct!=='—'&&parseFloat(r.attPct)>=98?'#2e7d32':'#c62828';
+    return `<tr style="background:${rowBg};border-bottom:1px solid #f0f0f0;">
+      <td style="padding:7px 8px;font-weight:600;color:#333;font-size:11px;">${i+1}. ${r.v.name}</td>
+      <td style="padding:7px 8px;"><span style="background:${aBg};color:${aCol};padding:2px 8px;border-radius:8px;font-size:9px;font-weight:700;">${r.v.agency}</span></td>
+      ${metCells}
+      <td style="padding:7px 8px;text-align:center;"><span style="font-weight:800;font-size:13px;color:${sColor};">${r.monthlyScore!==null?r.monthlyScore.toFixed(1)+'/5':'—'}</span></td>
+      <td style="padding:7px 8px;text-align:center;font-size:10px;color:${attColor};font-weight:700;">${r.attPct}</td>
+    </tr>`;
+  }).join('');
+
+  const agCards = agencyOrder.map(ag=>{
+    const s = agSummary[ag];
+    const pct = s!==null?Math.round((s/5)*100):0;
+    const bar = pct>=80?'#2ecc71':pct>=50?'#f39c12':'#e74c3c';
+    return `<div style="flex:1;background:${agBg[ag]};border-radius:10px;padding:16px;text-align:center;border:1px solid ${agColors[ag]}44;">
+      <div style="font-size:11px;font-weight:700;color:${agColors[ag]};margin-bottom:8px;">${ag}</div>
+      <div style="font-size:28px;font-weight:800;color:${agColors[ag]};">${s!==null?s.toFixed(1)+'/5':'—'}</div>
+      <div style="background:#e0e0e0;border-radius:4px;height:6px;margin-top:10px;overflow:hidden;"><div style="background:${bar};height:6px;width:${pct}%;"></div></div>
+      <div style="font-size:10px;color:#888;margin-top:5px;">${pct}% of target</div>
+    </div>`;
+  }).join('');
+
+  const genDate = new Date().toLocaleDateString('en-GB',{timeZone:'Asia/Dubai',day:'numeric',month:'long',year:'numeric'});
+
+  const reportHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+  <title>VPOC Monthly Report — ${monthLabel}</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',Arial,sans-serif;color:#1a1a2e;background:#fff;padding:0;}
+    @page{size:A4 landscape;margin:12mm;}
+    @media print{body{print-color-adjust:exact;-webkit-print-color-adjust:exact;}.no-print{display:none!important;}}
+  </style></head><body>
+  <div style="padding:20px 24px;">
+  <!-- HEADER -->
+  <div style="background:linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%);color:white;padding:18px 24px;border-radius:10px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <div style="font-size:19px;font-weight:800;letter-spacing:0.5px;">🏭 VPOC Activity Tracker — Monthly Report</div>
+      <div style="font-size:11px;opacity:0.65;margin-top:3px;">DXB5 · DXB8 · DWC3 · DDB1 | Line Manager: mnnnafee</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:20px;font-weight:700;">${monthLabel}</div>
+      <div style="font-size:10px;opacity:0.65;margin-top:3px;">Generated: ${genDate} (UAE)</div>
+      <div style="font-size:10px;opacity:0.65;">${days.length} day(s) of data recorded</div>
+    </div>
+  </div>
+
+  <!-- AGENCY CARDS -->
+  <div style="margin-bottom:16px;">
+    <div style="font-size:12px;font-weight:700;color:#444;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Agency Performance</div>
+    <div style="display:flex;gap:10px;">${agCards}</div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div style="font-size:12px;font-weight:700;color:#444;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">🏆 VPOC Leaderboard — Monthly Averages</div>
+  <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:16px;">
+    <thead><tr style="background:#f0f2f5;">
+      <th style="padding:8px;text-align:left;font-size:9px;color:#555;text-transform:uppercase;border-bottom:2px solid #ddd;">VPOC</th>
+      <th style="padding:8px;text-align:left;font-size:9px;color:#555;text-transform:uppercase;border-bottom:2px solid #ddd;">Agency</th>
+      ${metHeaders}
+      <th style="padding:8px;text-align:center;font-size:9px;color:#555;text-transform:uppercase;border-bottom:2px solid #ddd;">Score /5</th>
+      <th style="padding:8px;text-align:center;font-size:9px;color:#555;text-transform:uppercase;border-bottom:2px solid #ddd;">Att %</th>
+    </tr></thead>
+    <tbody>${tableRows}</tbody>
+  </table>
+
+  <!-- FOOTER / LEGEND -->
+  <div style="background:#f8f9fa;border-radius:8px;padding:12px 16px;font-size:9.5px;color:#666;line-height:1.7;">
+    <strong style="color:#1a1a2e;">Scoring Guide</strong>&nbsp;·&nbsp;
+    M3 Attendance: ≥98% monthly = 5pts (Present any day = pass, Absent = 0pts) &nbsp;·&nbsp;
+    M1 WBC: 100%=5 | 80%+=4 | 60%+=3 | 40%+=2 | &lt;40%=1 &nbsp;·&nbsp;
+    High Priority (M1·M2·M3·M7·M8) = 1.5× weight &nbsp;·&nbsp;
+    Medium (M4·M5·M6) = 1.0× &nbsp;·&nbsp;
+    Score = weighted avg of recorded days only
+  </div>
+  </div>
+
+  <div class="no-print" style="text-align:center;padding:20px;">
+    <button onclick="window.print()" style="background:#e94560;color:white;border:none;padding:12px 32px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-right:8px;">🖨️ Print / Save as PDF</button>
+    <button onclick="window.close()" style="background:#f0f2f5;color:#333;border:none;padding:12px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">✖ Close</button>
+  </div>
+  </body></html>`;
+
+  const win = window.open('','_blank','width=1200,height=900,menubar=yes');
+  win.document.write(reportHTML);
+  win.document.close();
 }
 
 // ═══════════════════════════════════════════════════
