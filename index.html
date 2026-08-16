@@ -1054,6 +1054,9 @@ function processM8(input){
     rows.forEach(r=>{
       const ag = agMap(r['3P']||r['3p']||'');
       if(!ag) return;
+      // Exclude terminated associates
+      const level = (r['Level']||r['level']||'').trim().toUpperCase();
+      if(level === 'TERMINATION') return;
 
       const quipDate     = parseQuipDate(r['Date Added on Quip']||r['date added on quip']||'');
       const deliveryDate = parseDeliveryDate(r['Delivery date']||r['delivery date']||'');
