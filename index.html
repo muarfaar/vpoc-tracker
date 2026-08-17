@@ -252,30 +252,35 @@
   <!-- CALENDAR SECTION -->
   <div class="section" style="margin-bottom:20px;">
     <div class="section-header">
-      <h2>📅 Monthly Attendance Calendar</h2>
+      <h2>📅 Monthly Attendance Calendar — M3</h2>
       <div style="display:flex;gap:8px;align-items:center;">
         <button class="btn btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="shiftCalMonth(-1)">◀ Prev</button>
         <span id="cal-month-label" style="font-weight:700;font-size:13px;"></span>
         <button class="btn btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="shiftCalMonth(1)">Next ▶</button>
+        <button class="btn btn-primary" style="font-size:11px;padding:4px 10px;" onclick="saveManualAttendance()">💾 Save Attendance</button>
       </div>
     </div>
     <div style="padding:16px 20px;">
-      <div style="font-size:11px;color:#888;margin-bottom:12px;">
-        🟢 = data uploaded for that date &nbsp;·&nbsp; ⬜ = no data &nbsp;·&nbsp; Grey = weekend/future
+      <div style="font-size:11px;color:#666;margin-bottom:12px;display:flex;gap:16px;flex-wrap:wrap;">
+        <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:14px;height:14px;background:#d4edda;border-radius:3px;display:inline-block;"></span> P = Present</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:14px;height:14px;background:#fde8e8;border-radius:3px;display:inline-block;"></span> A = Absent</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:14px;height:14px;background:#fff3cd;border-radius:3px;display:inline-block;"></span> SL = Sick Leave</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:14px;height:14px;background:#cce5ff;border-radius:3px;display:inline-block;"></span> AL = Annual Leave</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:14px;height:14px;background:#e0e0e0;border-radius:3px;display:inline-block;"></span> Grey = Off Day / Future</span>
       </div>
-      <div id="m3-calendar"></div>
+      <div id="m3-calendar" style="overflow-x:auto;"></div>
     </div>
   </div>
 
-  <!-- UPLOAD SECTION -->
-  <div class="section">
+  <!-- UPLOAD CSV SECTION -->
+  <div class="section" style="margin-bottom:20px;">
     <div class="section-header">
-      <h2>🕐 Upload Attendance CSV — M3</h2>
-      <div style="font-size:12px;color:#888;">Per VPOC · Present = any punch · ≥98% monthly target</div>
+      <h2>🕐 Upload Punch CSV — M3</h2>
+      <div style="font-size:12px;color:#888;">Auto-fill attendance from punch clock export</div>
     </div>
     <div style="padding:20px;">
       <div class="alert alert-info">
-        📌 Upload the daily punch clock CSV. Date is auto-detected from <strong>Punch Time</strong> column. <strong>Present</strong> (any punch) = 5pts · <strong>Absent</strong> (0 punches) = 0pts.
+        📌 Upload the daily punch clock CSV. Date is auto-detected from <strong>Punch Time</strong> column. Any punch = Present (P). No punch = Absent (A).
       </div>
       <div class="upload-zone" onclick="document.getElementById('m3-file').click()">
         <div class="upload-icon">📁</div>
@@ -288,7 +293,7 @@
         <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">📊 VPOC Punch Results</h3>
         <div style="overflow-x:auto;">
           <table>
-            <thead><tr><th>VPOC</th><th>Agency</th><th>Psoft ID</th><th>Punches Found</th><th>Status</th><th>Score /5</th><th>Month Att%</th></tr></thead>
+            <thead><tr><th>VPOC</th><th>Agency</th><th>Psoft ID</th><th>Punches</th><th>Status</th><th>Score /5</th></tr></thead>
             <tbody id="m3-table"></tbody>
           </table>
         </div>
@@ -299,8 +304,35 @@
       </div>
     </div>
   </div>
-</div>
 
+  <!-- MONTHLY SCORE SUMMARY -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📊 Monthly Attendance Summary</h2>
+      <span id="m3-summary-month" class="badge-blue badge"></span>
+    </div>
+    <div style="padding:16px 20px;">
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>VPOC</th>
+              <th>Agency</th>
+              <th style="text-align:center;">Working Days</th>
+              <th style="text-align:center;">Present</th>
+              <th style="text-align:center;">Absent</th>
+              <th style="text-align:center;">SL</th>
+              <th style="text-align:center;">AL</th>
+              <th style="text-align:center;">Att %</th>
+              <th style="text-align:center;">Score /5</th>
+            </tr>
+          </thead>
+          <tbody id="m3-summary-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ═══════════════════════════════════════ BRIDGING M4 -->
 <div id="page-m4" class="page">
   <div class="section">
@@ -686,7 +718,7 @@ function showPage(name,btn){
   if(name==='dashboard')renderLeaderboard();
   if(name==='metrics')renderMetrics();
   if(name==='team')renderTeam();
-  if(name==='m3')renderM3Calendar();
+  if(name==='m3'){ renderM3Calendar(); renderM3Summary(); }
 }
 
 // ═══════════════════════════════════════════════════
@@ -701,6 +733,7 @@ function init(){
   renderMetrics();
   renderTeam();
   renderM3Calendar();
+  renderM3Summary();
   pullFromGitHub();
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -915,80 +948,175 @@ function applyWBC(){
 // ═══════════════════════════════════════════════════
 // ATTENDANCE — M3
 // ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+// VPOC OFF DAYS MAP  (0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat)
+// ═══════════════════════════════════════════════════
+const VPOC_OFFDAYS = {
+  '205671526': [0,1],   // Adnan Amir Afridi    Sun+Mon
+  '207302255': [5,6],   // Arfa Arif             Fri+Sat
+  '207799093': [5,6],   // Javed Iqra            Fri+Sat
+  '205688378': [0,1],   // Khairi Mohamed        Sun+Mon
+  '205730381': [0,1],   // Marc Angel Luce       Sun+Mon
+  '207283256': [5,6],   // Hubaib Bikkiri        Fri+Sat
+  '204604983': [0,1],   // Anwar Mohammed        Sun+Mon
+  '204604982': [5,6],   // Nihala Yas Peedi      Fri+Sat
+  '205776070': [0,1],   // Pragti Kumar          Sun+Mon
+  '203305831': [0,1],   // Tinated Elsheba       Sun+Mon
+  '203331748': [5,6],   // Ny Ochieng Manya      Fri+Sat
+  '205441633': [5,6],   // Sandra Amoafo         Fri+Sat
+  '207275154': [5,6],   // Mitravakumar          Fri+Sat
+  '205389687': [5,6],   // Sweeney Gunaseke      Fri+Sat
+  '205699662': [5,6],   // Stephan Awinda        Fri+Sat
+  '200641956': [5,6]    // Zehra Sana            Fri+Sat
+};
+
+function isVpocOffDay(psoftId, dateStr){
+  const offDays = VPOC_OFFDAYS[psoftId] || [];
+  const dow = new Date(dateStr + 'T00:00:00').getDay();
+  return offDays.includes(dow);
+}
+
+// ─── M3 scoring from attendance status ───
+function attStatusToScore(status){
+  if(status === 'P')  return 5;
+  if(status === 'A')  return 0;
+  if(status === 'SL') return 0;
+  if(status === 'AL') return 0;
+  return null;
+}
+
+// ─── Calculate monthly att% and score for a VPOC ───
+function calcM3Monthly(psoftId, y, m){
+  const d = loadData();
+  const prefix = y + '-' + ('' + (m + 1)).padStart(2, '0');
+  const daysInMonth = new Date(y, m + 1, 0).getDate();
+  const todayStr = getUAEDateStr();
+  let workDays = 0, present = 0, absent = 0, sl = 0, al = 0;
+  for(let day = 1; day <= daysInMonth; day++){
+    const dateStr = prefix + '-' + ('' + day).padStart(2, '0');
+    if(dateStr > todayStr) continue;                          // future
+    if(isVpocOffDay(psoftId, dateStr)) continue;             // off day
+    workDays++;
+    const status = d[psoftId]?.[dateStr]?.['M3_STATUS'] ?? null;
+    if(status === 'P')  present++;
+    else if(status === 'A')  absent++;
+    else if(status === 'SL') sl++;
+    else if(status === 'AL') al++;
+  }
+  const recorded = present + absent + sl + al;
+  const attPct = recorded > 0 ? (present / recorded) * 100 : null;
+  let score = null;
+  if(attPct !== null){
+    if(attPct >= 98) score = 5;
+    else if(attPct >= 95) score = 4;
+    else if(attPct >= 90) score = 3;
+    else if(attPct >= 85) score = 2;
+    else score = 1;
+  }
+  return { workDays, present, absent, sl, al, recorded, attPct, score };
+}
+
+// ─── Save a single cell attendance status ───
+function setAttStatus(psoftId, dateStr, status){
+  const d = loadData();
+  if(!d[psoftId]) d[psoftId] = {};
+  if(!d[psoftId][dateStr]) d[psoftId][dateStr] = {};
+  d[psoftId][dateStr]['M3_STATUS'] = status;
+  // Also update M3 score for leaderboard
+  const [y, m] = dateStr.split('-').map(Number);
+  const {score} = calcM3Monthly(psoftId, y, m - 1);
+  if(score !== null) d[psoftId][dateStr]['M3'] = score;
+  saveData(d);
+}
+
+// ─── processM3: CSV upload auto-fill ───
 function processM3(input){
   const file = input.files[0];
   if(!file) return;
   const reader = new FileReader();
-  reader.onload = e=>{
+  reader.onload = e => {
     const rows = parseCSV(e.target.result);
-    if(!rows.length){alert('No data found in CSV.');return;}
+    if(!rows.length){ alert('No data found in CSV.'); return; }
 
-    // Detect date from first Punch Time
-    const firstPunch = rows[0]['Punch Time']||rows[0]['punch time']||'';
+    const firstPunch = rows[0]['Punch Time'] || rows[0]['punch time'] || '';
     const dateStr = parsePunchDate(firstPunch) || getUAEDateStr();
 
-    document.getElementById('m3-date-info').style.display='block';
-    document.getElementById('m3-date-info').innerHTML=`<div class="alert alert-success">📅 Date detected from Punch Time: <strong>${formatDisplayDate(dateStr)}</strong> — scores will be saved to this date.</div>`;
+    document.getElementById('m3-date-info').style.display = 'block';
+    document.getElementById('m3-date-info').innerHTML = `<div class="alert alert-success">📅 Date detected: <strong>${formatDisplayDate(dateStr)}</strong></div>`;
 
     // Count punches per Employee ID
     const punchCount = {};
-    rows.forEach(r=>{
-      const eid = (r['Employee ID']||r['employee id']||'').trim();
+    rows.forEach(r => {
+      const eid = (r['Employee ID'] || r['employee id'] || '').trim();
       if(!eid) return;
-      if(!punchCount[eid]) punchCount[eid]=0;
+      if(!punchCount[eid]) punchCount[eid] = 0;
       punchCount[eid]++;
     });
 
-    // Match VPOCs
-    const vpocResults = VPOCS.map(v=>{
+    const vpocResults = VPOCS.map(v => {
       const count = punchCount[v.id] || 0;
-      const score = count >= 1 ? 5 : 0;
       const found = v.id in punchCount;
-      return {...v, count, score, found};
+      const isOff = isVpocOffDay(v.id, dateStr);
+      const status = isOff ? 'OFF' : (found && count >= 1 ? 'P' : 'A');
+      const score = status === 'P' ? 5 : 0;
+      return { ...v, count, found, isOff, status, score };
     });
 
-    pendingM3 = {vpocResults, dateStr};
+    pendingM3 = { vpocResults, dateStr };
 
-    // Render table
-    document.getElementById('m3-table').innerHTML = vpocResults.map(r=>{
-      const agClass = 'ag-'+r.agency.toLowerCase();
-      const statusIcon = !r.found ? '⚠️ Not in CSV' : r.count>=1 ? '✅ Present' : '❌ Absent';
-      const rowStyle = !r.found ? 'background:#fffbf0;' : '';
+    document.getElementById('m3-table').innerHTML = vpocResults.map(r => {
+      const agClass = 'ag-' + r.agency.toLowerCase();
+      const rowStyle = r.isOff ? 'background:#f5f5f5;' : (!r.found ? 'background:#fffbf0;' : '');
+      const statusLabel = r.isOff ? '⬜ Off Day' : (r.status === 'P' ? '✅ Present' : '❌ Absent');
       return `<tr style="${rowStyle}">
         <td style="font-weight:600;">${r.name}</td>
         <td><span class="agency-tag ${agClass}">${r.agency}</span></td>
         <td style="font-size:11px;color:#aaa;">${r.id}</td>
-        <td style="text-align:center;font-weight:700;">${r.found ? r.count : '—'}</td>
-        <td>${statusIcon}</td>
-        <td style="text-align:center;"><span class="score-badge score-${r.score}">${r.score}</span></td>
+        <td style="text-align:center;font-weight:700;">${r.isOff ? '—' : (r.found ? r.count : '—')}</td>
+        <td>${statusLabel}</td>
+        <td style="text-align:center;"><span class="score-badge score-${r.isOff ? 'nd' : r.score}">${r.isOff ? '—' : r.score}</span></td>
       </tr>`;
     }).join('');
 
-    // Missing VPOCs warning
-    const missing = vpocResults.filter(r=>!r.found);
+    const missing = vpocResults.filter(r => !r.found && !r.isOff);
     const missingEl = document.getElementById('m3-missing');
-    if(missing.length>0){
-      missingEl.style.display='block';
-      missingEl.innerHTML=`<div class="alert alert-warning">⚠️ <strong>${missing.length} VPOC(s) not found in CSV</strong> — they will receive 0pts for M3: ${missing.map(r=>r.name).join(', ')}</div>`;
-    } else {
-      missingEl.style.display='none';
-    }
+    if(missing.length > 0){
+      missingEl.style.display = 'block';
+      missingEl.innerHTML = `<div class="alert alert-warning">⚠️ <strong>${missing.length} VPOC(s) not found in CSV</strong> — marked Absent: ${missing.map(r => r.name).join(', ')}</div>`;
+    } else { missingEl.style.display = 'none'; }
 
-    document.getElementById('m3-results').style.display='block';
+    document.getElementById('m3-results').style.display = 'block';
   };
   reader.readAsText(file);
 }
 
 function applyM3(){
   if(!pendingM3) return;
-  const {vpocResults, dateStr} = pendingM3;
-  vpocResults.forEach(r=>{
-    setScore(r.id, dateStr, 'M3', r.score);
+  const { vpocResults, dateStr } = pendingM3;
+  vpocResults.forEach(r => {
+    if(!r.isOff) setAttStatus(r.id, dateStr, r.status);
   });
   updateDebugCount();
   renderM3Calendar();
-  alert(`✅ M3 Attendance saved for ${formatDisplayDate(dateStr)}!\n\nCalendar updated — go to Dashboard for leaderboard.`);
+  renderM3Summary();
+  alert(`✅ M3 Attendance saved for ${formatDisplayDate(dateStr)}!\n\nCalendar and summary updated.`);
   pendingM3 = null;
+}
+
+// ─── Save manual attendance edits from calendar ───
+function saveManualAttendance(){
+  const selects = document.querySelectorAll('.att-select');
+  if(!selects.length){ alert('Nothing to save — navigate to a month with working days first.'); return; }
+  let count = 0;
+  selects.forEach(sel => {
+    const { psoftid, date } = sel.dataset;
+    const val = sel.value;
+    if(val) { setAttStatus(psoftid, date, val); count++; }
+  });
+  renderM3Calendar();
+  renderM3Summary();
+  updateDebugCount();
+  alert(`✅ Saved ${count} attendance entries.`);
 }
 
 // ═══════════════════════════════════════════════════
@@ -1209,13 +1337,14 @@ function clearAllData(){
 // M3 ATTENDANCE CALENDAR
 // ═══════════════════════════════════════════════════
 let calYear  = 0;
-let calMonth = 0;  // 0-indexed
+let calMonth = 0; // 0-indexed
 
 function shiftCalMonth(delta){
   calMonth += delta;
-  if(calMonth < 0){ calMonth=11; calYear--; }
-  if(calMonth > 11){ calMonth=0; calYear++; }
+  if(calMonth < 0){ calMonth = 11; calYear--; }
+  if(calMonth > 11){ calMonth = 0; calYear++; }
   renderM3Calendar();
+  renderM3Summary();
 }
 
 function renderM3Calendar(){
@@ -1223,95 +1352,130 @@ function renderM3Calendar(){
   if(!el) return;
   const d = loadData();
   const uae = getUAEDateStr();
-  const todayStr = uae;
-  if(calYear===0){
-    const [ty,tm] = uae.split('-');
+  if(calYear === 0){
+    const [ty, tm] = uae.split('-');
     calYear = parseInt(ty);
-    calMonth = parseInt(tm)-1;
+    calMonth = parseInt(tm) - 1;
   }
   const y = calYear;
-  const m = calMonth; // 0-indexed
+  const m = calMonth;
   const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('cal-month-label').textContent = monthNames[m]+' '+y;
+  document.getElementById('cal-month-label').textContent = monthNames[m] + ' ' + y;
+  document.getElementById('m3-summary-month').textContent = monthNames[m] + ' ' + y;
 
-  // Which dates have M3 data this month?
-  const prefix = y+'-'+(''+(m+1)).padStart(2,'0');
-  const datesWithData = new Set();
-  VPOCS.forEach(v=>{
-    if(d[v.id]){
-      Object.keys(d[v.id]).filter(k=>k.startsWith(prefix) && d[v.id][k]['M3']!==undefined)
-        .forEach(k=>datesWithData.add(k));
+  const daysInMonth = new Date(y, m + 1, 0).getDate();
+  const todayStr = uae;
+
+  // Status colours
+  const STATUS_BG  = { P:'#d4edda', A:'#fde8e8', SL:'#fff3cd', AL:'#cce5ff' };
+  const STATUS_CLR = { P:'#155724', A:'#721c24', SL:'#856404', AL:'#004085' };
+
+  // Build header row: blank + one col per day-of-month
+  let html = `<div style="overflow-x:auto;">
+  <table style="border-collapse:collapse;min-width:900px;font-size:11px;">
+  <thead>
+    <tr>
+      <th style="padding:6px 10px;text-align:left;background:#f8f9fa;border:1px solid #e0e0e0;min-width:150px;position:sticky;left:0;z-index:2;">VPOC</th>
+      <th style="padding:4px;text-align:center;background:#f8f9fa;border:1px solid #e0e0e0;min-width:60px;">Agency</th>`;
+
+  for(let day = 1; day <= daysInMonth; day++){
+    const dateStr = y + '-' + ('' + (m + 1)).padStart(2, '0') + '-' + ('' + day).padStart(2, '0');
+    const dow = new Date(dateStr + 'T00:00:00').getDay();
+    const dayLabels = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+    const isFuture = dateStr > todayStr;
+    const isToday  = dateStr === todayStr;
+    const hdrBg    = isFuture ? '#f5f5f5' : (isToday ? '#fff0f3' : '#f8f9fa');
+    const hdrClr   = isFuture ? '#ccc'    : (isToday ? '#e94560' : '#666');
+    const border   = isToday  ? '2px solid #e94560' : '1px solid #e0e0e0';
+    html += `<th style="padding:4px 2px;text-align:center;background:${hdrBg};border:${border};min-width:36px;color:${hdrClr};font-weight:${isToday?'800':'600'};">${day}<br><span style="font-weight:400;font-size:9px;">${dayLabels[dow]}</span></th>`;
+  }
+  html += `</tr></thead><tbody>`;
+
+  VPOCS.forEach((v, idx) => {
+    const rowBg = idx % 2 === 0 ? '#fff' : '#fafbff';
+    const agClass = 'ag-' + v.agency.toLowerCase();
+    html += `<tr style="background:${rowBg};">
+      <td style="padding:5px 10px;font-weight:600;border:1px solid #eee;position:sticky;left:0;background:${rowBg};z-index:1;">${v.name}</td>
+      <td style="padding:4px;text-align:center;border:1px solid #eee;"><span class="agency-tag ${agClass}" style="font-size:9px;">${v.agency}</span></td>`;
+
+    for(let day = 1; day <= daysInMonth; day++){
+      const dateStr = y + '-' + ('' + (m + 1)).padStart(2, '0') + '-' + ('' + day).padStart(2, '0');
+      const isFuture = dateStr > todayStr;
+      const isOff    = isVpocOffDay(v.id, dateStr);
+      const saved    = d[v.id]?.[dateStr]?.['M3_STATUS'] ?? '';
+
+      if(isFuture || isOff){
+        const cellBg  = isFuture ? '#f5f5f5' : '#e8e8e8';
+        const cellTxt = isFuture ? '' : (isOff ? 'OFF' : '');
+        html += `<td style="background:${cellBg};border:1px solid #eee;text-align:center;font-size:9px;color:#bbb;">${cellTxt}</td>`;
+      } else {
+        const bg  = saved ? (STATUS_BG[saved]  || '#fff') : '#fff';
+        const clr = saved ? (STATUS_CLR[saved] || '#333') : '#333';
+        html += `<td style="background:${bg};border:1px solid #eee;padding:1px;text-align:center;">
+          <select class="att-select" data-psoftid="${v.id}" data-date="${dateStr}"
+            style="width:38px;border:none;background:transparent;font-size:10px;font-weight:700;color:${clr};cursor:pointer;outline:none;"
+            onchange="onAttChange(this)">
+            <option value="">—</option>
+            <option value="P"  ${saved==='P' ?'selected':''}>P</option>
+            <option value="A"  ${saved==='A' ?'selected':''}>A</option>
+            <option value="SL" ${saved==='SL'?'selected':''}>SL</option>
+            <option value="AL" ${saved==='AL'?'selected':''}>AL</option>
+          </select>
+        </td>`;
+      }
     }
+    html += `</tr>`;
   });
 
-  // Build calendar grid
-  const firstDay = new Date(y, m, 1).getDay(); // 0=Sun
-  const daysInMonth = new Date(y, m+1, 0).getDate();
-  const startOffset = firstDay; // Sunday start
-
-  let html3 = `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:480px;">`;
-  const dayLabels = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  dayLabels.forEach(dl=>{
-    html3 += `<div style="text-align:center;font-size:10px;font-weight:700;color:#888;padding:4px 0;">${dl}</div>`;
-  });
-
-  // Empty cells before first day
-  for(let i=0;i<startOffset;i++){
-    html3 += `<div></div>`;
-  }
-
-  const today = new Date(todayStr+'T00:00:00');
-  for(let day=1; day<=daysInMonth; day++){
-    const dateStr2 = y+'-'+(''+(m+1)).padStart(2,'0')+'-'+(''+day).padStart(2,'0');
-    const cellDate = new Date(dateStr2+'T00:00:00');
-    const isWeekend = cellDate.getDay()===5 || cellDate.getDay()===6; // Fri/Sat = UAE weekend
-    const isFuture = cellDate > today;
-    const hasData = datesWithData.has(dateStr2);
-    const isToday = dateStr2 === todayStr;
-
-    let bg, color, title, border='';
-    if(isFuture){
-      bg='#f5f5f5'; color='#ccc'; title='Future';
-    } else if(isWeekend){
-      bg='#f0f0f0'; color='#bbb'; title='Weekend';
-    } else if(hasData){
-      bg='#d4edda'; color='#155724'; title='✅ Data uploaded';
-    } else {
-      bg='#fde8e8'; color='#721c24'; title='❌ No data uploaded';
-    }
-    if(isToday) border='2px solid #e94560;';
-
-    html3 += `<div title="${title}" style="text-align:center;padding:6px 2px;border-radius:6px;background:${bg};color:${color};font-size:12px;font-weight:600;cursor:default;border:${border}">${day}</div>`;
-  }
-  html3 += `</div>`;
-
-  // Summary row below calendar
-  const workdays = [];
-  for(let day=1;day<=daysInMonth;day++){
-    const dateStr2 = y+'-'+(''+(m+1)).padStart(2,'0')+'-'+(''+day).padStart(2,'0');
-    const cellDate = new Date(dateStr2+'T00:00:00');
-    const isWeekend = cellDate.getDay()===5 || cellDate.getDay()===6;
-    const isFuture = cellDate > today;
-    if(!isWeekend && !isFuture) workdays.push(dateStr2);
-  }
-  const uploaded = workdays.filter(d2=>datesWithData.has(d2)).length;
-  const pct = workdays.length ? Math.round((uploaded/workdays.length)*100) : 0;
-  const barColor = pct>=90?'#2ecc71':pct>=70?'#f39c12':'#e74c3c';
-
-  html3 += `<div style="margin-top:14px;background:#f8f9fa;border-radius:8px;padding:12px 14px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <span style="font-size:12px;font-weight:600;color:#444;">Upload Progress — ${monthNames[m]} ${y}</span>
-      <span style="font-size:13px;font-weight:800;color:${barColor};">${uploaded} / ${workdays.length} workdays (${pct}%)</span>
-    </div>
-    <div style="background:#e0e0e0;border-radius:6px;height:8px;overflow:hidden;">
-      <div style="background:${barColor};height:8px;width:${pct}%;border-radius:6px;transition:width 0.3s;"></div>
-    </div>
-    <div style="font-size:10px;color:#aaa;margin-top:5px;">🟢 Uploaded &nbsp;·&nbsp; 🔴 Missing &nbsp;·&nbsp; Grey = weekend/future &nbsp;·&nbsp; UAE weekend = Fri/Sat</div>
+  html += `</tbody></table></div>
+  <div style="margin-top:10px;font-size:10px;color:#888;">
+    💡 Change any dropdown → click <strong>💾 Save Attendance</strong> to commit. Or upload a punch CSV below to auto-fill.
   </div>`;
 
-  el.innerHTML = html3;
+  el.innerHTML = html;
 }
 
+// Live colour update when dropdown changes (before save)
+function onAttChange(sel){
+  const STATUS_BG  = { P:'#d4edda', A:'#fde8e8', SL:'#fff3cd', AL:'#cce5ff' };
+  const STATUS_CLR = { P:'#155724', A:'#721c24', SL:'#856404', AL:'#004085' };
+  const val = sel.value;
+  sel.parentElement.style.background = val ? (STATUS_BG[val] || '#fff') : '#fff';
+  sel.style.color = val ? (STATUS_CLR[val] || '#333') : '#333';
+}
+
+// ─── Monthly Summary Table ───
+function renderM3Summary(){
+  const tbody = document.getElementById('m3-summary-table');
+  if(!tbody) return;
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  if(calYear === 0){
+    const uae = getUAEDateStr();
+    const [ty, tm] = uae.split('-');
+    calYear = parseInt(ty); calMonth = parseInt(tm) - 1;
+  }
+  document.getElementById('m3-summary-month').textContent = monthNames[calMonth] + ' ' + calYear;
+
+  tbody.innerHTML = VPOCS.map(v => {
+    const { workDays, present, absent, sl, al, attPct, score } = calcM3Monthly(v.id, calYear, calMonth);
+    const agClass = 'ag-' + v.agency.toLowerCase();
+    const pctDisplay = attPct !== null ? attPct.toFixed(1) + '%' : '—';
+    const pctColor   = attPct === null ? '#aaa' : attPct >= 98 ? '#2e7d32' : attPct >= 90 ? '#e65100' : '#c62828';
+    const scoreDisp  = score !== null ? score : '—';
+    const scoreClass = score !== null ? 'score-' + score : 'score-nd';
+    return `<tr>
+      <td style="font-weight:600;">${v.name}</td>
+      <td><span class="agency-tag ${agClass}">${v.agency}</span></td>
+      <td style="text-align:center;">${workDays}</td>
+      <td style="text-align:center;font-weight:700;color:#2e7d32;">${present}</td>
+      <td style="text-align:center;font-weight:700;color:#c62828;">${absent}</td>
+      <td style="text-align:center;font-weight:700;color:#856404;">${sl}</td>
+      <td style="text-align:center;font-weight:700;color:#004085;">${al}</td>
+      <td style="text-align:center;font-weight:800;color:${pctColor};">${pctDisplay}</td>
+      <td style="text-align:center;"><span class="score-badge ${scoreClass}">${scoreDisp}</span></td>
+    </tr>`;
+  }).join('');
+}
 // ═══════════════════════════════════════════════════
 // MONTHLY PDF REPORT
 // ═══════════════════════════════════════════════════
