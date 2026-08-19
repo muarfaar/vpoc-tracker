@@ -480,21 +480,20 @@
 // ═══════════════════════════════════════════════════
 const VPOCS = [
   {id:'205671526',amazon:'miadnana',name:'Adnan Amir Afridi',agency:'Dulsco'},
-  {id:'207302255',amazon:'muarfaar',name:'Arfa Arif',agency:'Fastlink'},
-  {id:'207799093',amazon:'javeiqrn',name:'Javed Iqra',agency:'Dulsco'},
-  {id:'205688378',amazon:'osmakhai',name:'Khairi Mohamed',agency:'Fastlink'},
-  {id:'205730381',amazon:'lalucema',name:'Marc Angel Luce',agency:'Dulsco'},
-  {id:'207283256',amazon:'mbikkiri',name:'Hubaib Bikkiri',agency:'Dulsco'},
-  {id:'204604983',amazon:'mohaanwn',name:'Anwar Mohammed',agency:'Adecco'},
-  {id:'204604982',amazon:'niapeedi',name:'Nihala Yas Peedi',agency:'Adecco'},
+  {id:'204604983',amazon:'mohaanwn',name:'Anwar Ali Mohammed',agency:'Adecco'},
+  {id:'207799093',amazon:'javeiqrn',name:'Iqra Javed',agency:'Dulsco'},
+  {id:'205730381',amazon:'lalucema',name:'Marc Angelo Laluces',agency:'Dulsco'},
+  {id:'207283256',amazon:'mbikkiri',name:'Mohammed Hubaib Bikkirintavida',agency:'Dulsco'},
+  {id:'204604982',amazon:'niapeedi',name:'Nihala Yasmin Peedika',agency:'Adecco'},
   {id:'205776070',amazon:'okupragt',name:'Pragti Kumar',agency:'Fastlink'},
-  {id:'203305831',amazon:'predesnb',name:'Tinated Elsheba',agency:'Adecco'},
-  {id:'203331748',amazon:'renmanya',name:'Ny Ochieng Manya',agency:'Adecco'},
+  {id:'203305831',amazon:'predesnb',name:'Predestinated Elsheba Nzapu',agency:'Adecco'},
+  {id:'203331748',amazon:'renmanya',name:'Renny Ochieng Manyala',agency:'Adecco'},
   {id:'205441633',amazon:'jamoafos',name:'Sandra Amoafo',agency:'Dulsco'},
-  {id:'207275154',amazon:'sivakmit',name:'Mitravakumar',agency:'EFS'},
-  {id:'205389687',amazon:'gusweene',name:'Sweeney Gunaseke',agency:'Fastlink'},
-  {id:'205699662',amazon:'tambohes',name:'Stephan Awinda',agency:'Fastlink'},
-  {id:'200641956',amazon:'sazehra',name:'Zehra Sana',agency:'Fastlink'}
+  {id:'207275154',amazon:'sivakmit',name:'Mitra Sivakumar',agency:'EFS'},
+  {id:'205389687',amazon:'gusweene',name:'Sweeney Gunasekera',agency:'Fastlink'},
+  {id:'205699662',amazon:'tambohes',name:'Stephanie Alvyne Tamboh Awinda',agency:'Fastlink'},
+  {id:'200641956',amazon:'sazehra',name:'Sana Zehra',agency:'Fastlink'},
+  {id:'207302255',amazon:'muarfaar',name:'Arfa Arif',agency:'Fastlink'}
 ];
 
 const METRICS = [
@@ -952,22 +951,21 @@ function applyWBC(){
 // VPOC OFF DAYS MAP  (0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat)
 // ═══════════════════════════════════════════════════
 const VPOC_OFFDAYS = {
-  '205671526': [0,1],   // Adnan Amir Afridi    Sun+Mon
-  '207302255': [5,6],   // Arfa Arif             Fri+Sat
-  '207799093': [5,6],   // Javed Iqra            Fri+Sat
-  '205688378': [0,1],   // Khairi Mohamed        Sun+Mon
-  '205730381': [0,1],   // Marc Angel Luce       Sun+Mon
-  '207283256': [5,6],   // Hubaib Bikkiri        Fri+Sat
-  '204604983': [0,1],   // Anwar Mohammed        Sun+Mon
-  '204604982': [5,6],   // Nihala Yas Peedi      Fri+Sat
-  '205776070': [0,1],   // Pragti Kumar          Sun+Mon
-  '203305831': [0,1],   // Tinated Elsheba       Sun+Mon
-  '203331748': [5,6],   // Ny Ochieng Manya      Fri+Sat
-  '205441633': [5,6],   // Sandra Amoafo         Fri+Sat
-  '207275154': [5,6],   // Mitravakumar          Fri+Sat
-  '205389687': [5,6],   // Sweeney Gunaseke      Fri+Sat
-  '205699662': [5,6],   // Stephan Awinda        Fri+Sat
-  '200641956': [5,6]    // Zehra Sana            Fri+Sat
+  '205671526': [5,6],   // Adnan Amir Afridi          Fri+Sat
+  '204604983': [5,6],   // Anwar Ali Mohammed          Fri+Sat
+  '207799093': [5,6],   // Iqra Javed                  Fri+Sat
+  '205730381': [0,1],   // Marc Angelo Laluces         Sun+Mon
+  '207283256': [5,6],   // Mohammed Hubaib             Fri+Sat
+  '204604982': [0,1],   // Nihala Yasmin Peedika       Sun+Mon
+  '205776070': [0,1],   // Pragti Kumar                Sun+Mon
+  '203305831': [0,1],   // Predestinated Elsheba Nzapu Sun+Mon
+  '203331748': [5,6],   // Renny Ochieng Manyala       Fri+Sat
+  '205441633': [0,1],   // Sandra Amoafo               Sun+Mon
+  '207275154': [2,3],   // Mitra Sivakumar             Tue+Wed
+  '205389687': [5,6],   // Sweeney Gunasekera          Fri+Sat
+  '205699662': [0,1],   // Stephanie Tamboh Awinda     Sun+Mon
+  '200641956': [5,6],   // Sana Zehra                  Fri+Sat
+  '207302255': [5,6]    // Arfa Arif (joins Aug)       Fri+Sat
 };
 
 function isVpocOffDay(psoftId, dateStr){
