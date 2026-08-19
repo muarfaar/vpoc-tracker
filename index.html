@@ -768,6 +768,26 @@ function init(){
     console.log('July 2026 M3 seeded from Excel');
   })();
 
+  
+
+  // Arfa Arif Aug 2026 M3 (data through 17 Aug â€” 6/6 working days, 100%)
+  (function seedArfaAug2026M3(){
+    const SEED_KEY = 'vpoc_m3_arfa_aug2026_seeded';
+    if(localStorage.getItem(SEED_KEY)) return;
+    const d = JSON.parse(localStorage.getItem('vpoc_scores_v2')||'{}');
+    const id = '207302255';
+    if(!d[id]) d[id] = {};
+    if(!d[id]['2026-08-31']) d[id]['2026-08-31'] = {};
+    if(d[id]['2026-08-31']['M3'] === undefined){
+      d[id]['2026-08-31']['M3'] = 5;
+      d[id]['2026-08-31']['M3_ATT_PCT'] = 100.0;
+      d[id]['2026-08-31']['M3_NOTE'] = 'Data through 17 Aug (6/6 days present)';
+    }
+    localStorage.setItem('vpoc_scores_v2', JSON.stringify(d));
+    localStorage.setItem(SEED_KEY, '1');
+    console.log('Arfa Arif Aug 2026 M3 seeded');
+  })();
+
   pullFromGitHub();
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
