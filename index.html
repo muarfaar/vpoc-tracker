@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -788,6 +788,40 @@ function init(){
     console.log('Arfa Arif Aug 2026 M3 seeded');
   })();
 
+  // August 2026 M3 scores seeded from Excel attendance file (Aug 1-17) 
+  (function seedAug2026M3(){ 
+    const SEED_KEY = 'vpoc_m3_aug2026_14vpoc_seeded'; 
+    if(localStorage.getItem(SEED_KEY)) return; 
+    const d = JSON.parse(localStorage.getItem('vpoc_scores_v2')||'{}'); 
+    const scores = { 
+      '205671526': {att:100.0,score:5,note:'10/10 present'}, 
+      '204604983': {att:100.0,score:5,note:'12/12 present'}, 
+      '207799093': {att:100.0,score:5,note:'12/12 present'}, 
+      '205730381': {att:100.0,score:5,note:'11/11 PL=P'}, 
+      '207283256': {att:100.0,score:5,note:'10/10 PL=P'}, 
+      '204604982': {att:91.7,score:3,note:'11/12'}, 
+      '205776070': {att:90.9,score:3,note:'10/11'}, 
+      '203305831': {att:72.7,score:1,note:'8/11 3 absent'}, 
+      '203331748': {att:84.6,score:1,note:'11/13 2 absent'}, 
+      '205441633': {att:100.0,score:5,note:'13/13 present'}, 
+      '207275154': {att:100.0,score:5,note:'13/13 present'}, 
+      '205389687': {att:100.0,score:5,note:'11/11 PL=P'}, 
+      '205699662': {att:76.9,score:1,note:'10/13 3 SL'}, 
+      '200641956': {att:100.0,score:5,note:'13/13 present'} 
+    }; 
+    for(const id in scores){ 
+      if(!d[id]) d[id]={}; 
+      if(!d[id]['2026-08-31']) d[id]['2026-08-31']={}; 
+      if(d[id]['2026-08-31']['M3']===undefined){ 
+        d[id]['2026-08-31']['M3']=scores[id].score; 
+        d[id]['2026-08-31']['M3_ATT_PCT']=scores[id].att; 
+        d[id]['2026-08-31']['M3_NOTE']='Aug 1-17: '+scores[id].note; 
+      } 
+    } 
+    localStorage.setItem('vpoc_scores_v2',JSON.stringify(d)); 
+    localStorage.setItem(SEED_KEY,'1'); 
+    console.log('Aug 2026 M3 seeded 14 VPOCs'); 
+  })(); 
   pullFromGitHub();
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
