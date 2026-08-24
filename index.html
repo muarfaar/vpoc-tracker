@@ -856,8 +856,14 @@ function getMonthlyAvgScore(psoftId, y, m){
   const days = Object.keys(d[psoftId]).filter(k=>k.startsWith(prefix));
   const metricAvgs = {};
   METRICS.forEach(met=>{
-    const vals = days.map(day=>d[psoftId][day]?.[met.id]).filter(x=>x!==undefined&&x!==null);
-    metricAvgs[met.id] = vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
+    if(met.id === 'M3'){
+      // M3: compute from daily M3_STATUS entries via calcM3Monthly
+      const {score} = calcM3Monthly(psoftId, y, m);
+      metricAvgs['M3'] = score;
+    } else {
+      const vals = days.map(day=>d[psoftId][day]?.[met.id]).filter(x=>x!==undefined&&x!==null);
+      metricAvgs[met.id] = vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
+    }
   });
   let wSum=0, wAvail=0;
   METRICS.forEach(met=>{
