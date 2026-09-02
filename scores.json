@@ -139,6 +139,9 @@
       "M2": 1,
       "M2_COMPLIANCE_PCT": 0,
       "M2_SUBMISSIONS": 0
+    },
+    "NaN-00-undefined": {
+      "M3_STATUS": "A"
     }
   },
   "203331748": {
@@ -210,6 +213,9 @@
       "M2": 1,
       "M2_COMPLIANCE_PCT": 0,
       "M2_SUBMISSIONS": 0
+    },
+    "NaN-00-undefined": {
+      "M3_STATUS": "A"
     }
   },
   "204604982": {
@@ -281,6 +287,9 @@
       "M2": 1,
       "M2_COMPLIANCE_PCT": 0,
       "M2_SUBMISSIONS": 0
+    },
+    "NaN-00-undefined": {
+      "M3_STATUS": "A"
     }
   },
   "204604983": {
@@ -355,6 +364,9 @@
     },
     "2026-08-28": {
       "M5": 1
+    },
+    "NaN-00-undefined": {
+      "M3_STATUS": "A"
     }
   },
   "205389687": {
@@ -571,6 +583,9 @@
     },
     "2026-08-28": {
       "M8": 5
+    },
+    "NaN-00-undefined": {
+      "M3_STATUS": "A"
     }
   },
   "205699662": {
@@ -713,6 +728,9 @@
       "M2": 1,
       "M2_COMPLIANCE_PCT": 0,
       "M2_SUBMISSIONS": 0
+    },
+    "NaN-00-undefined": {
+      "M3_STATUS": "A"
     }
   },
   "205776070": {
@@ -784,6 +802,9 @@
       "M2": 1,
       "M2_COMPLIANCE_PCT": 0,
       "M2_SUBMISSIONS": 0
+    },
+    "NaN-00-undefined": {
+      "M3_STATUS": "A"
     }
   },
   "207275154": {
@@ -929,6 +950,9 @@
       "M2": 1,
       "M2_COMPLIANCE_PCT": 0,
       "M2_SUBMISSIONS": 0
+    },
+    "NaN-00-undefined": {
+      "M3_STATUS": "A"
     }
   },
   "207302255": {
@@ -1019,6 +1043,9 @@
     },
     "2026-08-28": {
       "M2": 1
+    },
+    "NaN-00-undefined": {
+      "M3_STATUS": "A"
     }
   }
 }
